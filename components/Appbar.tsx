@@ -15,31 +15,55 @@ import { ModeToggle } from "./mode-toggle";
 
 export function Appbar() {
   const navItems = [
+    // {
+    //   name: "About",
+    //   link: "#about",
+    // },
     {
-      name: "About",
-      link: "#about",
+      name: "Skills",
+      link: "#skills",
+    },
+    {
+      name: "Projects",
+      link: "#projects",
     },
     {
       name: "Contact",
       link: "#contact",
     },
-    {
-      name: "Projects",
-      link: "/projects",
-    }
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    targetId: string
+  ) => {
+    e.preventDefault();
+    const targetElement = document.querySelector(targetId);
+
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.getBoundingClientRect().top + window.scrollY - 80, // Adjust for header height
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
     <div className="sticky top-0 z-50  w-full">
       <Navbar>
         {/* Desktop Navigation */}
-        <NavBody>
+        <NavBody className="hidden lg:visible">
           <NavbarLogo />
-          <NavItems items={navItems} />
+          <NavItems
+            items={navItems.map((item) => ({
+              ...item,
+              onClick: (e: React.MouseEvent<HTMLAnchorElement>) => handleScroll(e, item.link),
+            }))}
+          />
           <div className="flex items-center gap-4">
-            <NavbarButton variant="primary">Contact</NavbarButton>
+            {/* <NavbarButton variant="primary">Contact</NavbarButton> */}
             <ModeToggle />
           </div>
         </NavBody>

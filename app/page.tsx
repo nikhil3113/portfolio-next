@@ -1,3 +1,4 @@
+import { ContactForm } from "@/components/Contact";
 import { Experience } from "@/components/Experience";
 import { ProjectCard } from "@/components/SampleProjectCard";
 import { Skills } from "@/components/Skills";
@@ -41,11 +42,11 @@ const project: Project[] = [
 export default function Home() {
   return (
     <div>
-      <section className="relative min-h-screen flex items-center justify-center">
+      <section className="relative min-h-[85vh] sm:min-h-screen flex items-center justify-center">
         <BackgroundBeamsWithCollision>
           <div>
-            <h2 className="text-2xl relative z-20 md:text-4xl lg:text-7xl font-bold text-center text-black dark:text-white font-sans tracking-tight">
-              John Doe <br />
+            <h2 className="sm:text-2xl text-4xl  relative z-20 md:text-4xl lg:text-7xl font-bold text-center text-black dark:text-white font-sans tracking-tight">
+              Nikhil Chavan <br />
               <div className="relative mx-auto inline-block w-max [filter:drop-shadow(0px_1px_3px_rgba(27,_37,_80,_0.14))]">
                 <div className="absolute left-0 top-[1px] bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r py-4 from-purple-500 via-violet-500 to-pink-500 [text-shadow:0_0_rgba(0,0,0,0.1)]">
                   <span className="">Full Stack Developer</span>
@@ -88,20 +89,20 @@ export default function Home() {
         </BackgroundBeamsWithCollision>
       </section>
 
-      <section className="py-16 max-w-5xl mx-auto">
+      <section className="py-16 max-sm:py-5 max-w-5xl mx-auto">
         {/* Skills */}
-        <div>
+        <div id="skills">
           <Skills />
         </div>
 
         {/* Work */}
-        <div>
-          <div className="max-w-3xl mx-auto text-center mb-0">
+        <div id="projects">
+          <div className="max-w-3xl mx-auto text-center mb-0 mt-16">
             <p className="text-primary font-semibold mb-2 tracking-wide">
               MY WORK
             </p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Projects</h2>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground max-sm:px-5">
               Explore a selection of my projects that showcase my technical
               skills and problem-solving abilities.
             </p>
@@ -119,7 +120,7 @@ export default function Home() {
               />
             ))}
           </div>
-          <div className="flex justify-end mt-0">
+          <div className="flex justify-end mt-0 max-sm:px-5">
             <Link href="/projects">
               <InteractiveHoverButton text="More" />
             </Link>
@@ -128,6 +129,19 @@ export default function Home() {
 
         <div>
           <Experience />
+        </div>
+
+        <div className="mt-16 pt-4 max-sm:px-5" id="contact">
+          <div className="max-w-3xl mx-auto text-center mb-8">
+            <p className="text-primary font-semibold mb-2 tracking-wide">
+              GET IN TOUCH
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Contact Me</h2>
+            <p className="text-muted-foreground max-sm:px-5">
+              Have a question or want to work together? Send me a message.
+            </p>
+          </div>
+          <ContactForm />
         </div>
       </section>
     </div>

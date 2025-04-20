@@ -2,23 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
 
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused !important;
+}
 /* Define the keyframes for marquee animations */
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(calc(-100%)); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-25%);
+  }
 }
 
 @keyframes marquee-reverse {
-  from { transform: translateX(calc(-100%)); }
-  to { transform: translateX(0); }
+  0% {
+    transform: translateX(-25%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
-
 @keyframes marquee-vertical {
   from { transform: translateY(0); }
   to { transform: translateY(calc(-100%)); }

@@ -3,7 +3,7 @@ import { ProjectCard } from "@/components/SampleProjectCard";
 
 export default function Projects() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-8">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-8 ">
       <ProjectCard
         title="SEO Validator"
         description="SEO Validator is an AI-powered tool that generates and optimizes meta titles and descriptions for better search rankings. It ensures SEO best practices with real-time feedback on keywords and character limits."

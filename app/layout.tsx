@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Appbar } from "@/components/Appbar";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,6 +39,7 @@ export default function RootLayout({
         >
           <Appbar />
           {children}
+          <ScrollToTop />
         </ThemeProvider>
       </body>
     </html>

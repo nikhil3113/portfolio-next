@@ -43,7 +43,7 @@ export function Experience() {
         <div className="max-w-2xl mx-auto text-center mb-16">
           <p className="text-primary font-semibold mb-2 tracking-wide">MY JOURNEY</p>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Professional Experience</h2>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground max-sm:px-5">
             A timeline of my professional growth and career milestones.
           </p>
         </div>

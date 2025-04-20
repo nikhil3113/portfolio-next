@@ -16,13 +16,12 @@ const skills = [
   { name: "Git", slug: "git" },
   { name: "Framer Motion", slug: "framer" },
   { name: "GitHub", slug: "github" },
-  { name: "AWS", slug: "amazonaws" },
+  { name: "AWS", slug: "amazonwebservices" },
   { name: "Vercel", slug: "vercel" },
   { name: "HTML5", slug: "html5" },
   { name: "CSS3", slug: "css3" },
   { name: "MySQL", slug: "mysql" },
   { name: "Flutter", slug: "flutter" },
-  { name: "VS Code", slug: "visualstudiocode" },
 ];
 
 export function Skills() {
@@ -35,17 +34,17 @@ export function Skills() {
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
           Technical Skills
         </h2>
-        <p className="text-muted-foreground">
+        <p className="text-muted-foreground max-sm:px-5">
           These are the technologies I&apos;ve worked with and am proficient in.
         </p>
       </div>
 
       <div className="mb-10">
-        <Marquee className="py-4" pauseOnHover >
+        <Marquee className="py-4 max-sm:px-5" pauseOnHover >
           {skills.slice(0, Math.ceil(skills.length / 2)).map((skill, index) => (
             <div
               key={index}
-              className="relative h-full w-fit mx-[4rem] flex flex-col items-center justify-center gap-2"
+              className="relative h-full w-fit sm:mx-[4rem] mx-[2rem] flex flex-col items-center justify-center gap-2"
             >
               <Image
                 src={`https://cdn.simpleicons.org/${skill.slug}`}
@@ -61,11 +60,11 @@ export function Skills() {
       </div>
 
       <div>
-        <Marquee pauseOnHover direction="right" className="py-4">
+        <Marquee pauseOnHover direction="right" className="py-4 max-sm:px-5">
           {skills.slice(Math.ceil(skills.length / 2)).map((skill, index) => (
             <div
               key={index}
-              className="relative h-full w-fit mx-[4rem] flex flex-col items-center justify-center gap-2"
+              className="relative h-full w-fit sm:mx-[4rem] mx-[2rem] flex flex-col items-center justify-center gap-2"
             >
               <Image
                 src={`https://cdn.simpleicons.org/${skill.slug}`}

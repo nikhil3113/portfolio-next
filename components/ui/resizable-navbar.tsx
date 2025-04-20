@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { HamIcon, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 import {
   motion,
@@ -197,8 +197,8 @@ export const MobileNavMenu = ({
   children,
   className,
   isOpen,
-  // onClose,
-}: MobileNavMenuProps) => {
+}: // onClose,
+MobileNavMenuProps) => {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -226,9 +226,16 @@ export const MobileNavToggle = ({
   onClick: () => void;
 }) => {
   return isOpen ? (
-    <X className="text-black dark:text-white" onClick={onClick} />
+    <X
+      className="text-black dark:text-white"
+      cursor-pointer
+      onClick={onClick}
+    />
   ) : (
-    <HamIcon className="text-black dark:text-white" onClick={onClick} />
+    <Menu
+      className="text-black dark:text-white cursor-pointer"
+      onClick={onClick}
+    />
   );
 };
 

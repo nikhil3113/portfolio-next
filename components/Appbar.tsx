@@ -1,101 +1,86 @@
 "use client";
-
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetClose,
-} from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
+  Navbar,
+  NavBody,
+  NavItems,
+  MobileNav,
+  NavbarLogo,
+  NavbarButton,
+  MobileNavHeader,
+  MobileNavToggle,
+  MobileNavMenu,
+} from "@/components/ui/resizable-navbar";
+import { useState } from "react";
 import { ModeToggle } from "./mode-toggle";
 
 export function Appbar() {
-  const [scrolled, setScrolled] = useState(false);
-
-  // Navigation items
   const navItems = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Projects", href: "/projects" },
-    { name: "Contact", href: "/contact" },
+    {
+      name: "About",
+      link: "#about",
+    },
+    {
+      name: "Contact",
+      link: "#contact",
+    },
+    {
+      name: "Projects",
+      link: "/projects",
+    }
   ];
 
-  // Handle scroll effect
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <nav
-      className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300 px-10",
-        scrolled
-          ? "bg-background/95 backdrop-blur-sm border-b py-2"
-          : "bg-transparent py-4"
-      )}
-    >
-      <div className="container flex h-14 items-center justify-between">
-        {/* Logo/Name */}
-        <Link href="/" className="flex items-center gap-2">
-          <span className="font-bold text-xl">YourName</span>
-        </Link>
-
+    <div className="sticky top-0 z-50  w-full">
+      <Navbar>
         {/* Desktop Navigation */}
-        <div className="hidden md:flex md:items-center gap-6">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="text-sm font-medium transition-colors hover:text-primary"
-            >
-              {item.name}
-            </Link>
-          ))}
-          <Button variant="outline" size="sm" asChild>
-            <a href="/contact">Get in touch</a>
-          </Button>
-          <ModeToggle/>
-        </div>
+        <NavBody>
+          <NavbarLogo />
+          <NavItems items={navItems} />
+          <div className="flex items-center gap-4">
+            <NavbarButton variant="primary">Contact</NavbarButton>
+            <ModeToggle />
+          </div>
+        </NavBody>
 
         {/* Mobile Navigation */}
-        <Sheet>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon">
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right">
-            <div className="flex flex-col gap-6 px-2 py-6">
-              {navItems.map((item) => (
-                <SheetClose key={item.name} asChild>
-                  <Link
-                    href={item.href}
-                    className="text-sm font-medium transition-colors hover:text-primary"
-                  >
-                    {item.name}
-                  </Link>
-                </SheetClose>
-              ))}
-              <SheetClose asChild>
-                <Button className="mt-2">Get in touch</Button>
-              </SheetClose>
+        <MobileNav>
+          <MobileNavHeader>
+            <NavbarLogo />
+            <MobileNavToggle
+              isOpen={isMobileMenuOpen}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            />
+          </MobileNavHeader>
+
+          <MobileNavMenu
+            isOpen={isMobileMenuOpen}
+            onClose={() => setIsMobileMenuOpen(false)}
+          >
+            {navItems.map((item, idx) => (
+              <a
+                key={`mobile-link-${idx}`}
+                href={item.link}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="relative text-neutral-600 dark:text-neutral-300"
+              >
+                <span className="block">{item.name}</span>
+              </a>
+            ))}
+            <div className="flex w-full flex-col gap-4">
+              <NavbarButton
+                onClick={() => setIsMobileMenuOpen(false)}
+                variant="primary"
+                className="w-full"
+              >
+                Login
+              </NavbarButton>
+              <ModeToggle />
             </div>
-          </SheetContent>
-        </Sheet>
-      </div>
-    </nav>
+          </MobileNavMenu>
+        </MobileNav>
+      </Navbar>
+    </div>
   );
 }

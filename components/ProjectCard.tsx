@@ -1,10 +1,7 @@
-"use client";
+"use client"
 
 import Image from "next/image";
-import React from "react";
-import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
 import Link from "next/link";
-import { Github } from "lucide-react";
 
 interface ProjectCardProps {
   title: string;
@@ -24,67 +21,56 @@ export function ProjectCard({
   githubLink,
 }: ProjectCardProps) {
   return (
-    <CardContainer className="inter-var">
-      <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border">
-        <CardItem
-          translateZ="50"
-          className="text-xl font-bold text-neutral-600 dark:text-white"
-        >
-          {title}
-        </CardItem>
-        <CardItem
-          as="p"
-          translateZ="60"
-          className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
-        >
-          {description}
-        </CardItem>
-        <CardItem translateZ="100" className="w-full mt-4">
-          <Image
-            src={image}
-            height={1000}
-            width={1000}
-            className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
-            alt={title}
-          />
-        </CardItem>
-        
-        {/* Tags */}
-        <CardItem
-          translateZ="40"
-          className="flex flex-wrap gap-2 mt-4"
-        >
-          {tags.map((tag, index) => (
-            <span
-              key={index}
-              className="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded-md text-xs"
-            >
-              {tag}
-            </span>
-          ))}
-        </CardItem>
-        
-        <div className="flex justify-between items-center mt-8">
-          <CardItem
-            translateZ={20}
-            as={Link}
-            href={siteLink}
-            target="_blank"
-            className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white hover:underline flex items-center"
-          >
-            Visit Site →
-          </CardItem>
-          <CardItem
-            translateZ={20}
-            as={Link}
-            href={githubLink}
-            target="_blank"
-            className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold flex items-center gap-1"
-          >
-            <Github size={16} /> GitHub
-          </CardItem>
+    <div className="w-full h-full">
+        <div className="group relative h-full flex flex-col overflow-hidden rounded-2xl border border-zinc-100 bg-white dark:bg-zinc-900 dark:border-zinc-800 transition duration-200">
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-tl-lg rounded-tr-lg bg-gray-100 dark:bg-zinc-800">
+            <Image
+              src={image}
+              alt={title}
+              className="h-full w-full transform object-cover transition duration-200 group-hover:scale-95 group-hover:rounded-2xl"
+              width={500}
+              height={500}
+           />
+          </div>
+          <div className="p-4 flex flex-col flex-grow">
+            <h2 className="my-3 text-lg font-bold text-zinc-700 dark:text-zinc-200">
+              {title}
+            </h2>
+            <p className="my-3 text-sm font-normal text-zinc-500 dark:text-zinc-400">
+              {description}
+            </p>
+            
+            <div className="flex flex-wrap gap-2 my-4">
+              {tags.map((tag, index) => (
+                <span 
+                  key={index}
+                  className="px-2 py-1 text-xs font-medium rounded-full bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            
+            <div className="mt-auto pt-2 flex flex-row items-center justify-between">
+              <Link
+                href={githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 transition-colors"
+              >
+                View Source
+              </Link>
+              <Link
+                href={siteLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative z-10 block rounded-xl bg-black dark:bg-zinc-700 px-6 py-2 text-xs font-bold text-white"
+              >
+                Live Demo
+              </Link>
+            </div>
+          </div>
         </div>
-      </CardBody>
-    </CardContainer>
+    </div>
   );
 }

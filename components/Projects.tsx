@@ -1,5 +1,5 @@
 // In your projects page or component
-import { ProjectCard } from "@/components/ProjectCard";
+import { ProjectCard } from "@/components/SampleProjectCard";
 
 export default function Projects() {
   return (

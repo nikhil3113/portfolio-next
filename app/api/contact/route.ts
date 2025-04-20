@@ -24,14 +24,14 @@ export async function POST(req: NextRequest) {
     });
 
     try {
-      if (!process.env.MAILER_SEND_API_KEY) {
-        return new Response("Missing MailerSend API key", { status: 500 });
+      if (!process.env.MAILER_SEND_API_KEY || !process.env.MAILERSEND_EMAIL) {
+        return new Response("Missing MailerSend ENV", { status: 500 });
       }
 
       const mailerSend = new MailerSend({
         apiKey: process.env.MAILER_SEND_API_KEY,
       });
-      const sentFrom = new Sender("MS_E30404@test-zxk54v887n1ljy6v.mlsender.net", "Nikhil Chavan");
+      const sentFrom = new Sender(process.env.MAILERSEND_EMAIL, "Nikhil Chavan");
 
       const recipents = [new Recipient(email, name)];
 

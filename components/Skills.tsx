@@ -12,16 +12,14 @@ const skills = [
   { name: "JavaScript", slug: "javascript" },
   { name: "Node.js", slug: "nodedotjs" },
   { name: "MongoDB", slug: "mongodb" },
-  { name: "Firebase", slug: "firebase" },
   { name: "Git", slug: "git" },
-  { name: "Framer Motion", slug: "framer" },
   { name: "GitHub", slug: "github" },
-  { name: "AWS", slug: "amazonwebservices" },
   { name: "Vercel", slug: "vercel" },
   { name: "HTML5", slug: "html5" },
   { name: "CSS3", slug: "css3" },
   { name: "MySQL", slug: "mysql" },
-  { name: "Flutter", slug: "flutter" },
+  {name: "Prisma", slug:"prisma"},
+  {name: "Tailwind CSS", slug:"tailwindcss"}
 ];
 
 export function Skills() {

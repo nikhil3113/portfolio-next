@@ -42,6 +42,7 @@ export function ContactForm() {
         toast({
           title: "Message sent!",
           description: "Thank you for reaching out. I'll get back to you soon.",
+          variant: "success"
         });
         setFormData({ name: "", email: "", message: "" });
       } else {
@@ -93,7 +94,7 @@ export function ContactForm() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="Enter Your Eamil"
+            placeholder="Enter Your Email"
             type="email"
             required
           />

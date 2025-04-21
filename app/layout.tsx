@@ -17,7 +17,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Nikhil Chavan Software Developer Portfolio",
+  title: "Nikhil Chavan Full Stack Developer Portfolio",
   description: "Welcome to my portfolio site, where you can view my projects, professional experience, and skills. Let&apos; connect and explore potential collaborations together.",
 };
 

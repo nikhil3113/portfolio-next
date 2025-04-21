@@ -5,15 +5,17 @@ import {
   NavItems,
   MobileNav,
   NavbarLogo,
-  NavbarButton,
   MobileNavHeader,
   MobileNavToggle,
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
 import { useState } from "react";
 import { ModeToggle } from "./mode-toggle";
+import { usePathname } from "next/navigation";
 
 export function Appbar() {
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
   const navItems = [
     // {
     //   name: "About",
@@ -56,12 +58,15 @@ export function Appbar() {
         {/* Desktop Navigation */}
         <NavBody className="hidden lg:visible">
           <NavbarLogo />
-          <NavItems
-            items={navItems.map((item) => ({
-              ...item,
-              onClick: (e: React.MouseEvent<HTMLAnchorElement>) => handleScroll(e, item.link),
-            }))}
-          />
+          {isHomePage && (
+            <NavItems
+              items={navItems.map((item) => ({
+                ...item,
+                onClick: (e: React.MouseEvent<HTMLAnchorElement>) =>
+                  handleScroll(e, item.link),
+              }))}
+            />
+          )}
           <div className="flex items-center gap-4">
             {/* <NavbarButton variant="primary">Contact</NavbarButton> */}
             <ModeToggle />
@@ -82,24 +87,21 @@ export function Appbar() {
             isOpen={isMobileMenuOpen}
             onClose={() => setIsMobileMenuOpen(false)}
           >
-            {navItems.map((item, idx) => (
-              <a
-                key={`mobile-link-${idx}`}
-                href={item.link}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="relative text-neutral-600 dark:text-neutral-300"
-              >
-                <span className="block">{item.name}</span>
-              </a>
-            ))}
+            {isHomePage &&
+              navItems.map((item, idx) => (
+                <a
+                  key={`mobile-link-${idx}`}
+                  href={item.link}
+                  onClick={(e) => {
+                    handleScroll(e, item.link);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="relative text-neutral-600 dark:text-neutral-300"
+                >
+                  <span className="block">{item.name}</span>
+                </a>
+              ))}
             <div className="flex w-full flex-col gap-4">
-              <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
-                className="w-full"
-              >
-                Login
-              </NavbarButton>
               <ModeToggle />
             </div>
           </MobileNavMenu>

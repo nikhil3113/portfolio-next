@@ -83,6 +83,42 @@ export async function POST(req: NextRequest) {
 
       await mailerSend.email.send(emailParams);
 
+      if (!process.env.MAIL) {
+        return new Response("Missing MAIL ENV", { status: 500 });
+      }
+      const myEmail = process.env.MAIL;
+      const notificationRecipients = [new Recipient(myEmail, "Nikhil Chavan")];
+  
+      const notificationParams = new EmailParams()
+        .setFrom(sentFrom)
+        .setTo(notificationRecipients)
+        .setReplyTo(new Sender(email, name)) // Allow direct reply to the sender
+        .setSubject(`New Contact Form Submission: ${name}`)
+        .setHtml(`
+          <div style="font-family: 'Arial', sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
+            <h2 style="color: #6d28d9; margin-bottom: 20px;">New Contact Form Submission</h2>
+            
+            <p><strong>From:</strong> ${name} (${email})</p>
+            
+            <h3 style="color: #6d28d9; margin-top: 20px;">Message:</h3>
+            <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+              ${message}
+            </div>
+            
+            <p style="color: #666; font-size: 14px;">This is an automated notification from your portfolio website.</p>
+          </div>
+        `)
+        .setText(`New Contact Form Submission
+        
+        From: ${name} (${email})
+        
+        Message:
+        ${message}
+        
+        This is an automated notification from your portfolio website.`);
+    
+      await mailerSend.email.send(notificationParams);
+
       console.log("Email sent successfully");
     } catch (error) {
       console.log("Error sending email", error);

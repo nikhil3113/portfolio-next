@@ -31,7 +31,7 @@ export function ScrollToTop() {
       onClick={scrollToTop}
       className={`${
         isVisible ? "opacity-100" : "opacity-0"
-      } fixed bottom-6 right-6 z-50 p-3 bg-primary text-white rounded-full shadow-lg transition-opacity duration-300 focus:outline-none hover:bg-primary/80`}
+      } fixed bottom-6 right-6 z-50 p-3 bg-primary text-white dark:text-black rounded-full shadow-lg transition-opacity duration-300 focus:outline-none hover:bg-primary/80`}
       aria-label="Scroll to top"
     >
       <ArrowUp size={20} />

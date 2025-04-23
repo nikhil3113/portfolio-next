@@ -4,6 +4,7 @@ import "./globals.css";
 import { Appbar } from "@/components/Appbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,7 +19,8 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Nikhil Chavan Full Stack Developer Portfolio",
-  description: "Welcome to my portfolio site, where you can view my projects, professional experience, and skills. Let&apos; connect and explore potential collaborations together.",
+  description:
+    "Welcome to my portfolio site, where you can view my projects, professional experience, and skills. Let&apos; connect and explore potential collaborations together.",
 };
 
 export default function RootLayout({
@@ -27,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -42,6 +44,7 @@ export default function RootLayout({
           <ScrollToTop />
         </ThemeProvider>
       </body>
+      <GoogleAnalytics gaId="G-QQDK7W7LM4" />
     </html>
   );
 }

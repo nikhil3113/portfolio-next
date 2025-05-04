@@ -6,7 +6,7 @@ interface ExperienceItem {
   date: string;
   company: string;
   role: string;
-  description: string[]; // Changed from string to string[] for bullet points
+  description: string[];
 }
 
 const experienceData: ExperienceItem[] = [
@@ -17,6 +17,7 @@ const experienceData: ExperienceItem[] = [
     description: [
       "Rebuilt the official company website digixpressionsmedia.com using React.js, Express.js, and MongoDB within 1 month, completing it 3–4 times faster than the estimated outsourced timeline.",
       "Solely leading frontend development for an in-house SEO tool using React.js, designed to reduce manual SEO audit time by 30% for the internal SEO team.",
+      "Developed authentication and lead verification APIs for easyhomeloan.in that automatically validated user conversions, enabling the affiliate team to generate accurate attribution reports and reducing manual verification time by 40%.",
     ],
   },
   {
@@ -27,6 +28,7 @@ const experienceData: ExperienceItem[] = [
       "Revamped Hero Section and developed a blog page for EasyHomeLoan using PHP, MySQL, and Bootstrap,improving page load speed by 30%.",
       "Built and integrated 10+ RESTful APIs in PHP, streamlining data flow between frontend and backend.",
       "Automated HR emails via Google Apps Script, reducing manual effort by 90%.",
+      "Performed QA testing for Smarkerz app, participating in the Agile development lifecycle and identifying 30+ bugs, contributing to improved app stability and user experience.",
     ],
   },
   {

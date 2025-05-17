@@ -102,26 +102,26 @@ const projects: Project[] = [
     siteLink: "https://weathers-one.netlify.app/",
     githubLink: "https://github.com/nikhil3113/weather-app-react/",
   },
-  {
-    id: "movie-search-app",
-    title: "Movie Search App",
-    description:
-      "The movie app allows users to search for movies, view details like ratings, cast, and synopses. It features a sleek, responsive interface for a seamless browsing experience. Discover and explore a vast collection of movies effortlessly.",
-    image: "/images/movie.png",
-    tags: ["React", "Css", "Axios", "tmdb API"],
-    siteLink: "https://movie-tmdb-search.netlify.app/",
-    githubLink: "https://github.com/nikhil3113/movieFinder",
-  },
-  {
-    id: "pokedex",
-    title: "PokeDex",
-    description:
-      "The Pokemon Search app lets users search for Pokémon and view detailed information, including stats. It features a clean, responsive interface for an enjoyable browsing experience. Explore and learn about your favorite Pokémon with ease.",
-    image: "/images/poke.png",
-    tags: ["React", "Css", "Axios", "Poke API"],
-    siteLink: "https://pokemon-adventure-check.netlify.app/",
-    githubLink: "https://github.com/nikhil3113/pokemon-app",
-  },
+  // {
+  //   id: "movie-search-app",
+  //   title: "Movie Search App",
+  //   description:
+  //     "The movie app allows users to search for movies, view details like ratings, cast, and synopses. It features a sleek, responsive interface for a seamless browsing experience. Discover and explore a vast collection of movies effortlessly.",
+  //   image: "/images/movie.png",
+  //   tags: ["React", "Css", "Axios", "tmdb API"],
+  //   siteLink: "https://movie-tmdb-search.netlify.app/",
+  //   githubLink: "https://github.com/nikhil3113/movieFinder",
+  // },
+  // {
+  //   id: "pokedex",
+  //   title: "PokeDex",
+  //   description:
+  //     "The Pokemon Search app lets users search for Pokémon and view detailed information, including stats. It features a clean, responsive interface for an enjoyable browsing experience. Explore and learn about your favorite Pokémon with ease.",
+  //   image: "/images/poke.png",
+  //   tags: ["React", "Css", "Axios", "Poke API"],
+  //   siteLink: "https://pokemon-adventure-check.netlify.app/",
+  //   githubLink: "https://github.com/nikhil3113/pokemon-app",
+  // },
 ];
 
 export default function ProjectsPage() {

@@ -176,7 +176,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div>
+        <div id="experience">
           <Experience />
         </div>
 

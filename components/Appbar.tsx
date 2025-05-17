@@ -21,14 +21,19 @@ export function Appbar() {
     //   name: "About",
     //   link: "#about",
     // },
-    {
-      name: "Skills",
-      link: "#skills",
-    },
+    // {
+    //   name: "Skills",
+    //   link: "#skills",
+    // },
     {
       name: "Projects",
       link: "#projects",
     },
+    {
+      name: "Experience",
+      link: "#experience",
+    },
+
     {
       name: "Contact",
       link: "#contact",

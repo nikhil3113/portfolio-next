@@ -7,10 +7,12 @@ const nextConfig = {
         hostname: "cdn.simpleicons.org",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
     ],
-    domains:[
-      "cdn.simpleicons.org",
-    ],
+    domains: ["cdn.simpleicons.org"],
     dangerouslyAllowSVG: true,
   },
 };

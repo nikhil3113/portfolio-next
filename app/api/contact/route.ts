@@ -1,4 +1,4 @@
-import { prisma } from "@/db";
+import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 
@@ -31,7 +31,10 @@ export async function POST(req: NextRequest) {
       const mailerSend = new MailerSend({
         apiKey: process.env.MAILER_SEND_API_KEY,
       });
-      const sentFrom = new Sender(process.env.MAILERSEND_EMAIL, "Nikhil Chavan");
+      const sentFrom = new Sender(
+        process.env.MAILERSEND_EMAIL,
+        "Nikhil Chavan"
+      );
 
       const recipents = [new Recipient(email, name)];
 
@@ -88,13 +91,12 @@ export async function POST(req: NextRequest) {
       }
       const myEmail = process.env.MAIL;
       const notificationRecipients = [new Recipient(myEmail, "Nikhil Chavan")];
-  
+
       const notificationParams = new EmailParams()
         .setFrom(sentFrom)
         .setTo(notificationRecipients)
         .setReplyTo(new Sender(email, name)) // Allow direct reply to the sender
-        .setSubject(`New Contact Form Submission: ${name}`)
-        .setHtml(`
+        .setSubject(`New Contact Form Submission: ${name}`).setHtml(`
           <div style="font-family: 'Arial', sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
             <h2 style="color: #6d28d9; margin-bottom: 20px;">New Contact Form Submission</h2>
             
@@ -107,8 +109,7 @@ export async function POST(req: NextRequest) {
             
             <p style="color: #666; font-size: 14px;">This is an automated notification from your portfolio website.</p>
           </div>
-        `)
-        .setText(`New Contact Form Submission
+        `).setText(`New Contact Form Submission
         
         From: ${name} (${email})
         
@@ -116,7 +117,7 @@ export async function POST(req: NextRequest) {
         ${message}
         
         This is an automated notification from your portfolio website.`);
-    
+
       await mailerSend.email.send(notificationParams);
 
       console.log("Email sent successfully");

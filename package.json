@@ -11,6 +11,7 @@
     "signup": "npx tsx scripts/signup.ts"
   },
   "dependencies": {
+    "@getbrevo/brevo": "^2.5.0",
     "@hookform/resolvers": "^5.1.1",
     "@next/third-parties": "^15.3.1",
     "@prisma/client": "^6.6.0",

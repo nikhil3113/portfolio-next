@@ -3,7 +3,6 @@ import {
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -35,7 +34,11 @@ async function getPorjects() {
 export default async function Projects() {
   const projects = await getPorjects();
   if (!projects || projects.length === 0) {
-    return <div>No projects found</div>;
+    return (
+      <div className=" grid place-items-center h-screen">
+        <h1 className="text-3xl font-bold">No Project Found</h1>
+      </div>
+    );
   }
 
   return (
@@ -64,12 +67,6 @@ export default async function Projects() {
               </TableRow>
             ))}
           </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableCell colSpan={3}>Total</TableCell>
-              <TableCell className="text-right">$2,500.00</TableCell>
-            </TableRow>
-          </TableFooter>
         </Table>
       </div>
     </div>

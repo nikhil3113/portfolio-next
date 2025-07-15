@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
   if (!session || !session.user) {
@@ -15,7 +15,7 @@ export async function PUT(
     );
   }
   try {
-    const id = params.id;
+    const id = (await params).id;
     const { title, description, tags, siteLink, githubLink, imageUrl } =
       await request.json();
     if (
@@ -58,7 +58,7 @@ export async function PUT(
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
 
@@ -68,7 +68,7 @@ export async function GET(
       { status: 401 }
     );
   }
-  const id = params.id;
+  const id = (await params).id;
   try {
     const projects = await prisma.project.findUnique({
       where: { id },
@@ -85,7 +85,7 @@ export async function GET(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
   if (!session || !session.user) {
@@ -95,7 +95,7 @@ export async function DELETE(
     );
   }
 
-  const id = params.id;
+  const id = (await params).id;
   try {
     const existingProject = await prisma.project.findUnique({
       where: { id },

@@ -4,42 +4,12 @@ import { ProjectCard } from "@/components/SampleProjectCard";
 import { Skills } from "@/components/Skills";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
+import { getProjects } from "@/lib/action/projects";
 import Link from "next/link";
 
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-  siteLink: string;
-  githubLink: string;
-}
 
-const project: Project[] = [
-  {
-    id: "seo-validator",
-    title: "SEO Validator",
-    description:
-      "SEO Validator is an AI-powered tool that generates and optimizes meta titles and descriptions for better search rankings. It ensures SEO best practices with real-time feedback on keywords and character limits.",
-    image: "/images/seo-validator.png",
-    tags: ["React", "Next.js", "AI", "OpenAI"],
-    siteLink: "https://seo-validator.vercel.app/",
-    githubLink: "https://github.com/nikhil3113/seo-validator",
-  },
-  {
-    id: "modern-mart",
-    title: "Modern Mart",
-    description:
-      "Modern Mart, an eCommerce platform designed to provide a seamless shopping experience. It features a modern UI, allowing users to browse products, add reviews with headlines and descriptions, and make secure payments through the Razorpay payment gateway.",
-    image: "/images/ecommerce.png",
-    tags: ["React", "Next.js", "MongoDB", "Razorpay"],
-    siteLink: "https://modernmart.netlify.app/",
-    githubLink: "https://github.com/nikhil3113/modern-ecommerce",
-  },
-];
-
-export default function Home() {
+export default async function Home() {
+  const project = await getProjects();
   return (
     <div>
       <section className="relative min-h-[85vh] sm:min-h-screen flex items-center justify-center">
@@ -60,7 +30,7 @@ export default function Home() {
             <div className="mt-8 flex justify-center z-20 relative">
               <a
                 href="/resume.pdf"
-                download="Nikhil_Chavan_Resume.pdf"
+                download="Nikhil_Chavan.pdf"
                 className="group relative inline-flex items-center justify-center px-8 py-3 overflow-hidden font-medium transition duration-300 ease-out border-2 rounded-full shadow-md bg-background/80 backdrop-blur-sm border-primary/50 dark:hover:border-black hover:border-white"
               >
                 <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 group-hover:translate-x-0 ease ">
@@ -157,7 +127,7 @@ export default function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 p-0">
-            {project.map((items, idx) => (
+            {project.slice(0, 2).map((items, idx) => (
               <ProjectCard
                 key={idx}
                 title={items.title}

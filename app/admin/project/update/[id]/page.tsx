@@ -91,6 +91,7 @@ export default function UpdateProjects() {
       setImageUrl={setImageUrl}
       imageUrl={imageUrl}
       isLoading={isLoading}
+      isUpdate={true}
     />
   );
 }

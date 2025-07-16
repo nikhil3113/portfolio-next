@@ -21,7 +21,7 @@ async function getProjects() {
 
     const projects = await prisma.project.findMany({
       orderBy: {
-        createdAt: "desc",
+        createdAt: "asc",
       },
     });
 
@@ -46,7 +46,6 @@ export default async function Projects() {
   return (
     <div className="min-h-screen p-6">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
             Projects
@@ -55,16 +54,22 @@ export default async function Projects() {
             Manage your portfolio projects ({projects.length} total)
           </p>
         </div>
-
-        {/* Enhanced Table Card */}
         <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200/50 dark:border-gray-700/50 overflow-hidden">
-          <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-              All Projects
-            </h2>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              A comprehensive list of all your portfolio projects
-            </p>
+          <div className="p-6 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between ">
+            <div>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                All Projects
+              </h2>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                A comprehensive list of all your portfolio projects
+              </p>
+            </div>
+            <Link
+              href={`/admin/project/add`}
+              className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            >
+              Add
+            </Link>
           </div>
 
           <div className="overflow-x-auto bg-white/80 dark:bg-slate-800/80">
@@ -142,8 +147,6 @@ export default async function Projects() {
               </TableBody>
             </Table>
           </div>
-
-          {/* Table Footer */}
           <div className="px-6 py-4 bg-gray-50/50 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-700">
             <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
               Showing {projects.length} project

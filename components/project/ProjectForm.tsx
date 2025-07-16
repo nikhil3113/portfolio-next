@@ -12,7 +12,6 @@ import {
   Upload,
   Tag,
   ArrowLeft,
-  Eye,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -31,6 +30,7 @@ interface ProjectFormProps {
   imageUrl?: string;
   setImageUrl: (url: string) => void;
   form: UseFormReturn<ProjectFormData>;
+  isUpdate?: boolean;
 }
 
 export function ProjectForm({
@@ -39,6 +39,7 @@ export function ProjectForm({
   imageUrl,
   setImageUrl,
   form,
+  isUpdate = false,
 }: ProjectFormProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-black dark:to-slate-800 p-6">
@@ -240,17 +241,17 @@ export function ProjectForm({
                   </Button>
 
                   <div className="flex space-x-3">
-                    <Button type="button" variant="outline" className="px-8">
-                      <Eye className="w-4 h-4 mr-2" />
-                      Preview
-                    </Button>
                     <Button
                       type="submit"
                       className="px-8 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
                       disabled={isLoading}
                     >
                       <Plus className="w-4 h-4 mr-2" />
-                      {isLoading ? "Loading" : "Create Project"}
+                      {isLoading
+                        ? "Loading"
+                        : isUpdate
+                        ? "Update Project"
+                        : "Add Project"}
                     </Button>
                   </div>
                 </div>

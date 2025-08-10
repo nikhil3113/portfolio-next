@@ -6,6 +6,77 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Configure for tiptap editor */
+.prose h1 {
+  font-size: 32px;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose h2 {
+  font-size: 24px;
+  margin-top: 1.2em;
+  margin-bottom: 0.4em;
+}
+
+.prose h3 {
+  font-size: 18.72px;
+  margin-top: 1em;
+  margin-bottom: 0.3em;
+}
+
+.prose ul {
+  list-style-type: disc;
+  margin-left: 1.5em;
+  margin-bottom: 1em;
+  padding-left: 1.5em;
+}
+
+.prose ol {
+  list-style-type: decimal;
+  margin-left: 1.5em;
+  margin-bottom: 1em;
+  padding-left: 1.5em;
+}
+
+.prose blockquote {
+  border-left: 4px solid #a0aec0;
+  padding-left: 1em;
+  color: #6b7280;
+  font-style: italic;
+  margin: 1em 0;
+  background: #f9fafb;
+}
+
+.prose a {
+  color: #2563eb;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.prose a:hover {
+  color: #1d4ed8;
+}
+
+.prose pre {
+  background: #1a202c;
+  color: #f8f8f2;
+  border-radius: 0.5em;
+  padding: 1em;
+  overflow-x: auto;
+  font-size: 0.95em;
+  margin: 1em 0;
+}
+
+.prose code {
+  background: #f3f4f6;
+  color: #d6336c;
+  border-radius: 0.3em;
+  padding: 0.2em 0.4em;
+  font-size: 0.95em;
+}
+
+/* Utility for marquee */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -34,13 +105,21 @@ html {
   }
 }
 @keyframes marquee-vertical {
-  from { transform: translateY(0); }
-  to { transform: translateY(calc(-100%)); }
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100%));
+  }
 }
 
 @keyframes marquee-vertical-reverse {
-  from { transform: translateY(calc(-100%)); }
-  to { transform: translateY(0); }
+  from {
+    transform: translateY(calc(-100%));
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 /* Define animation classes */
@@ -90,7 +169,7 @@ html {
     --sky-400: #38bdf8;
     --sky-500: #0ea5e9;
   }
-  
+
   .dark {
     --background: 224 71.4% 4.1%;
     --foreground: 210 20% 98%;

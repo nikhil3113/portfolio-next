@@ -5,6 +5,7 @@ import { Appbar } from "@/components/Appbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Providers } from "./Providers";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -39,9 +40,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Appbar />
-          {children}
-          <ScrollToTop />
+          <Providers>
+            <Appbar />
+            {children}
+            <ScrollToTop />
+          </Providers>
         </ThemeProvider>
       </body>
       <GoogleAnalytics gaId="G-QQDK7W7LM4" />

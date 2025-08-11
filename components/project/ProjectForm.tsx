@@ -2,18 +2,8 @@ import FormFields from "@/components/Form";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { UseFormReturn } from "react-hook-form";
-
-import { CldUploadWidget } from "next-cloudinary";
-import {
-  Plus,
-  FileText,
-  Link2,
-  ImageIcon,
-  Upload,
-  Tag,
-  ArrowLeft,
-} from "lucide-react";
-import Image from "next/image";
+import { Plus, FileText, Link2, ImageIcon, Tag, ArrowLeft } from "lucide-react";
+import { ImageUpload } from "../ImageUpload";
 
 interface ProjectFormData {
   title: string;
@@ -141,75 +131,12 @@ export function ProjectForm({
                     </p>
                   </div>
 
-                  <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-8 text-center hover:border-blue-400 transition-colors">
-                    <CldUploadWidget
-                      uploadPreset={
-                        process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
-                      }
-                      signatureEndpoint="/api/sign-cloudinary-params"
-                      onSuccess={(result) => {
-                        console.log("Image uploaded successfully:", result);
-
-                        if (result.info && typeof result.info !== "string") {
-                          const uploadedUrl = result.info.secure_url;
-                          setImageUrl(uploadedUrl);
-                          form.setValue("image", uploadedUrl);
-                        }
-                      }}
-                      options={{
-                        singleUploadAutoClose: true,
-                        multiple: false,
-                        maxFiles: 1,
-                      }}
-                    >
-                      {({ open }) => {
-                        return (
-                          <div className="space-y-4">
-                            {imageUrl ? (
-                              <div className="space-y-4">
-                                <Image
-                                  src={imageUrl}
-                                  alt="Uploaded preview"
-                                  className="w-full h-48 object-cover rounded-lg border"
-                                  width={400}
-                                  height={200}
-                                />
-                                <Button
-                                  type="button"
-                                  onClick={() => open()}
-                                  variant="outline"
-                                  className="w-full"
-                                >
-                                  <Upload className="w-4 h-4 mr-2" />
-                                  Change Image
-                                </Button>
-                              </div>
-                            ) : (
-                              <div>
-                                <div className="mx-auto w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                                  <Upload className="w-8 h-8 text-white" />
-                                </div>
-                                <div>
-                                  <Button
-                                    type="button"
-                                    onClick={() => open()}
-                                    variant="outline"
-                                    className="mb-2"
-                                  >
-                                    <Upload className="w-4 h-4 mr-2" />
-                                    Upload Project Image
-                                  </Button>
-                                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                                    PNG, JPG, GIF up to 10MB
-                                  </p>
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        );
-                      }}
-                    </CldUploadWidget>
-                  </div>
+                  <ImageUpload
+                    form={form}
+                    imageUrl={imageUrl}
+                    setImageUrl={setImageUrl}
+                    field="image"
+                  />
                 </div>
 
                 {/* Tags Section */}

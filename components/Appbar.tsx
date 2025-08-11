@@ -17,14 +17,6 @@ export function Appbar() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const navItems = [
-    // {
-    //   name: "About",
-    //   link: "#about",
-    // },
-    // {
-    //   name: "Skills",
-    //   link: "#skills",
-    // },
     {
       name: "Projects",
       link: "#projects",
@@ -37,6 +29,10 @@ export function Appbar() {
     {
       name: "Contact",
       link: "#contact",
+    },
+    {
+      name: "Blog",
+      link: "/blogs",
     },
   ];
 

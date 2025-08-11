@@ -1,13 +1,14 @@
 import { Controller, UseFormReturn } from "react-hook-form";
 import { Form } from "../ui/form";
 import FormFields from "../Form";
-import { ImageUpload } from "./ImageUpload";
+// import { ImageUpload } from "./ImageUpload";
 import { TipTap } from "../TipTap";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Separator } from "../ui/separator";
 import { Badge } from "../ui/badge";
 import { Save, Eye } from "lucide-react";
+import { ImageUpload } from "../ImageUpload";
 
 interface BlogFormData {
   h1: string;
@@ -77,9 +78,15 @@ export function BlogForm({
               {/* Image Upload Section */}
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold">Featured Image</h3>
-                <ImageUpload
+                {/* <ImageUpload
                   onImageUploaded={(url) => form.setValue("imageUrl", url)}
                   value={form.watch("imageUrl")}
+                /> */}
+                <ImageUpload<BlogFormData>
+                  form={form}
+                  imageUrl={form.watch("imageUrl")}
+                  setImageUrl={(url) => form.setValue("imageUrl", url)}
+                  field="imageUrl"
                 />
               </div>
 

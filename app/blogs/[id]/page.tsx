@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { CircleUser, CalendarDays, Clock } from "lucide-react";
+import { Metadata } from "next";
 import Image from "next/image";
 
 const getBlogById = async (id: string) => {
@@ -13,6 +14,37 @@ const getBlogById = async (id: string) => {
     return null;
   }
 };
+
+type Props = {
+  params: Promise<{ id: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const id = (await params).id;
+  const blog = await getBlogById(id);
+  if (!blog) {
+    return {
+      title: "Blog Not Found",
+      description: "This blog post does not exist.",
+    };
+  }
+  return {
+    title: blog.h1,
+    description: blog.metaDescription || blog.content?.slice(0, 150),
+    openGraph: {
+      title: blog.h1,
+      description: blog.metaDescription || blog.content?.slice(0, 150),
+      images: blog.imageUrl ? [{ url: blog.imageUrl }] : [],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: blog.h1,
+      description: blog.metaDescription || blog.content?.slice(0, 150),
+      images: blog.imageUrl ? [blog.imageUrl] : [],
+    },
+  };
+}
 
 function estimateReadTime(html: string) {
   const text = html.replace(/<[^>]*>/g, " ");

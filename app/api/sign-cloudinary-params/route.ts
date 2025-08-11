@@ -33,3 +33,24 @@ export async function POST(request: Request) {
     );
   }
 }
+
+export async function DELETE(request: Request) {
+  try {
+    const { publicId } = await request.json();
+    if (!publicId) {
+      return Response.json({ error: "Public ID is required" }, { status: 400 });
+    }
+
+    const result = await cloudinary.uploader.destroy(publicId);
+    return Response.json(
+      { message: "Cloudinary resource deleted successfully", result },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error deleting Cloudinary resource:", error);
+    return Response.json(
+      { error: "Failed to delete Cloudinary resource" },
+      { status: 500 }
+    );
+  }
+}

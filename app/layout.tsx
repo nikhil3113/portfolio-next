@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   description:
     "Welcome to my portfolio site, where you can view my projects, professional experience, and skills. Let's connect and explore potential collaborations together.",
   other: {
-    "google-site-verification": process.env.GOOGLE_SITE_VERIFICATION || "",
+    "google-site-verification": "5gjaQq-E7AeichpVI8Qa64ah0ICxs_iaO4ioHjgOeOk",
   },
 };
 
@@ -32,7 +32,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -51,7 +50,7 @@ export default function RootLayout({
           </Providers>
         </ThemeProvider>
       </body>
-      <GoogleAnalytics gaId={gaId} />
+      <GoogleAnalytics gaId="G-QQDK7W7LM4" />
     </html>
   );
 }

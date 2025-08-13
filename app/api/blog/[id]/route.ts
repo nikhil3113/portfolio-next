@@ -1,6 +1,7 @@
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function GET(
@@ -44,7 +45,7 @@ export async function PUT(
     );
   }
   try {
-    const { id } = await params;
+    const { id } = await params;  
     const body = await request.json();
     const { h1, metaDescription, content, imageUrl, author } = body;
     if (!h1 || !metaDescription || !content) {
@@ -64,6 +65,7 @@ export async function PUT(
         author,
       },
     });
+    revalidatePath(`/blogs/${id}`);
     return NextResponse.json(updatedBlog, { status: 200 });
   } catch (error) {
     console.error("Error updating blog:", error);

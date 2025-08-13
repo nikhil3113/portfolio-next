@@ -22,6 +22,9 @@ export const metadata: Metadata = {
   title: "Nikhil Chavan Full Stack Developer Portfolio",
   description:
     "Welcome to my portfolio site, where you can view my projects, professional experience, and skills. Let's connect and explore potential collaborations together.",
+  other: {
+    "google-site-verification": process.env.GOOGLE_SITE_VERIFICATION || "",
+  },
 };
 
 export default function RootLayout({
@@ -29,6 +32,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -47,7 +51,7 @@ export default function RootLayout({
           </Providers>
         </ThemeProvider>
       </body>
-      <GoogleAnalytics gaId="G-QQDK7W7LM4" />
+      <GoogleAnalytics gaId={gaId} />
     </html>
   );
 }

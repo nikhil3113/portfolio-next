@@ -3,6 +3,8 @@ import { CircleUser, CalendarDays, Clock } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 
+export const revalidate = 0; 
+
 const getBlogById = async (id: string) => {
   try {
     const blog = await prisma.blog.findUnique({

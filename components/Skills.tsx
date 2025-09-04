@@ -1,7 +1,7 @@
 "use client";
 
 import { Marquee } from "@/components/ui/marquee";
-import Image from "next/image";
+// import Image from "next/image";
 
 // Define skills with their Simple Icons slugs
 const skills = [
@@ -16,7 +16,7 @@ const skills = [
   { name: "GitHub", slug: "github" },
   { name: "Vercel", slug: "vercel" },
   { name: "HTML5", slug: "html5" },
-  { name: "CSS3", slug: "css3" },
+  { name: "CSS3", slug: "css" },
   { name: "MySQL", slug: "mysql" },
   {name: "Prisma", slug:"prisma"},
   {name: "Tailwind CSS", slug:"tailwindcss"}
@@ -44,7 +44,7 @@ export function Skills() {
               key={index}
               className="relative h-full w-fit sm:mx-[4rem] mx-[2rem] flex flex-col items-center justify-center gap-2"
             >
-              <Image
+              <img
                 src={`https://cdn.simpleicons.org/${skill.slug}`}
                 alt={skill.name}
                 className="h-10 w-10"
@@ -64,7 +64,7 @@ export function Skills() {
               key={index}
               className="relative h-full w-fit sm:mx-[4rem] mx-[2rem] flex flex-col items-center justify-center gap-2"
             >
-              <Image
+              <img
                 src={`https://cdn.simpleicons.org/${skill.slug}`}
                 alt={skill.name}
                 className="h-10 w-10"

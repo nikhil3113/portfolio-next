@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { CircleUser, CalendarDays, Clock } from "lucide-react";
-// import { Metadata } from "next";
+import { Metadata } from "next";
 import Image from "next/image";
 
 export const revalidate = 0;
@@ -17,12 +17,13 @@ const getBlogById = async (id: string) => {
   }
 };
 
-// type Props = {
-//   params: Promise<{ id: string }>;
-// };
+type Props = {
+  params: Promise<{ id: string }>;
+};
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const blog = await getBlogById(params.id);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const blog = await getBlogById(id);
   if (!blog) {
     return {
       title: "Blog Not Found",
@@ -98,7 +99,7 @@ export default async function BlogPage({
               <div className="relative w-full aspect-[16/9] overflow-hidden rounded-xl border bg-muted shadow-sm">
                 <Image
                   src={blog.imageUrl}
-                  alt={`${blog.h1} - full stack developer portfolio article image`}
+                  alt={blog.h1}
                   fill
                   className="object-cover"
                   sizes="100vw"

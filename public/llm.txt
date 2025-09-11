@@ -1,0 +1,28 @@
+Project: Full Stack Developer Portfolio
+
+Description:
+This project is a modern full stack developer portfolio built with Next.js, React, TypeScript, Prisma, and Tailwind CSS. 
+It features dynamic blog and project pages, admin editing, authentication, image uploads (Cloudinary), and SEO optimization.
+
+Key Features:
+- Blog system with rich text editing and code highlighting
+- Project showcase with images and links
+- Admin dashboard for content management
+- Authentication with NextAuth.js
+- Image uploads via Cloudinary
+- Responsive and accessible UI with shadcn/ui and Tailwind CSS
+- SEO: dynamic metadata, sitemap, robots, Open Graph, Twitter cards
+
+Tech Stack:
+- Next.js App Router
+- React
+- TypeScript
+- Prisma (PostgreSQL)
+- NextAuth.js
+- Cloudinary
+- Tailwind CSS
+- shadcn/ui
+
+Instructions for LLM:
+- Use this context to answer questions about the project structure, features, and technologies.
+- Refer to this file for a high-level overview of the codebase.

@@ -18,8 +18,8 @@ const skills = [
   { name: "HTML5", slug: "html5" },
   { name: "CSS3", slug: "css" },
   { name: "MySQL", slug: "mysql" },
-  {name: "Prisma", slug:"prisma"},
-  {name: "Tailwind CSS", slug:"tailwindcss"}
+  { name: "Prisma", slug: "prisma" },
+  { name: "Tailwind CSS", slug: "tailwindcss" },
 ];
 
 export function Skills() {
@@ -38,7 +38,7 @@ export function Skills() {
       </div>
 
       <div className="mb-10">
-        <Marquee className="py-4 max-sm:px-5" pauseOnHover >
+        <Marquee className="py-4 max-sm:px-5" pauseOnHover>
           {skills.slice(0, Math.ceil(skills.length / 2)).map((skill, index) => (
             <div
               key={index}

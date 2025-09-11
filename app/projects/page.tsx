@@ -2,6 +2,12 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { getProjects } from "@/lib/action/projects";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Projects",
+  description:
+    "Showcasing full stack developer portfolio projects: scalable APIs, performant frontends, and modern tooling.",
+};
+
 export default async function ProjectsPage() {
   const projects = await getProjects();
   return (

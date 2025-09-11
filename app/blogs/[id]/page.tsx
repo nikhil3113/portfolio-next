@@ -1,9 +1,9 @@
 import { prisma } from "@/lib/prisma";
 import { CircleUser, CalendarDays, Clock } from "lucide-react";
-import { Metadata } from "next";
+// import { Metadata } from "next";
 import Image from "next/image";
 
-export const revalidate = 0; 
+export const revalidate = 0;
 
 const getBlogById = async (id: string) => {
   try {
@@ -17,33 +17,37 @@ const getBlogById = async (id: string) => {
   }
 };
 
-type Props = {
-  params: Promise<{ id: string }>;
-};
+// type Props = {
+//   params: Promise<{ id: string }>;
+// };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const id = (await params).id;
-  const blog = await getBlogById(id);
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const blog = await getBlogById(params.id);
   if (!blog) {
     return {
       title: "Blog Not Found",
-      description: "This blog post does not exist.",
+      description:
+        "This article does not exist | Full Stack Developer Portfolio",
     };
   }
+  const baseDesc =
+    blog.metaDescription ||
+    (blog.content ? blog.content.replace(/<[^>]+>/g, "").slice(0, 150) : "");
   return {
-    title: blog.h1,
-    description: blog.metaDescription || blog.content?.slice(0, 150),
+    title: `${blog.h1}`,
+    description: `${baseDesc} | Full Stack Developer Portfolio`,
+    alternates: {
+      canonical: `https://nikchavan.com/blogs/${blog.id}`,
+    },
     openGraph: {
       title: blog.h1,
-      description: blog.metaDescription || blog.content?.slice(0, 150),
+      description: baseDesc,
+      url: `https://nikchavan.com/blogs/${blog.id}`,
       images: blog.imageUrl ? [{ url: blog.imageUrl }] : [],
-      type: "article",
     },
     twitter: {
-      card: "summary_large_image",
       title: blog.h1,
-      description: blog.metaDescription || blog.content?.slice(0, 150),
-      images: blog.imageUrl ? [blog.imageUrl] : [],
+      description: baseDesc,
     },
   };
 }
@@ -94,7 +98,7 @@ export default async function BlogPage({
               <div className="relative w-full aspect-[16/9] overflow-hidden rounded-xl border bg-muted shadow-sm">
                 <Image
                   src={blog.imageUrl}
-                  alt={blog.h1}
+                  alt={`${blog.h1} - full stack developer portfolio article image`}
                   fill
                   className="object-cover"
                   sizes="100vw"

@@ -43,7 +43,7 @@ export const metadata: Metadata = {
       "Projects & articles showcasing modern full stack development with React, Next.js and TypeScript.",
   },
   other: {
-    "google-site-verification": "5gjaQq-E7AeichpVI8Qa64ah0ICxs_iaO4ioHjgOeOk",
+    "google-site-verification": "EhFpUqvjGl7jkuGbfRhK71u32bp3BDQFYQSvllx97r8",
   },
 };
 

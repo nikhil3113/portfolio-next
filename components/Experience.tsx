@@ -15,9 +15,10 @@ const experienceData: ExperienceItem[] = [
     company: "Digixpressions Pvt Ltd",
     role: "Full Stack Developer - Junior Executive",
     description: [
-      "Rebuilt the official company website digixpressionsmedia.com using React.js, Express.js, and MongoDB within 1 month, completing it 3–4 times faster than the estimated outsourced timeline.",
-      "Solely leading frontend development for an in-house SEO tool using React.js, designed to reduce manual SEO audit time by 30% for the internal SEO team.",
-      "Developed authentication and lead verification APIs for easyhomeloan.in that automatically validated user conversions, enabling the affiliate team to generate accurate attribution reports and reducing manual verification time by 40%.",
+      "Orchestrated the full-stack development of the company’s website, delivering a production-ready application 3–4 times faster than the projected timeline for external vendors, resulting in significant cost savings.",
+      "Led the frontend development lifecycle for an in-house SEO analytics tool, from concept to deployment, creating an intuitive interface that reduced manual audit time by 30%.",
+      "Developed a DA/PA checker tool using Next.js that checks Domain and Page Authority, eliminating 85% of the manual workload for the off-page SEO team.",
+      "Managed the complete deployment lifecycle for the SEO tool’s frontend, utilizing Git, PM2, and Nginx to ensure high availability.",
     ],
   },
   {
@@ -25,10 +26,10 @@ const experienceData: ExperienceItem[] = [
     company: "Digixpressions Pvt Ltd",
     role: "Product Intern",
     description: [
-      "Revamped Hero Section and developed a blog page for EasyHomeLoan using PHP, MySQL, and Bootstrap,improving page load speed by 30%.",
-      "Built and integrated 10+ RESTful APIs in PHP, streamlining data flow between frontend and backend.",
+      "Revamped Hero Section and engineered a blog page for EasyHomeLoan using PHP, MySQL, and Bootstrap, improving page load speed by 30%.",
+      "Built and integrated RESTful APIs in PHP, streamlining data flow between frontend and backend.",
       "Automated HR emails via Google Apps Script, reducing manual effort by 90%.",
-      "Performed QA testing for Smarkerz app, participating in the Agile development lifecycle and identifying 30+ bugs, contributing to improved app stability and user experience.",
+      "Managed the content publishing workflow in WordPress, overseeing the formatting, scheduling, and final upload of articles for multiple teams.",
     ],
   },
   {
@@ -36,8 +37,8 @@ const experienceData: ExperienceItem[] = [
     company: "Mira Advanced Engineering",
     role: "Java Developer Intern",
     description: [
-      "Developed backend features in Java for internal tools, optimizing load time by 15–20%.",
-      "Worked on multiple projects using JSP, AWT, and Swing. implemented core functionality and reviewed code regularly with mentor.",
+      "Implemented backend features in Java for internal tools, optimizing load time by 15–20%.",
+      "Worked on multiple projects using JSP, AWT, and Swing. And reviewed code regularly with mentor.",
     ],
   },
   {

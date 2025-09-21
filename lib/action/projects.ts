@@ -6,7 +6,7 @@ export async function getProjects() {
   try {
     const projects = await prisma.project.findMany({
       orderBy: {
-        createdAt: "asc",
+        createdAt: "desc",
       },
     });
     return projects.map((project) => ({

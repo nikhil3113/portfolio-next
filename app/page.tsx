@@ -7,7 +7,6 @@ import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button
 import { getProjects } from "@/lib/action/projects";
 import Link from "next/link";
 
-
 export default async function Home() {
   const project = await getProjects();
   return (
@@ -118,7 +117,7 @@ export default async function Home() {
         <div id="projects">
           <div className="max-w-3xl mx-auto text-center mb-0 mt-16">
             <p className="text-primary font-semibold mb-2 tracking-wide">
-              MY WORK
+              Proof Of Work
             </p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Projects</h2>
             <p className="text-muted-foreground max-sm:px-5">
@@ -126,7 +125,7 @@ export default async function Home() {
               skills and problem-solving abilities.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 p-0">
+          <div className="grid grid-cols-1 lg:grid-cols-2 p-0">
             {project.slice(0, 2).map((items, idx) => (
               <ProjectCard
                 key={idx}
@@ -139,8 +138,8 @@ export default async function Home() {
               />
             ))}
           </div>
-          <div className="flex justify-end mt-0 max-sm:px-5">
-            <Link href="/projects">
+          <div className="flex justify-center mt-0 max-sm:px-5">
+            <Link href="/projects" prefetch={true}>
               <InteractiveHoverButton text="More" />
             </Link>
           </div>

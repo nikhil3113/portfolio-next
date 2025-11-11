@@ -34,13 +34,19 @@ export function ProjectCard({
           />
         </div>
         <div className="p-4 flex flex-col flex-grow">
-          <h2 className="my-3 text-lg font-bold text-zinc-700 dark:text-zinc-200">
-            {title}
-          </h2>
-          <p className="my-3 text-sm font-normal text-zinc-500 dark:text-zinc-400">
-            {description}
-          </p>
-
+          <Link
+            href={siteLink}
+            className="w-full h-full"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h2 className="my-3 text-lg font-bold text-zinc-700 dark:text-zinc-200">
+              {title}
+            </h2>
+            <p className="my-3 text-sm font-normal text-zinc-500 dark:text-zinc-400">
+              {description}
+            </p>
+          </Link>
           <div className="flex flex-wrap gap-2 my-4">
             {tags.map((tag, index) => (
               <span

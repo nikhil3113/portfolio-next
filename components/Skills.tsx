@@ -1,6 +1,7 @@
 "use client";
 
 import { Marquee } from "@/components/ui/marquee";
+import Image from "next/image";
 // import Image from "next/image";
 
 // Define skills with their Simple Icons slugs
@@ -44,12 +45,12 @@ export function Skills() {
               key={index}
               className="relative h-full w-fit sm:mx-[4rem] mx-[2rem] flex flex-col items-center justify-center gap-2"
             >
-              <img
+              <Image
                 src={`https://cdn.simpleicons.org/${skill.slug}`}
                 alt={skill.name}
                 className="h-10 w-10"
-                height={10}
-                width={10}
+                height={40}
+                width={40}
               />
               <span className="text-sm font-medium">{skill.name}</span>
             </div>
@@ -64,12 +65,12 @@ export function Skills() {
               key={index}
               className="relative h-full w-fit sm:mx-[4rem] mx-[2rem] flex flex-col items-center justify-center gap-2"
             >
-              <img
+              <Image
                 src={`https://cdn.simpleicons.org/${skill.slug}`}
                 alt={skill.name}
                 className="h-10 w-10"
-                height={10}
-                width={10}
+                height={40}
+                width={40}
               />
               <span className="text-sm font-medium">{skill.name}</span>
             </div>

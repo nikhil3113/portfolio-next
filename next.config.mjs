@@ -10,9 +10,9 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "res.cloudinary.com",
+        pathname: "/**",
       },
     ],
-    domains: ["cdn.simpleicons.org"],
     dangerouslyAllowSVG: true,
   },
 };

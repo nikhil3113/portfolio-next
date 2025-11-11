@@ -45,7 +45,7 @@ export function Skills() {
               key={index}
               className="relative h-full w-fit sm:mx-[4rem] mx-[2rem] flex flex-col items-center justify-center gap-2"
             >
-              <Image
+              <img
                 src={`https://cdn.simpleicons.org/${skill.slug}`}
                 alt={skill.name}
                 className="h-10 w-10"
@@ -65,7 +65,7 @@ export function Skills() {
               key={index}
               className="relative h-full w-fit sm:mx-[4rem] mx-[2rem] flex flex-col items-center justify-center gap-2"
             >
-              <Image
+              <img
                 src={`https://cdn.simpleicons.org/${skill.slug}`}
                 alt={skill.name}
                 className="h-10 w-10"

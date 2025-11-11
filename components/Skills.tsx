@@ -1,7 +1,6 @@
 "use client";
 
 import { Marquee } from "@/components/ui/marquee";
-import Image from "next/image";
 // import Image from "next/image";
 
 // Define skills with their Simple Icons slugs

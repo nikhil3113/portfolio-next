@@ -11,7 +11,7 @@
     "signup": "npx tsx scripts/signup.ts"
   },
   "dependencies": {
-    "@getbrevo/brevo": "^2.5.0",
+    "@getbrevo/brevo": "^3.0.1",
     "@hookform/resolvers": "^5.1.1",
     "@next/third-parties": "^15.3.1",
     "@prisma/client": "^6.6.0",
@@ -43,11 +43,11 @@
     "class-variance-authority": "^0.7.1",
     "cloudinary": "^2.7.0",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.6.5",
+    "framer-motion": "^12.23.24",
     "lowlight": "^3.3.0",
     "lucide-react": "^0.487.0",
     "mailersend": "^2.5.0",
-    "motion": "^12.7.4",
+    "motion": "^12.23.24",
     "multer": "^2.0.2",
     "next": "^15.3.1",
     "next-auth": "^4.24.11",

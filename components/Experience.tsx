@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { MagicCard } from "./ui/magic-card";
+import { useTheme } from "next-themes";
 
 interface ExperienceItem {
   date: string;
@@ -53,6 +55,7 @@ const experienceData: ExperienceItem[] = [
 ];
 
 export function Experience() {
+  const { theme } = useTheme();
   return (
     <section className="py-16">
       <div className="container mx-auto px-4">
@@ -89,7 +92,10 @@ export function Experience() {
               </div>
 
               {/* Content */}
-              <div className="bg-card border rounded-lg p-6 shadow-sm">
+              <MagicCard
+                className="bg-card border rounded-lg p-6 shadow-sm"
+                gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
+              >
                 <span className="text-sm text-muted-foreground font-medium">
                   {item.date}
                 </span>
@@ -103,7 +109,7 @@ export function Experience() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </MagicCard>
             </motion.div>
           ))}
         </div>

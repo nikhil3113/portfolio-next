@@ -1,3 +1,4 @@
+import { About } from "@/components/About";
 import { ContactForm } from "@/components/Contact";
 import { Experience } from "@/components/Experience";
 import { ProjectCard } from "@/components/SampleProjectCard";
@@ -105,6 +106,10 @@ export default async function Home() {
             </div>
           </div>
         </BackgroundBeamsWithCollision>
+      </section>
+
+      <section className="flex justify-center items-center">
+        <About />
       </section>
 
       <section className="py-16 max-sm:py-5 max-w-5xl mx-auto">

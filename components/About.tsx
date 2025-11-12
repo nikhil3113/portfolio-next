@@ -1,0 +1,39 @@
+import { Terminal, TypingAnimation } from "@/components/ui/terminal";
+
+export function About() {
+  return (
+    <div className="w-full max-w-2xl mx-auto mb-8">
+      <h2 className="text-3xl md:text-4xl font-bold mb-10 text-primary text-center">
+        About Me
+      </h2>
+      <Terminal>
+        <TypingAnimation>
+          👋 Greetings! I&apos;m Nikhil Chavan — a Full Stack Developer with 1.5
+          years of experience.
+        </TypingAnimation>
+
+        <TypingAnimation>
+          🚀 Building high-impact, performant web applications.
+        </TypingAnimation>
+
+        <TypingAnimation>
+          🧩 Expertise: RESTful APIs, auth, & third-party integrations.
+        </TypingAnimation>
+
+        <TypingAnimation>
+          🗄️ Databases: Proficient in MongoDB & MySQL.
+        </TypingAnimation>
+
+        <TypingAnimation>🛠️ From custom Next.js SEO tools...</TypingAnimation>
+
+        <TypingAnimation>
+          🏗️ ...to production backends deployed with PM2 & Nginx.
+        </TypingAnimation>
+
+        <TypingAnimation>
+          ✨ Always exploring new tech & delivering clean, maintainable code!
+        </TypingAnimation>
+      </Terminal>
+    </div>
+  );
+}

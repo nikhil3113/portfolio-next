@@ -1,6 +1,8 @@
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import redis from "@/lib/redis";
 import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function PUT(
@@ -45,7 +47,9 @@ export async function PUT(
         imageUrl,
       },
     });
-
+    await redis.del("projects");
+    revalidatePath("/projects");
+    revalidatePath("/");
     return NextResponse.json("Project Updated", { status: 200 });
   } catch (error) {
     console.error("Error updating project:", error);
@@ -109,6 +113,9 @@ export async function DELETE(
     await prisma.project.delete({
       where: { id },
     });
+    await redis.del("projects");
+    revalidatePath("/projects");
+    revalidatePath("/");
     return NextResponse.json("Project Deleted", { status: 200 });
   } catch (error) {
     console.error("Error deleting project:", error);

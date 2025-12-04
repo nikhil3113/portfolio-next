@@ -6,6 +6,7 @@ import { Skills } from "@/components/Skills";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { getProjects } from "@/lib/action/projects";
+import { Project } from "@/types/projects";
 import Link from "next/link";
 
 export default async function Home() {
@@ -131,7 +132,7 @@ export default async function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 p-0">
-            {project.slice(0, 2).map((items, idx) => (
+            {project.slice(0, 2).map((items: Project, idx: number) => (
               <ProjectCard
                 key={idx}
                 title={items.title}

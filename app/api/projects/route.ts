@@ -1,6 +1,8 @@
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import redis from "@/lib/redis";
 import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -46,6 +48,10 @@ export async function POST(req: Request) {
         imageUrl,
       },
     });
+
+    await redis.del("projects");
+    revalidatePath("/projects");
+    revalidatePath("/");
     return NextResponse.json("Project Created", { status: 201 });
   } catch (error) {
     console.error("Error in POST /api/projects:", error);

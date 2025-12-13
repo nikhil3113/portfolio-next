@@ -1,4 +1,8 @@
-import { Terminal, TypingAnimation } from "@/components/ui/terminal";
+import {
+  AnimatedSpan,
+  Terminal,
+  TypingAnimation,
+} from "@/components/ui/terminal";
 
 export function About() {
   return (
@@ -12,23 +16,23 @@ export function About() {
           years of experience.
         </TypingAnimation>
 
-        <TypingAnimation>
+        <AnimatedSpan>
           🚀 Building high-impact, performant web applications.
-        </TypingAnimation>
+        </AnimatedSpan>
 
-        <TypingAnimation>
+        <AnimatedSpan>
           🧩 Expertise: RESTful APIs, auth, & third-party integrations.
-        </TypingAnimation>
+        </AnimatedSpan>
 
-        <TypingAnimation>
+        <AnimatedSpan>
           🗄️ Databases: Proficient in MongoDB & MySQL.
-        </TypingAnimation>
+        </AnimatedSpan>
 
-        <TypingAnimation>🛠️ From custom Next.js SEO tools...</TypingAnimation>
+        <AnimatedSpan>🛠️ From custom Next.js SEO tools...</AnimatedSpan>
 
-        <TypingAnimation>
+        <AnimatedSpan>
           🏗️ ...to production backends deployed with PM2 & Nginx.
-        </TypingAnimation>
+        </AnimatedSpan>
 
         <TypingAnimation>
           ✨ Always exploring new tech & delivering clean, maintainable code!

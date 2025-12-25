@@ -5,7 +5,7 @@ import { Appbar } from "@/components/Appbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { Providers } from "./Providers";
+import { PostHogProvider, Providers } from "./Providers";
 
 const siteUrl = "https://nikchavan.com";
 
@@ -114,9 +114,11 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Providers>
-            <Appbar />
-            {children}
-            <ScrollToTop />
+            <PostHogProvider>
+              <Appbar />
+              {children}
+              <ScrollToTop />
+            </PostHogProvider>
           </Providers>
         </ThemeProvider>
         <GoogleAnalytics gaId="G-QQDK7W7LM4" />

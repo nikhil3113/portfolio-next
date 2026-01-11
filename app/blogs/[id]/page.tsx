@@ -1,21 +1,10 @@
+import { getBlogById } from "@/lib/action/blogs";
 import { prisma } from "@/lib/prisma";
 import { CircleUser, CalendarDays, Clock } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 
 export const revalidate = 0;
-
-const getBlogById = async (id: string) => {
-  try {
-    const blog = await prisma.blog.findUnique({
-      where: { id },
-    });
-    return blog;
-  } catch (error) {
-    console.log("Error fetching blog by ID:", error);
-    return null;
-  }
-};
 
 type Props = {
   params: Promise<{ id: string }>;

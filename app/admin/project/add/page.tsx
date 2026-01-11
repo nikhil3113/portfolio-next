@@ -14,6 +14,7 @@ const formSchema = z.object({
   githubLink: z.url("Invalid URL format").min(1, "GitHub link is required"),
   image: z.string().min(1, "Image URL is required"),
   tags: z.string().min(1, "At least one tag is required"),
+  createdAt: z.string().optional(),
 });
 
 export default function AddProject() {
@@ -29,6 +30,7 @@ export default function AddProject() {
       githubLink: "",
       image: "",
       tags: "",
+      createdAt: "",
     },
   });
 
@@ -46,6 +48,7 @@ export default function AddProject() {
         githubLink: values.githubLink,
         imageUrl: values.image,
         tags: tagArray,
+        createdAt: values.createdAt,
       });
       if (response.status === 201) {
         alert("Project created successfully!");

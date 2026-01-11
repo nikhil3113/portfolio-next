@@ -1,19 +1,5 @@
-import { prisma } from "@/lib/prisma";
 import { BlogCard } from "@/components/blog/BlogCard";
-
-const getBlogs = async () => {
-  try {
-    const blogs = await prisma.blog.findMany({
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-    return blogs;
-  } catch (error) {
-    console.log("Error fetching blogs:", error);
-    return [];
-  }
-};
+import { getBlogs } from "@/lib/action/blogs";
 
 export default async function Blogs() {
   const blogs = await getBlogs();
@@ -25,7 +11,7 @@ export default async function Blogs() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="md:mx-32 px-4 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2 dark:text-white">
           Blogs

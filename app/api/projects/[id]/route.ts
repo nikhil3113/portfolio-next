@@ -18,8 +18,15 @@ export async function PUT(
   }
   try {
     const id = (await params).id;
-    const { title, description, tags, siteLink, githubLink, imageUrl } =
-      await request.json();
+    const {
+      title,
+      description,
+      tags,
+      siteLink,
+      githubLink,
+      imageUrl,
+      createdAt,
+    } = await request.json();
     if (
       !title ||
       !description ||
@@ -45,6 +52,7 @@ export async function PUT(
         siteLink,
         githubLink,
         imageUrl,
+        createdAt: createdAt ? new Date(createdAt) : undefined,
       },
     });
     await redis.del("projects");

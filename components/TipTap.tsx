@@ -90,9 +90,9 @@ export function TipTap({ value, onChange }: TipTapProps) {
   };
 
   return (
-    <div className="border border-gray-200 rounded-lg overflow-hidden">
+    <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
       {/* Toolbar */}
-      <div className="border-b border-gray-200 p-2 bg-gray-50">
+      <div className="border-b border-gray-200 dark:border-gray-700 p-2 bg-gray-50 dark:bg-gray-700">
         <div className="flex flex-wrap gap-1">
           {/* Text Formatting */}
           <Button

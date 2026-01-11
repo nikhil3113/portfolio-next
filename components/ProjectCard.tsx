@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { RadiantButton } from "./RadiantButton";
+import { CldImage } from "next-cloudinary";
 
 interface ProjectCardProps {
   title: string;
@@ -25,7 +26,7 @@ export function ProjectCard({
     <div className="w-full h-full">
       <div className="group relative h-full flex flex-col overflow-hidden rounded-2xl border border-zinc-100 bg-white dark:bg-zinc-900 dark:border-zinc-800 transition duration-200">
         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-tl-lg rounded-tr-lg bg-gray-100 dark:bg-zinc-800">
-          <Image
+          <CldImage
             src={image}
             alt={title}
             className="h-full w-full transform object-cover transition duration-200 group-hover:scale-95 group-hover:rounded-2xl"

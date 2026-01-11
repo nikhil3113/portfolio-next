@@ -15,6 +15,7 @@ const formSchema = z.object({
   content: z.string().min(1, "Content is required"),
   imageUrl: z.string().optional(),
   author: z.string().min(1, "Author is required"),
+  isPublished: z.boolean(),
 });
 export default function UpdateBlogPage() {
   const { id } = useParams();
@@ -26,6 +27,7 @@ export default function UpdateBlogPage() {
       content: "",
       imageUrl: "",
       author: "",
+      isPublished: false,
     },
   });
 
@@ -42,6 +44,7 @@ export default function UpdateBlogPage() {
             content: res.data.content,
             imageUrl: res.data.imageUrl,
             author: res.data.author,
+            isPublished: res.data.isPublished,
           });
         }
       })
@@ -58,6 +61,7 @@ export default function UpdateBlogPage() {
         content: values.content,
         imageUrl: values.imageUrl,
         author: values.author,
+        isPublished: values.isPublished,
       });
       if (response.status === 201 || 200) {
         alert("Blog created successfully!");

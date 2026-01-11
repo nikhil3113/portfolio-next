@@ -9,6 +9,8 @@ import { Separator } from "../ui/separator";
 import { Badge } from "../ui/badge";
 import { Save, Eye } from "lucide-react";
 import { ImageUpload } from "../ImageUpload";
+import { Checkbox } from "../ui/checkbox";
+import { Label } from "../ui/label";
 
 interface BlogFormData {
   h1: string;
@@ -16,6 +18,7 @@ interface BlogFormData {
   content: string;
   imageUrl?: string;
   author: string;
+  isPublished: boolean;
 }
 
 interface BlogFormProps {
@@ -107,6 +110,22 @@ export function BlogForm({
                     </div>
                   )}
                 />
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="isPublished"
+                  checked={form.watch("isPublished")}
+                  onCheckedChange={(checked) =>
+                    form.setValue("isPublished", !!checked)
+                  }
+                />
+                <Label
+                  htmlFor="isPublished"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Publish this blog post
+                </Label>
               </div>
 
               <Separator />

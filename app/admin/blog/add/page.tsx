@@ -13,6 +13,7 @@ const formSchema = z.object({
   content: z.string().min(1, "Content is required"),
   imageUrl: z.string().optional(),
   author: z.string().min(1, "Author is required"),
+  isPublished: z.boolean(),
 });
 export default function AddBlogPage() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -23,6 +24,7 @@ export default function AddBlogPage() {
       content: "",
       imageUrl: "",
       author: "",
+      isPublished: false,
     },
   });
 
@@ -36,6 +38,7 @@ export default function AddBlogPage() {
         content: values.content,
         imageUrl: values.imageUrl,
         author: values.author,
+        isPublished: values.isPublished,
       });
       if (response.status === 201) {
         alert("Blog created successfully!");

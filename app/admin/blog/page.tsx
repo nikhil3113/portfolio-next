@@ -50,7 +50,7 @@ export default function AllBlogsTable() {
           <a href="/admin/blog/add">+ New Blog</a>
         </Button>
       </div>
-      <div className="rounded-xl border bg-white shadow-sm overflow-x-auto">
+      <div className="rounded-xl border bg-white dark:bg-black shadow-sm overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
@@ -82,8 +82,10 @@ export default function AllBlogsTable() {
                   )}
                 </TableCell>
                 <TableCell>
-                  <div className="font-medium text-gray-900">{blog.h1}</div>
-                  <div className="text-xs text-gray-500 line-clamp-1">{blog.metaDescription}</div>
+                  <div className="font-medium text-gray-900 dark:text-gray-200">{blog.h1}</div>
+                  <div className="text-xs text-gray-500 line-clamp-1">
+                    {blog.metaDescription}
+                  </div>
                 </TableCell>
                 <TableCell>
                   <span className="font-medium">{blog.author}</span>
@@ -94,11 +96,7 @@ export default function AllBlogsTable() {
                     : "-"}
                 </TableCell>
                 <TableCell className="text-right space-x-2 flex justify-center items-center">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    asChild
-                  >
+                  <Button size="sm" variant="outline" asChild>
                     <a href={`/admin/blog/update/${blog.id}`}>Edit</a>
                   </Button>
                   <Button

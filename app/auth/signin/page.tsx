@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn, useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Form } from "@/components/ui/form";
 import FormFields from "@/components/Form";
@@ -33,6 +33,12 @@ export default function LoginPage() {
   const router = useRouter();
   const session = useSession();
 
+  useEffect(() => {
+    if (session.status === "authenticated") {
+      router.push("/admin/project");
+    }
+  }, [session.status, router]);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,11 +46,6 @@ export default function LoginPage() {
       password: "",
     },
   });
-
-  if (session.status === "authenticated") {
-    router.push("/admin/project");
-    return null;
-  }
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);

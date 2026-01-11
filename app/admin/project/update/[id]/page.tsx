@@ -15,6 +15,7 @@ const formSchema = z.object({
   githubLink: z.url("Invalid URL format").min(1, "GitHub link is required"),
   image: z.string().min(1, "Image URL is required"),
   tags: z.string().min(1, "At least one tag is required"),
+  createdAt: z.string().optional(),
 });
 
 export default function UpdateProjects() {
@@ -32,6 +33,7 @@ export default function UpdateProjects() {
       githubLink: "",
       image: "",
       tags: "",
+      createdAt: "",
     },
   });
 
@@ -40,6 +42,7 @@ export default function UpdateProjects() {
       try {
         const response = await axios.get(`/api/projects/${projectId}`);
         const project = response.data;
+        console.log("Fetched project:", project);
         form.reset({
           title: project.title,
           description: project.description,
@@ -47,6 +50,7 @@ export default function UpdateProjects() {
           githubLink: project.githubLink,
           image: project.imageUrl,
           tags: project.tags.join(", "),
+          createdAt: project.createdAt ? project.createdAt.split("T")[0] : "",
         });
         setImageUrl(project.imageUrl);
       } catch (error) {
@@ -70,6 +74,7 @@ export default function UpdateProjects() {
         githubLink: values.githubLink,
         imageUrl: values.image,
         tags: tagArray,
+        createdAt: values.createdAt,
       });
       if (response.status === 200) {
         alert("Project updated successfully!");

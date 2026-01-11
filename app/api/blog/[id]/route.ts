@@ -1,5 +1,6 @@
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import redis from "@/lib/redis";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
@@ -45,9 +46,10 @@ export async function PUT(
     );
   }
   try {
-    const { id } = await params;  
+    const { id } = await params;
     const body = await request.json();
-    const { h1, metaDescription, content, imageUrl, author } = body;
+    const { h1, metaDescription, content, imageUrl, author, isPublished } =
+      body;
     if (!h1 || !metaDescription || !content) {
       return NextResponse.json(
         { message: "Missing required fields" },
@@ -63,9 +65,13 @@ export async function PUT(
         content,
         imageUrl,
         author,
+        isPublished,
       },
     });
+    await redis.del("blogs");
     revalidatePath(`/blogs/${id}`);
+    revalidatePath("/blogs");
+    revalidatePath("/");
     return NextResponse.json(updatedBlog, { status: 200 });
   } catch (error) {
     console.error("Error updating blog:", error);

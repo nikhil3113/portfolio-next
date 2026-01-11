@@ -1,5 +1,7 @@
+import { revalidatePath } from "next/cache";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import redis from "@/lib/redis";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
@@ -15,7 +17,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { h1, metaDescription, content, imageUrl, author } =
+    const { h1, metaDescription, content, imageUrl, author, isPublished } =
       await request.json();
 
     if (!h1 || !metaDescription || !content || !imageUrl || !author) {
@@ -32,8 +34,12 @@ export async function POST(request: Request) {
         content,
         imageUrl,
         author,
+        isPublished,
       },
     });
+    await redis.del("blogs");
+    revalidatePath("/blogs");
+    revalidatePath("/");
     return NextResponse.json(
       { message: "Blog created successfully" },
       { status: 201 }

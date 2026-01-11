@@ -5,7 +5,7 @@ import { NextAuthOptions } from "next-auth";
 
 export const authOptions: NextAuthOptions = {
   pages: {
-    signIn: "/admin/signin",
+    signIn: "/auth/signin",
   },
   providers: [
     CredentialsProvider({

@@ -14,8 +14,15 @@ export async function POST(req: Request) {
     );
   }
   try {
-    const { title, description, tags, siteLink, githubLink, imageUrl } =
-      await req.json();
+    const {
+      title,
+      description,
+      tags,
+      siteLink,
+      githubLink,
+      imageUrl,
+      createdAt,
+    } = await req.json();
     if (
       !title ||
       !description ||
@@ -46,6 +53,7 @@ export async function POST(req: Request) {
         siteLink,
         githubLink,
         imageUrl,
+        createdAt: createdAt ? new Date(createdAt) : new Date(),
       },
     });
 

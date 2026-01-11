@@ -12,6 +12,7 @@ interface ProjectFormData {
   githubLink: string;
   image: string;
   tags: string;
+  createdAt?: string;
 }
 
 interface ProjectFormProps {
@@ -87,6 +88,14 @@ export function ProjectForm({
                       label="Project Description"
                       placeholder="Describe what makes your project special..."
                       type="textarea"
+                    />
+
+                    <FormFields
+                      name="createdAt"
+                      control={form.control}
+                      label="Project Date"
+                      placeholder="YYYY-MM-DD"
+                      type="date"
                     />
                   </div>
                 </div>

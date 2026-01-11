@@ -31,7 +31,7 @@ export function Appbar() {
       link: "#contact",
     },
     {
-      name: "Blog",
+      name: "Blogs",
       link: "/blogs",
     },
   ];

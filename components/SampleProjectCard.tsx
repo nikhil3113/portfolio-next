@@ -5,6 +5,7 @@ import React from "react";
 import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
 import Link from "next/link";
 import { Github } from "lucide-react";
+import { CldImage } from "next-cloudinary";
 
 interface ProjectCardProps {
   title: string;
@@ -40,7 +41,7 @@ export function ProjectCard({
           {description}
         </CardItem>
         <CardItem translateZ="100" className="w-full mt-4">
-          <Image
+          <CldImage
             src={image}
             height={1000}
             width={1000}

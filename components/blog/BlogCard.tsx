@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Card, CardHeader, CardContent, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
+import { CldImage } from "next-cloudinary";
 
 interface BlogData {
   id: string;
@@ -17,11 +18,11 @@ export function BlogCard({ blogs }: { blogs: BlogData[] }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {blogs.map((blog) => (
-        <Link href={`/blogs/${blog.id}`} key={blog.id}>
+        <Link href={`/blogs/${blog.id}`} key={blog.id} prefetch={true}>
           <Card className="overflow-hidden transition-shadow duration-300 cursor-pointer group shadow-none">
             <div className="relative h-48 w-full overflow-hidden">
               {blog.imageUrl ? (
-                <Image
+                <CldImage
                   src={blog.imageUrl}
                   alt={blog.h1}
                   fill

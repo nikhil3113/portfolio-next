@@ -12,6 +12,8 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 async function getProjects() {
   try {
     const session = await getServerSession(authOptions);

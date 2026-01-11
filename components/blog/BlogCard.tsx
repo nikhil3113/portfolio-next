@@ -1,4 +1,5 @@
-import Image from "next/image";
+"use client";
+
 import { Card, CardHeader, CardContent, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
 import Link from "next/link";

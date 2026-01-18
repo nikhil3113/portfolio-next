@@ -18,6 +18,7 @@ interface BlogFormData {
   content: string;
   imageUrl?: string;
   author: string;
+  slug: string;
   isPublished: boolean;
 }
 
@@ -60,6 +61,12 @@ export function BlogForm({
                     control={form.control}
                     label="Blog Title"
                     placeholder="Enter an engaging title for your blog post"
+                  />
+                  <FormFields
+                    name="slug"
+                    control={form.control}
+                    label="Slug"
+                    placeholder="Enter a URL-friendly slug (e.g., my-blog-post)"
                   />
                   <FormFields
                     name="metaDescription"

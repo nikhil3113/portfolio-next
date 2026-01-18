@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { PostHogProvider, Providers } from "./Providers";
+import { Toaster } from "sonner";
 
 const siteUrl = "https://nikchavan.com";
 
@@ -118,6 +119,7 @@ export default function RootLayout({
               <Appbar />
               {children}
               <ScrollToTop />
+              <Toaster richColors />
             </PostHogProvider>
           </Providers>
         </ThemeProvider>

@@ -35,7 +35,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (session.status === "authenticated") {
-      router.push("/admin/project");
+      router.push("/admin");
     }
   }, [session.status, router]);
 

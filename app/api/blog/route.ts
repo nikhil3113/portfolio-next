@@ -12,24 +12,32 @@ export async function POST(request: Request) {
       {
         error: "Unauthorized",
       },
-      { status: 401 }
+      { status: 401 },
     );
   }
 
   try {
-    const { h1, metaDescription, content, imageUrl, author, isPublished } =
-      await request.json();
+    const {
+      h1,
+      metaDescription,
+      content,
+      imageUrl,
+      author,
+      isPublished,
+      slug,
+    } = await request.json();
 
-    if (!h1 || !metaDescription || !content || !imageUrl || !author) {
+    if (!h1 || !metaDescription || !content || !imageUrl || !author || !slug) {
       return NextResponse.json(
         { error: "All fields are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     await prisma.blog.create({
       data: {
         h1,
+        slug,
         metaDescription,
         content,
         imageUrl,
@@ -42,13 +50,13 @@ export async function POST(request: Request) {
     revalidatePath("/");
     return NextResponse.json(
       { message: "Blog created successfully" },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     console.log("Error in POST /api/blog:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -66,7 +74,7 @@ export async function GET() {
     console.error("Error fetching blogs:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

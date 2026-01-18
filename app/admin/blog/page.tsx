@@ -15,6 +15,7 @@ interface Blog {
   id: string;
   h1: string;
   metaDescription: string;
+  slug: string;
   content: string;
   imageUrl?: string;
   author: string;
@@ -97,12 +98,12 @@ export default function AllBlogsTable() {
                 </TableCell>
                 <TableCell className="text-right space-x-2 flex justify-center items-center">
                   <Button size="sm" variant="outline" asChild>
-                    <a href={`/admin/blog/update/${blog.id}`}>Edit</a>
+                    <a href={`/admin/blog/update/${blog.slug}`}>Edit</a>
                   </Button>
                   <Button
                     size="sm"
                     variant="destructive"
-                    // onClick={() => handleDelete(blog.id)}
+                  // onClick={() => handleDelete(blog.id)}
                   >
                     Delete
                   </Button>

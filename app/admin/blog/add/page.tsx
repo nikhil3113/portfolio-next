@@ -4,7 +4,9 @@ import { BlogForm } from "@/components/blog/Form";
 import { useAuthRedirect } from "@/hooks/use-auth-redirect";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 
 const formSchema = z.object({
@@ -13,9 +15,11 @@ const formSchema = z.object({
   content: z.string().min(1, "Content is required"),
   imageUrl: z.string().optional(),
   author: z.string().min(1, "Author is required"),
+  slug: z.string().min(1, "Slug is required"),
   isPublished: z.boolean(),
 });
 export default function AddBlogPage() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -24,6 +28,7 @@ export default function AddBlogPage() {
       content: "",
       imageUrl: "",
       author: "",
+      slug: "",
       isPublished: false,
     },
   });
@@ -38,15 +43,22 @@ export default function AddBlogPage() {
         content: values.content,
         imageUrl: values.imageUrl,
         author: values.author,
+        slug: values.slug,
         isPublished: values.isPublished,
       });
       if (response.status === 201) {
-        alert("Blog created successfully!");
+        toast.success("Blog created successfully");
         form.reset();
+        router.push("/admin/blog");
       } else {
         alert("Failed to create blog. Please try again.");
       }
     } catch (error) {
+      axios.isAxiosError(error) && error.response
+        ? toast.error(
+          `Error: ${error.response.data.message || "Failed to create blog"}`
+        )
+        : toast.error("An unexpected error occurred");
       console.log("Error submitting form:", error);
     }
   }

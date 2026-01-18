@@ -6,6 +6,8 @@ import z from "zod";
 import axios from "axios";
 import { useState } from "react";
 import { ProjectForm } from "@/components/project/ProjectForm";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -20,6 +22,7 @@ const formSchema = z.object({
 export default function AddProject() {
   const [imageUrl, setImageUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -51,12 +54,18 @@ export default function AddProject() {
         createdAt: values.createdAt,
       });
       if (response.status === 201) {
-        alert("Project created successfully!");
+        toast.success("Project created successfully");
         form.reset();
+        router.push("/admin/project");
       } else {
         alert("Failed to create project. Please try again.");
       }
     } catch (error) {
+      axios.isAxiosError(error) && error.response
+        ? toast.error(
+          `Error: ${error.response.data.message || "Failed to create blog"}`
+        )
+        : toast.error("An unexpected error occurred");
       console.log("Error submitting form:", error);
     } finally {
       setIsLoading(false);

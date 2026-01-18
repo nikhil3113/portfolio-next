@@ -3,9 +3,10 @@
 import { ProjectForm } from "@/components/project/ProjectForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 
 const formSchema = z.object({
@@ -23,6 +24,7 @@ export default function UpdateProjects() {
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
   const projectId = params.id as string;
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -77,12 +79,18 @@ export default function UpdateProjects() {
         createdAt: values.createdAt,
       });
       if (response.status === 200) {
-        alert("Project updated successfully!");
+        toast.success("Project updated successfully");
         form.reset();
+        router.push("/admin/project");
       } else {
         alert("Failed to update project. Please try again.");
       }
     } catch (error) {
+      axios.isAxiosError(error) && error.response
+        ? toast.error(
+          `Error: ${error.response.data.message || "Failed to update project"}`
+        )
+        : toast.error("An unexpected error occurred");
       console.log("Error submitting form:", error);
     } finally {
       setIsLoading(false);

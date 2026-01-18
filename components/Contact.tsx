@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
+import { toast } from "sonner";
 
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -16,7 +17,6 @@ export function ContactForm() {
     message: "",
   });
 
-  const { toast } = useToast();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -39,26 +39,16 @@ export function ContactForm() {
       });
 
       if (response.ok) {
-        toast({
-          title: "Message sent!",
-          description: "Thank you for reaching out. I'll get back to you soon.",
-          variant: "success"
+        toast.success("Message sent successfully!", {
+          description: "I'll get back to you soon.",
         });
         setFormData({ name: "", email: "", message: "" });
       } else {
-        toast({
-          variant: "destructive",
-          title: "Something went wrong",
-          description: "Your message couldn't be sent. Please try again.",
-        });
+        toast.error("Failed to send message. Please try again.");
       }
     } catch (error) {
       console.log(error);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "There was a problem sending your message.",
-      });
+      toast.error("An unexpected error occurred. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -121,7 +111,7 @@ export function ContactForm() {
           {isSubmitting ? (
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           ) : (
-            "Let's Connect" 
+            "Let's Connect"
           )}
           <BottomGradient />
         </button>

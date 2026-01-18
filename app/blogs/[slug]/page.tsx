@@ -1,4 +1,4 @@
-import { getBlogById } from "@/lib/action/blogs";
+import { getBlogBySlug } from "@/lib/action/blogs";
 import { prisma } from "@/lib/prisma";
 import { CircleUser, CalendarDays, Clock } from "lucide-react";
 import { Metadata } from "next";
@@ -7,12 +7,12 @@ import Image from "next/image";
 export const revalidate = 0;
 
 type Props = {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = await params;
-  const blog = await getBlogById(id);
+  const { slug } = await params;
+  const blog = await getBlogBySlug(slug);
   if (!blog) {
     return {
       title: "Blog Not Found",
@@ -51,10 +51,10 @@ function estimateReadTime(html: string) {
 export default async function BlogPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }) {
-  const { id } = await params;
-  const blog = await getBlogById(id);
+  const { slug } = await params;
+  const blog = await getBlogBySlug(slug);
 
   return (
     <div className="container mx-auto px-4 py-10">
@@ -65,7 +65,7 @@ export default async function BlogPage({
               {blog.h1}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-4 text-sm text-black ">
+            <div className="flex flex-wrap items-center gap-4 text-sm text-black dark:text-white ">
               <div className="flex items-center gap-2">
                 <CircleUser className="h-4 w-4" />
                 <span>{blog.author}</span>

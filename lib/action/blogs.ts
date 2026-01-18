@@ -23,12 +23,12 @@ export async function getBlogs() {
   }
 }
 
-export async function getBlogById(id: string) {
+export async function getBlogBySlug(slug: string) {
   try {
     const blog = await prisma.blog.findUnique({
       where: {
+        slug,
         isPublished: true,
-        id,
       },
     });
     return blog;

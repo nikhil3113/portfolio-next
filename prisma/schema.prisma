@@ -35,6 +35,8 @@ model Project {
 model Blog {
   id              String   @id @default(auto()) @map("_id") @db.ObjectId
   h1              String
+  slug            String   @unique
+  metaTitle       String?
   metaDescription String
   content         String
   imageUrl        String

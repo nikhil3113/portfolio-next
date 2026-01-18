@@ -7,6 +7,7 @@ import * as cheerio from "cheerio";
 import { notFound } from "next/navigation";
 import slugify from "slugify";
 import { TableOfContents } from "@/components/blog/TableOfContents";
+import { BlogViewTracker } from "@/components/blog/ViewTracker";
 
 export async function generateStaticParams() {
   const blogs = await prisma.blog.findMany({ select: { slug: true } });
@@ -83,29 +84,37 @@ export default async function BlogPage({
   const modifiedHtml = $.html();
 
   return (
-    <div className="container mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-[1fr_280px] gap-12 relative">
+    <div className="container mx-auto px-4 py-10 ">
       <div className="mx-auto w-full max-w-3xl order-2 md:order-1">
         <article className="space-y-6">
           <h1 className="text-2xl md:text-3xl font-bold  text-foreground">
             {blog.h1}
           </h1>
 
-          <div className="flex flex-wrap items-center gap-4 text-sm text-black dark:text-white ">
-            <div className="flex items-center gap-2">
-              <CircleUser className="h-4 w-4" />
-              <span>{blog.author}</span>
+          <div className="flex justify-between items-center">
+            <div className="flex flex-wrap items-center gap-4 text-sm text-black dark:text-white ">
+              <div className="flex items-center gap-2">
+                <CircleUser className="h-4 w-4" />
+                <span>{blog.author}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CalendarDays className="h-4 w-4" />
+                <span>
+                  {blog.createdAt
+                    ? new Date(blog.createdAt).toLocaleDateString()
+                    : ""}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4" />
+                <span>{estimateReadTime(blog.content)} min read</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <CalendarDays className="h-4 w-4" />
-              <span>
-                {blog.createdAt
-                  ? new Date(blog.createdAt).toLocaleDateString()
-                  : ""}
+
+            <div>
+              <span className="text-sm text-muted-foreground">
+                {blog.views ?? 0} views
               </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4" />
-              <span>{estimateReadTime(blog.content)} min read</span>
             </div>
           </div>
           <TableOfContents headings={headings} />
@@ -132,7 +141,7 @@ export default async function BlogPage({
           />
         </article>
       </div>
-
+      <BlogViewTracker slug={blog.slug} />
     </div>
   );
 }

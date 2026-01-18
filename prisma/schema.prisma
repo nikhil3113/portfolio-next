@@ -41,6 +41,7 @@ model Blog {
   content         String
   imageUrl        String
   author          String
+  views           Int      @default(0)
   isPublished     Boolean  @default(false)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt

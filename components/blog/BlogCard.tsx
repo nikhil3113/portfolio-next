@@ -42,7 +42,7 @@ export function BlogCard({ blogs }: { blogs: BlogData[] }) {
               <CardTitle className="text-lg font-semibold line-clamp-2 group-hover:text-primary transition-colors">
                 {blog.h1}
               </CardTitle>
-              <div className="flex items-center gap-2 text-sm text-gray-500">
+              <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-200">
                 <span>By {blog.author}</span>
                 <span>•</span>
                 <span>
@@ -52,7 +52,7 @@ export function BlogCard({ blogs }: { blogs: BlogData[] }) {
             </CardHeader>
 
             <CardContent className="pt-0">
-              <p className="text-gray-600 text-sm line-clamp-3 mb-3">
+              <p className="text-gray-600 dark:text-gray-200 text-sm line-clamp-3 mb-3">
                 {blog.metaDescription || blog.content.slice(0, 120)}...
               </p>
               <Badge variant="secondary" className="text-xs">

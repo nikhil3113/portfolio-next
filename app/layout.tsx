@@ -71,8 +71,8 @@ export default function RootLayout({
     url: siteUrl,
     jobTitle: "Full Stack Developer",
     sameAs: [
-      "https://github.com/yourhandle",
-      "https://www.linkedin.com/in/yourhandle",
+      "https://github.com/nikhil3113",
+      "https://www.linkedin.com/in/nikhil-chavan-8b83ab184",
     ],
     knowsAbout: [
       "Full Stack Development",
@@ -80,6 +80,7 @@ export default function RootLayout({
       "TypeScript",
       "React",
       "Node.js",
+      "Java"
     ],
   };
   const webSiteLd = {

@@ -4,8 +4,10 @@ import { useEffect } from "react";
 
 export function BlogViewTracker({ slug }: { slug: string }) {
     useEffect(() => {
+        if (process.env.NODE_ENV === 'development') {
+            return;
+        }
         const viewedKey = `blog-viewed-${slug}`;
-
         if (typeof window !== 'undefined' && sessionStorage.getItem(viewedKey)) {
             return;
         }

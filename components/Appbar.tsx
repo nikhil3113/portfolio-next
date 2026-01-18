@@ -94,8 +94,13 @@ export function Appbar() {
                   key={`mobile-link-${idx}`}
                   href={item.link}
                   onClick={(e) => {
-                    handleScroll(e, item.link);
-                    setIsMobileMenuOpen(false);
+                    if (item.link.startsWith("#")) {
+                      handleScroll(e, item.link);
+                      setIsMobileMenuOpen(false);
+                    } else {
+                      setIsMobileMenuOpen(false);
+                      // Do NOT call e.preventDefault() for normal links
+                    }
                   }}
                   className="relative text-neutral-600 dark:text-neutral-300"
                 >

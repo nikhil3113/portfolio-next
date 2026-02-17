@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MagicCard } from "./ui/magic-card";
+import { MagicCard } from "@/components/ui/magic-card";
 import { useTheme } from "next-themes";
 
 interface ExperienceItem {

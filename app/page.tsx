@@ -1,8 +1,8 @@
-import { About } from "@/components/About";
-import { ContactForm } from "@/components/Contact";
-import { Experience } from "@/components/Experience";
-import { ProjectCard } from "@/components/SampleProjectCard";
-import { Skills } from "@/components/Skills";
+import { About } from "@/components/landing/About";
+import { ContactForm } from "@/components/landing/Contact";
+import { Experience } from "@/components/landing/Experience";
+import { ProjectCard } from "@/components/project/SampleProjectCard";
+import { Skills } from "@/components/landing/Skills";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { getProjects } from "@/lib/action/projects";

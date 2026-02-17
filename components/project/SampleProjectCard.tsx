@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React from "react";
-import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
+import { CardBody, CardContainer, CardItem } from "../ui/3d-card";
 import Link from "next/link";
 import { Github } from "lucide-react";
 import { CldImage } from "next-cloudinary";
@@ -49,7 +49,7 @@ export function ProjectCard({
             alt={title}
           />
         </CardItem>
-        
+
         {/* Tags */}
         <CardItem
           translateZ="40"
@@ -64,7 +64,7 @@ export function ProjectCard({
             </span>
           ))}
         </CardItem>
-        
+
         <div className="flex justify-between items-center mt-8">
           <CardItem
             translateZ={20}

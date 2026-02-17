@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { RadiantButton } from "./RadiantButton";
+import { RadiantButton } from "../landing/RadiantButton";
 import { CldImage } from "next-cloudinary";
 
 interface ProjectCardProps {

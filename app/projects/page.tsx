@@ -1,4 +1,4 @@
-import { ProjectCard } from "@/components/ProjectCard";
+import { ProjectCard } from "@/components/project/ProjectCard";
 import { getProjects } from "@/lib/action/projects";
 import { Project } from "@/types/projects";
 import Link from "next/link";

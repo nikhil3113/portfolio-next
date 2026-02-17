@@ -4,19 +4,21 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
 import { toast } from "sonner";
 
-export function ContactForm() {
+interface ContactFormProps {
+  compact?: boolean;
+}
+
+export function ContactForm({ compact = false }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
-
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -55,7 +57,14 @@ export function ContactForm() {
   };
 
   return (
-    <div className="shadow-input mx-auto w-full max-w-md rounded-none  p-4 md:rounded-2xl md:p-8 dark:bg-black mt-20 border  ">
+    <div
+      className={cn(
+        "shadow-input mx-auto w-full rounded-none p-4 md:rounded-2xl dark:bg-black border",
+        compact ? "p-4 md:p-6" : "max-w-md p-4 md:p-8 mt-20"
+      )}
+    >
+
+
       <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
         Get in Touch
       </h2>
@@ -63,11 +72,11 @@ export function ContactForm() {
         Have a question or want to work together? Send me a message.
       </p>
 
-      <form className="my-8" onSubmit={handleSubmit}>
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="name">Name</Label>
+      <form className={compact ? "my-4" : "my-8"} onSubmit={handleSubmit}>
+        <LabelInputContainer className="mb-3">
+          <Label htmlFor={compact ? "name-compact" : "name"}>Name</Label>
           <Input
-            id="name"
+            id={compact ? "name-compact" : "name"}
             name="name"
             value={formData.name}
             onChange={handleChange}
@@ -77,10 +86,12 @@ export function ContactForm() {
           />
         </LabelInputContainer>
 
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="email">Email Address</Label>
+        <LabelInputContainer className="mb-3">
+          <Label htmlFor={compact ? "email-compact" : "email"}>
+            Email Address
+          </Label>
           <Input
-            id="email"
+            id={compact ? "email-compact" : "email"}
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -90,15 +101,20 @@ export function ContactForm() {
           />
         </LabelInputContainer>
 
-        <LabelInputContainer className="mb-8">
-          <Label htmlFor="message">Message</Label>
+        <LabelInputContainer className={compact ? "mb-4" : "mb-8"}>
+          <Label htmlFor={compact ? "message-compact" : "message"}>
+            Message
+          </Label>
           <Textarea
-            id="message"
+            id={compact ? "message-compact" : "message"}
             name="message"
             value={formData.message}
             onChange={handleChange}
             placeholder="Your message here..."
-            className="min-h-[120px] resize-none"
+            className={cn(
+              "resize-none",
+              compact ? "min-h-[80px]" : "min-h-[120px]"
+            )}
             required
           />
         </LabelInputContainer>
@@ -111,7 +127,7 @@ export function ContactForm() {
           {isSubmitting ? (
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           ) : (
-            "Let's Connect"
+            "Hire Me"
           )}
           <BottomGradient />
         </button>

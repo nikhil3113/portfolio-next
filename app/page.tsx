@@ -19,7 +19,7 @@ export default async function Home() {
             <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
               {/* Left side - Heading and social links */}
               <div className="text-center lg:text-left z-20">
-                <h2 className=" sm:text-2xl md:text-4xl lg:text-4xl xl:text-6xl font-bold text-black dark:text-white font-sans tracking-tight">
+                <h2 className=" text-4xl md:text-4xl lg:text-4xl xl:text-6xl font-bold text-black dark:text-white font-sans tracking-tight">
                   Nikhil Chavan <br />
                   <div className="relative inline-block w-max [filter:drop-shadow(0px_1px_3px_rgba(27,_37,_80,_0.14))]">
                     <div className="absolute left-0 top-[1px] bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r py-4 from-purple-500 via-violet-500 to-pink-500 [text-shadow:0_0_rgba(0,0,0,0.1)]">
@@ -143,7 +143,7 @@ export default async function Home() {
               skills and problem-solving abilities.
             </p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 p-0">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 p-0">
             {project.slice(0, 2).map((items: Project, idx: number) => (
               <ProjectCard
                 key={idx}

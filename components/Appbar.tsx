@@ -12,29 +12,22 @@ import {
 import { useState } from "react";
 import { ModeToggle } from "./mode-toggle";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export function Appbar() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
-  const navItems = [
-    {
-      name: "Projects",
-      link: "#projects",
-    },
-    {
-      name: "Experience",
-      link: "#experience",
-    },
-
-    {
-      name: "Contact",
-      link: "#contact",
-    },
-    {
-      name: "Blogs",
-      link: "/blogs",
-    },
-  ];
+  const navItems = isHomePage
+    ? [
+      { name: "Projects", link: "#projects" },
+      { name: "Experience", link: "#experience" },
+      { name: "Contact", link: "#contact" },
+      { name: "Blogs", link: "/blogs" },
+    ]
+    : [
+      { name: "Projects", link: "/projects" },
+      { name: "Blogs", link: "/blogs" },
+    ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -59,15 +52,16 @@ export function Appbar() {
         {/* Desktop Navigation */}
         <NavBody className="hidden lg:visible">
           <NavbarLogo />
-          {isHomePage && (
-            <NavItems
-              items={navItems.map((item) => ({
-                ...item,
-                onClick: (e: React.MouseEvent<HTMLAnchorElement>) =>
-                  handleScroll(e, item.link),
-              }))}
-            />
-          )}
+          <NavItems
+            items={navItems.map((item) => ({
+              ...item,
+              onClick:
+                isHomePage && item.link.startsWith("#")
+                  ? (e: React.MouseEvent<HTMLAnchorElement>) =>
+                    handleScroll(e, item.link)
+                  : undefined,
+            }))}
+          />
           <div className="flex items-center gap-4">
             {/* <NavbarButton variant="primary">Contact</NavbarButton> */}
             <ModeToggle />
@@ -88,25 +82,24 @@ export function Appbar() {
             isOpen={isMobileMenuOpen}
             onClose={() => setIsMobileMenuOpen(false)}
           >
-            {isHomePage &&
-              navItems.map((item, idx) => (
-                <a
-                  key={`mobile-link-${idx}`}
-                  href={item.link}
-                  onClick={(e) => {
-                    if (item.link.startsWith("#")) {
-                      handleScroll(e, item.link);
-                      setIsMobileMenuOpen(false);
-                    } else {
-                      setIsMobileMenuOpen(false);
-                      // Do NOT call e.preventDefault() for normal links
-                    }
-                  }}
-                  className="relative text-neutral-600 dark:text-neutral-300"
-                >
-                  <span className="block">{item.name}</span>
-                </a>
-              ))}
+            {navItems.map((item, idx) => (
+              <Link
+                key={`mobile-link-${idx}`}
+                href={item.link}
+                onClick={(e) => {
+                  if (isHomePage && item.link.startsWith("#")) {
+                    handleScroll(e, item.link);
+                    setIsMobileMenuOpen(false);
+                  } else {
+                    setIsMobileMenuOpen(false);
+                  }
+                }}
+                prefetch={true}
+                className="relative text-neutral-600 dark:text-neutral-300"
+              >
+                <span className="block">{item.name}</span>
+              </Link>
+            ))}
             <div className="flex w-full flex-col gap-4">
               <ModeToggle />
             </div>

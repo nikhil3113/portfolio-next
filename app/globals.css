@@ -1,7 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+body,
+html,
+* {
+  font-family: var(--font-geist-mono), monospace !important;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -46,7 +50,10 @@ html {
   font-style: italic;
   margin: 1em 0;
   background: #f9fafb;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
 }
 
 .dark .prose blockquote {

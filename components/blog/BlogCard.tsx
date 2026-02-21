@@ -30,7 +30,7 @@ export function BlogCard({ blogs }: { blogs: BlogData[] }) {
         return (
           <Link href={`/blogs/${blog.slug}`} key={blog.id} prefetch={true}>
             <div className="py-6 rounded-lg">
-              <h2 className="text-black dark:text-white text-xl md:text-2xl font-bold mb-2">
+              <h2 className="text-black dark:text-white text-xl md:text-2xl font-bold mb-2 hover:underline transition-colors duration-300">
                 {blog.h1}
               </h2>
               <div className="flex items-center text-gray-700 dark:text-gray-300 text-sm mb-2 gap-2">
@@ -46,7 +46,7 @@ export function BlogCard({ blogs }: { blogs: BlogData[] }) {
                 <span>{readTime} min read</span>
               </div>
               <div className="flex gap-5 items-start mt-5">
-                <div className="relative w-40 h-32 overflow-hidden rounded-sm hidden md:block">
+                <div className="relative w-40 h-20 overflow-hidden rounded-sm hidden md:block">
                   {blog.imageUrl ? (
                     <CldImage
                       src={blog.imageUrl}
@@ -62,7 +62,7 @@ export function BlogCard({ blogs }: { blogs: BlogData[] }) {
                   )}
                 </div>
                 <div>
-                  <p className="dark:text-gray-300 text-gray-700 md:text-lg text-md mb-3">
+                  <p className="dark:text-gray-300 text-gray-700  text-md mb-3">
                     {blog.metaDescription || blog.content.slice(0, 80)}...
                   </p>
                 </div>

@@ -13,13 +13,13 @@ export default async function Home() {
   const project = await getProjects();
   return (
     <div>
-      <section className="relative min-h-[85vh] sm:min-h-screen flex items-center justify-center">
+      <section className="relative min-h-screen flex items-center justify-center">
         <BackgroundBeamsWithCollision>
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
               {/* Left side - Heading and social links */}
               <div className="text-center lg:text-left z-20">
-                <h2 className=" text-4xl md:text-4xl lg:text-4xl xl:text-6xl font-bold text-black dark:text-white font-sans tracking-tight">
+                <h2 className=" text-3xl md:text-4xl lg:text-4xl xl:text-6xl font-bold text-black dark:text-white font-sans tracking-tight">
                   Nikhil Chavan <br />
                   <div className="relative inline-block w-max [filter:drop-shadow(0px_1px_3px_rgba(27,_37,_80,_0.14))]">
                     <div className="absolute left-0 top-[1px] bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r py-4 from-purple-500 via-violet-500 to-pink-500 [text-shadow:0_0_rgba(0,0,0,0.1)]">

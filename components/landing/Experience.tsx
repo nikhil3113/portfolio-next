@@ -101,7 +101,7 @@ export function Experience() {
                 </span>
                 <h3 className="text-xl font-bold mt-2">{item.company}</h3>
                 <h4 className="font-medium text-primary">{item.role}</h4>
-                <ul className="mt-3 space-y-2 text-muted-foreground">
+                <ul className="mt-3 space-y-2 text-muted-foreground text-sm">
                   {item.description.map((point, idx) => (
                     <li key={idx} className="flex items-start">
                       <span className="text-primary mr-2">•</span>

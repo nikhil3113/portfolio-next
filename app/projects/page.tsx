@@ -12,7 +12,7 @@ export const metadata = {
 export default async function ProjectsPage() {
   const projects = await getProjects();
   return (
-    <div className="container mx-auto px-2 xl:px-32 py-16">
+    <div className="px-2 md:mx-32 py-16">
       <div className="max-w-3xl mx-auto text-center mb-12">
         <p className="text-primary font-semibold mb-2 tracking-wide">MY WORK</p>
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Projects</h1>

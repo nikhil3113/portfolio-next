@@ -107,6 +107,13 @@ html {
   }
 }
 
+/* Custom View Transitions for Theme Toggle Spread Effect */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
 .marquee-container:hover .marquee-content {
   animation-play-state: paused !important;
 }

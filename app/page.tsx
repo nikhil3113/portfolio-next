@@ -78,7 +78,7 @@ export default async function Home() {
                     </svg>
                   </a>
                   <a
-                    href="https://www.linkedin.com/in/nikhil-chavan-8b83ab184"
+                    href="https://www.linkedin.com/in/nikchavan"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-foreground hover:text-primary transition-colors p-2"
@@ -202,7 +202,7 @@ export default async function Home() {
                 </span>
               </a>
               <a
-                href="https://www.linkedin.com/in/nikhil-chavan-8b83ab184"
+                href="https://www.linkedin.com/in/nikchavan"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex flex-col items-center group"

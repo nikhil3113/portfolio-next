@@ -23,7 +23,7 @@ export async function sednMail(email: string, message: string, name: string) {
 
     apiInstance.setApiKey(
       Brevo.TransactionalEmailsApiApiKeys.apiKey,
-      process.env.BREVO_API_KEY
+      process.env.BREVO_API_KEY,
     );
 
     const sendSmtpEmail = new Brevo.SendSmtpEmail();
@@ -51,7 +51,7 @@ export async function sednMail(email: string, message: string, name: string) {
             <p>In the meantime, feel free to connect with me on:</p>
             <ul style="list-style-type: none; padding-left: 0;">
               <li style="margin-bottom: 8px;">• <a href="https://github.com/nikhil3113" style="color: #6d28d9; text-decoration: none;">GitHub</a></li>
-              <li style="margin-bottom: 8px;">• <a href="https://www.linkedin.com/in/nikhil-chavan-8b83ab184" style="color: #6d28d9; text-decoration: none;">LinkedIn</a></li>
+              <li style="margin-bottom: 8px;">• <a href="https://www.linkedin.com/in/nikchavan" style="color: #6d28d9; text-decoration: none;">LinkedIn</a></li>
             </ul>
             
             <p>Looking forward to our conversation!</p>

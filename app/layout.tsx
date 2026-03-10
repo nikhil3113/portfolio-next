@@ -73,7 +73,7 @@ export default function RootLayout({
     jobTitle: "Full Stack Developer",
     sameAs: [
       "https://github.com/nikhil3113",
-      "https://www.linkedin.com/in/nikhil-chavan-8b83ab184",
+      "https://www.linkedin.com/in/nikchavan",
     ],
     knowsAbout: [
       "Full Stack Development",

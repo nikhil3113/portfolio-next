@@ -5,7 +5,6 @@ import { Marquee } from "@/components/ui/marquee";
 
 // Define skills with their Simple Icons slugs
 const skills = [
-  { name: "Tailwind CSS", slug: "tailwindcss" },
   { name: "Next.js", slug: "nextdotjs" },
   { name: "React", slug: "react" },
   { name: "TypeScript", slug: "typescript" },
@@ -20,6 +19,11 @@ const skills = [
   { name: "MySQL", slug: "mysql" },
   { name: "Prisma", slug: "prisma" },
   { name: "Tailwind CSS", slug: "tailwindcss" },
+  { name: "Golang", slug: "go" },
+  { name: "Nginx", slug: "nginx" },
+  { name: "Neovim", slug: "neovim" },
+  { name: "Drizzle", slug: "drizzle" },
+  { name: "Linux", slug: "linux" },
 ];
 
 export function Skills() {
@@ -45,7 +49,7 @@ export function Skills() {
               className="relative h-full w-fit sm:mx-[4rem] mx-[2rem] flex flex-col items-center justify-center gap-2"
             >
               <img
-                src={`https://cdn.simpleicons.org/${skill.slug}`}
+                src={`https://cdn.simpleicons.org/${skill.slug}?viewbox=auto`}
                 alt={skill.name}
                 className="h-10 w-10"
                 height={40}
@@ -65,7 +69,7 @@ export function Skills() {
               className="relative h-full w-fit sm:mx-[4rem] mx-[2rem] flex flex-col items-center justify-center gap-2"
             >
               <img
-                src={`https://cdn.simpleicons.org/${skill.slug}`}
+                src={`https://cdn.simpleicons.org/${skill.slug}?viewbox=auto`}
                 alt={skill.name}
                 className="h-10 w-10"
                 height={40}

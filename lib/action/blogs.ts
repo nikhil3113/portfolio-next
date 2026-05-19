@@ -11,6 +11,15 @@ export async function getBlogs() {
       where: {
         isPublished: true,
       },
+      select: {
+        id: true,
+        h1: true,
+        metaDescription: true,
+        imageUrl: true,
+        author: true,
+        slug: true,
+        createdAt: true,
+      },
       orderBy: {
         createdAt: "desc",
       },

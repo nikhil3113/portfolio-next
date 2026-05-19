@@ -10,23 +10,16 @@ interface BlogData {
   id: string;
   h1: string;
   metaDescription: string;
-  content: string;
   imageUrl: string;
   author: string;
   slug: string;
   createdAt: Date;
 }
 
-function calculateReadTime(content: string): number {
-  const words = content.split(/\s+/).length;
-  return Math.ceil(words / 200); 
-}
-
 export function BlogCard({ blogs }: { blogs: BlogData[] }) {
   return (
     <div className="grid grid-cols-1 gap-6">
       {blogs.map((blog) => {
-        const readTime = calculateReadTime(blog.content);
         return (
           <Link href={`/blogs/${blog.slug}`} key={blog.id} prefetch={true}>
             <div className="py-6 rounded-lg">
@@ -42,8 +35,6 @@ export function BlogCard({ blogs }: { blogs: BlogData[] }) {
                     year: "numeric",
                   })}
                 </span>
-                <span className="mx-2">•</span>
-                <span>{readTime} min read</span>
               </div>
               <div className="flex gap-5 items-start mt-5">
                 <div className="relative w-40 h-20 overflow-hidden rounded-sm hidden md:block">
@@ -62,8 +53,10 @@ export function BlogCard({ blogs }: { blogs: BlogData[] }) {
                   )}
                 </div>
                 <div>
+  
                   <p className="dark:text-gray-300 text-gray-700  text-md mb-3">
-                    {blog.metaDescription || blog.content.slice(0, 80)}...
+                    {blog.metaDescription.slice(0, 250)}
+                    ...
                   </p>
                 </div>
               </div>

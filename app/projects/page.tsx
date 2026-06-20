@@ -2,11 +2,46 @@ import { ProjectCard } from "@/components/project/ProjectCard";
 import { getProjects } from "@/lib/action/projects";
 import { Project } from "@/types/projects";
 import Link from "next/link";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Projects",
+export const metadata: Metadata = {
+  title: "Projects | Full Stack Web Apps by Nikhil Chavan",
   description:
-    "Showcasing full stack developer portfolio projects: scalable APIs, performant frontends, and modern tooling.",
+    "Portfolio projects by Nikhil Chavan: production-ready full stack web apps built with Next.js, React, TypeScript, Node.js, MySQL, and MongoDB. Explore live demos and source code.",
+  keywords: [
+    "full stack projects",
+    "next.js projects",
+    "react portfolio",
+    "typescript projects",
+    "node.js projects",
+    "nikhil chavan projects",
+  ],
+  alternates: {
+    canonical: "https://nikchavan.com/projects",
+  },
+  openGraph: {
+    title: "Projects | Nikhil Chavan",
+    description:
+      "Production-ready full stack projects built with Next.js, React, TypeScript, Node.js, MySQL, and MongoDB.",
+    url: "https://nikchavan.com/projects",
+    siteName: "Nikhil Chavan Portfolio",
+    type: "website",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Nikhil Chavan Projects",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Projects | Nikhil Chavan",
+    description:
+      "Production-ready full stack projects built with Next.js, React, TypeScript, Node.js, MySQL, and MongoDB.",
+    images: ["/opengraph-image"],
+  },
 };
 
 export default async function ProjectsPage() {

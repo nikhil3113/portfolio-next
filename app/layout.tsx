@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: "Full Stack Developer Portfolio | Nikhil Chavan",
-    template: "%s | Full Stack Developer Portfolio",
+    template: "%s | Nikhil Chavan",
   },
   description:
     "Full Stack Developer Portfolio of Nikhil Chavan. Modern web apps, scalable APIs, projects, blogs, and expertise in React, Next.js, TypeScript, Node.js.",
@@ -26,9 +26,6 @@ export const metadata: Metadata = {
     "web developer portfolio",
     "node.js projects",
   ],
-  alternates: {
-    canonical: siteUrl,
-  },
   openGraph: {
     type: "website",
     url: siteUrl,
@@ -36,12 +33,21 @@ export const metadata: Metadata = {
     description:
       "Explore projects, articles, and experience building modern full stack applications with Next.js, React, TypeScript, and Node.js.",
     siteName: "Nikhil Chavan Portfolio",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Nikhil Chavan - Full Stack Developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Full Stack Developer Portfolio | Nikhil Chavan",
     description:
       "Projects & articles showcasing modern full stack development with React, Next.js and TypeScript.",
+    images: ["/opengraph-image"],
   },
   other: {
     "google-site-verification": "EhFpUqvjGl7jkuGbfRhK71u32bp3BDQFYQSvllx97r8",
@@ -97,7 +103,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="canonical" href={siteUrl} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteLd) }}

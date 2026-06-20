@@ -8,6 +8,13 @@ import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button
 import { getProjects } from "@/lib/action/projects";
 import { Project } from "@/types/projects";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default async function Home() {
   const project = await getProjects();
@@ -19,7 +26,7 @@ export default async function Home() {
             <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
               {/* Left side - Heading and social links */}
               <div className="text-center lg:text-left z-20">
-                <h2 className=" text-3xl md:text-4xl lg:text-4xl xl:text-6xl font-bold text-black dark:text-white font-sans tracking-tight">
+                <h1 className=" text-3xl md:text-4xl lg:text-4xl xl:text-6xl font-bold text-black dark:text-white font-sans tracking-tight">
                   Nikhil Chavan <br />
                   <div className="relative inline-block w-max [filter:drop-shadow(0px_1px_3px_rgba(27,_37,_80,_0.14))]">
                     <div className="absolute left-0 top-[1px] bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r py-4 from-purple-500 via-violet-500 to-pink-500 [text-shadow:0_0_rgba(0,0,0,0.1)]">
@@ -29,7 +36,7 @@ export default async function Home() {
                       <span className="">Full Stack Developer</span>
                     </div>
                   </div>
-                </h2>
+                </h1>
                 {/* Resume Download Button */}
                 <div className="mt-8 flex justify-center lg:justify-start">
                   <a
@@ -137,7 +144,7 @@ export default async function Home() {
             <p className="text-primary font-semibold mb-2 tracking-wide">
               Proof Of Work
             </p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Projects</h2>
+            <h3 className="text-3xl md:text-4xl font-bold mb-4">Projects</h3>
             <p className="text-muted-foreground max-sm:px-5">
               Explore a selection of my projects that showcase my technical
               skills and problem-solving abilities.
@@ -172,7 +179,7 @@ export default async function Home() {
             <p className="text-primary font-semibold mb-2 tracking-wide">
               GET IN TOUCH
             </p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Contact Me</h2>
+            <h3 className="text-3xl md:text-4xl font-bold mb-4">Contact Me</h3>
             <p className="text-muted-foreground max-sm:px-5">
               Have a question or want to work together? Send me a message.
             </p>

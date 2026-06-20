@@ -7,9 +7,9 @@ import {
 export function About() {
   return (
     <div className="w-full max-w-2xl mx-auto mb-8">
-      <h2 className="text-3xl md:text-4xl font-bold mb-10 text-primary text-center">
+      <h3 className="text-3xl md:text-4xl font-bold mb-10 text-primary text-center">
         About Me
-      </h2>
+      </h3>
       <Terminal>
         <TypingAnimation>
           👋 Greetings! I&apos;m Nikhil Chavan — a Full Stack Developer with 1.5

@@ -35,12 +35,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${blog.h1}`,
     description: `${baseDesc} | Full Stack Developer Portfolio`,
     alternates: {
-      canonical: `https://nikchavan.com/blogs/${blog.id}`,
+      canonical: `https://nikchavan.com/blogs/${blog.slug}`,
     },
     openGraph: {
       title: blog.h1,
       description: baseDesc,
-      url: `https://nikchavan.com/blogs/${blog.id}`,
+      url: `https://nikchavan.com/blogs/${blog.slug}`,
       images: blog.imageUrl ? [{ url: blog.imageUrl }] : [],
     },
     twitter: {

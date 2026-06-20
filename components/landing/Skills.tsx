@@ -33,9 +33,9 @@ export function Skills() {
         <p className="text-primary font-semibold mb-2 tracking-wide">
           MY EXPERTISE
         </p>
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <h3 className="text-3xl md:text-4xl font-bold mb-4">
           Technical Skills
-        </h2>
+        </h3>
         <p className="text-muted-foreground max-sm:px-5">
           These are the technologies I&apos;ve worked with and am proficient in.
         </p>

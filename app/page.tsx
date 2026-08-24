@@ -3,7 +3,6 @@ import { ContactForm } from "@/components/landing/Contact";
 import { Experience } from "@/components/landing/Experience";
 import { ProjectCard } from "@/components/project/SampleProjectCard";
 import { Skills } from "@/components/landing/Skills";
-import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { getProjects } from "@/lib/action/projects";
 import { Project } from "@/types/projects";
@@ -20,21 +19,15 @@ export default async function Home() {
   const project = await getProjects();
   return (
     <div>
-      <section className="relative min-h-screen flex items-center justify-center">
-        <BackgroundBeamsWithCollision>
-          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
-              {/* Left side - Heading and social links */}
-              <div className="text-center lg:text-left z-20">
-                <h1 className=" text-3xl md:text-4xl lg:text-4xl xl:text-6xl font-bold text-black dark:text-white font-sans tracking-tight">
+      <section className="relative flex min-h-screen items-center justify-center px-gutter py-section-mobile md:py-section-desktop">
+        <div className="mx-auto w-full max-w-container">
+          <div className="flex flex-col items-center justify-between gap-8 lg:flex-row lg:gap-12">
+            {/* Left side - Heading and social links */}
+            <div className="z-20 text-center lg:text-left">
+                <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl lg:text-4xl xl:text-6xl">
                   Nikhil Chavan <br />
-                  <div className="relative inline-block w-max [filter:drop-shadow(0px_1px_3px_rgba(27,_37,_80,_0.14))]">
-                    <div className="absolute left-0 top-[1px] bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r py-4 from-purple-500 via-violet-500 to-pink-500 [text-shadow:0_0_rgba(0,0,0,0.1)]">
-                      <span className="">Full Stack Developer</span>
-                    </div>
-                    <div className="relative bg-clip-text text-transparent bg-no-repeat bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 py-4">
-                      <span className="">Full Stack Developer</span>
-                    </div>
+                  <div className="relative inline-block w-max py-4 text-primary">
+                    <span>Full Stack Developer</span>
                   </div>
                 </h1>
                 {/* Resume Download Button */}
@@ -42,9 +35,9 @@ export default async function Home() {
                   <a
                     href="/resume.pdf"
                     download="Nikhil_Chavan.pdf"
-                    className="group relative inline-flex items-center justify-center px-8 py-3 overflow-hidden font-medium transition duration-300 ease-out border-2 rounded-full shadow-md bg-background/80 backdrop-blur-sm border-primary/50 dark:hover:border-black hover:border-white"
+                    className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border-2 border-primary/50 bg-background/80 px-8 py-3 font-medium shadow-md backdrop-blur-sm transition duration-300 ease-out hover:border-primary"
                   >
-                    <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 group-hover:translate-x-0 ease ">
+                    <span className="absolute inset-0 flex h-full w-full -translate-x-full items-center justify-center bg-primary text-primary-foreground duration-300 group-hover:translate-x-0 ease">
                       <svg
                         className="w-6 h-6"
                         fill="none"
@@ -67,7 +60,7 @@ export default async function Home() {
                   </a>
                 </div>
 
-                <div className="flex justify-center lg:justify-start gap-4 mt-6">
+                <div className="mt-6 flex justify-center gap-4 lg:justify-start">
                   <a
                     href="https://github.com/nikhil3113"
                     target="_blank"
@@ -115,32 +108,31 @@ export default async function Home() {
                     </svg>
                   </a>
                 </div>
-              </div>
+            </div>
 
-              {/* Right side - Contact Form */}
-              <div className="z-20 hidden lg:block">
-                <div className="bg-background/80 backdrop-blur-sm rounded-2xl p-2">
-                  <ContactForm compact />
-                </div>
+            {/* Right side - Contact Form */}
+            <div className="z-20 hidden lg:block">
+              <div className="rounded-2xl bg-background/80 p-2 backdrop-blur-sm">
+                <ContactForm compact />
               </div>
             </div>
           </div>
-        </BackgroundBeamsWithCollision>
+        </div>
       </section>
 
-      <section className="flex justify-center items-center">
+      {/* <section className="flex justify-center items-center">
         <About />
-      </section>
+      </section> */}
 
-      <section className="py-16 max-sm:py-5 max-w-5xl mx-auto">
+      <section className="mx-auto w-full max-w-container px-gutter py-section-mobile md:py-section-desktop">
         {/* Skills */}
         <div id="skills">
           <Skills />
         </div>
 
         {/* Work */}
-        <div id="projects">
-          <div className="max-w-3xl mx-auto text-center mb-0 mt-16">
+        <div className="mt-section-mobile md:mt-section-desktop" id="projects">
+          <div className="mx-auto mb-12 max-w-3xl text-center">
             <p className="text-primary font-semibold mb-2 tracking-wide">
               Proof Of Work
             </p>
@@ -150,7 +142,7 @@ export default async function Home() {
               skills and problem-solving abilities.
             </p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 p-0">
+          <div className="grid grid-cols-1 gap-8 p-0 lg:grid-cols-2">
             {project.slice(0, 2).map((items: Project, idx: number) => (
               <ProjectCard
                 key={idx}
@@ -163,19 +155,19 @@ export default async function Home() {
               />
             ))}
           </div>
-          <div className="flex justify-center mt-0 max-sm:px-5">
+          <div className="mt-8 flex justify-center">
             <Link href="/projects" prefetch={true}>
               <InteractiveHoverButton text="More" />
             </Link>
           </div>
         </div>
 
-        <div id="experience">
+        <div className="mt-section-mobile md:mt-section-desktop" id="experience">
           <Experience />
         </div>
 
-        <div className="mt-16 pt-4 max-sm:px-5" id="contact">
-          <div className="max-w-3xl mx-auto text-center mb-8">
+        <div className="mt-section-mobile md:mt-section-desktop" id="contact">
+          <div className="mx-auto mb-12 max-w-3xl text-center">
             <p className="text-primary font-semibold mb-2 tracking-wide">
               GET IN TOUCH
             </p>

@@ -95,7 +95,7 @@ export function Appbar() {
                   }
                 }}
                 prefetch={true}
-                className="relative text-neutral-600 dark:text-neutral-300"
+                 className="relative text-muted-foreground hover:text-foreground"
               >
                 <span className="block">{item.name}</span>
               </Link>

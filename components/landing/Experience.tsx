@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { MagicCard } from "@/components/ui/magic-card";
-import { useTheme } from "next-themes";
 
 interface ExperienceItem {
   date: string;
@@ -55,11 +54,10 @@ const experienceData: ExperienceItem[] = [
 ];
 
 export function Experience() {
-  const { theme } = useTheme();
   return (
-    <section className="py-16">
-      <div className="container mx-auto px-4">
-        <div className="max-w-2xl mx-auto text-center mb-16">
+    <section className="py-0">
+      <div className="mx-auto w-full max-w-container">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
           <p className="text-primary font-semibold mb-2 tracking-wide">
             MY JOURNEY
           </p>
@@ -71,7 +69,7 @@ export function Experience() {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="mx-auto max-w-4xl">
           {experienceData.map((item, index) => (
             <motion.div
               key={index}
@@ -79,7 +77,7 @@ export function Experience() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="relative pl-8 mb-12 last:mb-0"
+              className="relative mb-8 pl-8 last:mb-0"
             >
               {/* Timeline connector */}
               {index < experienceData.length - 1 && (
@@ -94,7 +92,7 @@ export function Experience() {
               {/* Content */}
               <MagicCard
                 className="bg-card border rounded-lg p-6 shadow-sm"
-                gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
+                gradientColor="hsl(var(--surface-container-highest))"
               >
                 <span className="text-sm text-muted-foreground font-medium">
                   {item.date}

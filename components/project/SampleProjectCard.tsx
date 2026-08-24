@@ -25,18 +25,21 @@ export function ProjectCard({
   githubLink,
 }: ProjectCardProps) {
   return (
-    <CardContainer className="inter-var max-sm:px-5">
-      <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border">
+    <CardContainer
+      className="inter-var max-sm:px-5"
+      containerClassName="py-0"
+    >
+       <CardBody className="relative group/card w-auto rounded-xl border border-border bg-card p-6 h-auto sm:w-[30rem]">
         <CardItem
           translateZ="50"
-          className="text-xl font-bold text-neutral-600 dark:text-white"
+          className="text-xl font-bold text-card-foreground"
         >
           {title}
         </CardItem>
         <CardItem
           as="p"
           translateZ="60"
-          className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300 "
+          className="mt-2 max-w-sm text-sm text-muted-foreground"
         >
           {description}
         </CardItem>
@@ -58,7 +61,7 @@ export function ProjectCard({
           {tags.map((tag, index) => (
             <span
               key={index}
-              className="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded-md text-xs"
+              className="rounded-md bg-muted px-2 py-1 font-mono text-xs text-muted-foreground"
             >
               {tag}
             </span>
@@ -71,7 +74,7 @@ export function ProjectCard({
             as={Link}
             href={siteLink}
             target="_blank"
-            className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white hover:underline flex items-center"
+            className="flex items-center rounded-xl px-4 py-2 text-xs font-normal text-foreground hover:text-primary hover:underline"
           >
             Visit Site →
           </CardItem>
@@ -80,7 +83,7 @@ export function ProjectCard({
             as={Link}
             href={githubLink}
             target="_blank"
-            className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold flex items-center gap-1"
+            className="flex items-center gap-1 rounded-xl bg-primary px-4 py-2 text-xs font-bold text-primary-foreground"
           >
             <Github size={16} /> GitHub
           </CardItem>

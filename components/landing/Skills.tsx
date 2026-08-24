@@ -28,8 +28,8 @@ const skills = [
 
 export function Skills() {
   return (
-    <section className="py-16">
-      <div className="max-w-2xl mx-auto text-center mb-12">
+    <section className="py-0">
+      <div className="mx-auto mb-12 max-w-2xl text-center">
         <p className="text-primary font-semibold mb-2 tracking-wide">
           MY EXPERTISE
         </p>
@@ -41,7 +41,7 @@ export function Skills() {
         </p>
       </div>
 
-      <div className="mb-10">
+      <div className="mb-8">
         <Marquee className="py-4 max-sm:px-5" pauseOnHover>
           {skills.slice(0, Math.ceil(skills.length / 2)).map((skill, index) => (
             <div

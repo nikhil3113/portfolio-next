@@ -59,22 +59,24 @@ export function ContactForm({ compact = false }: ContactFormProps) {
   return (
     <div
       className={cn(
-        "shadow-input mx-auto w-full rounded-none p-4 md:rounded-2xl dark:bg-black border",
-        compact ? "p-4 md:p-6" : "max-w-md p-4 md:p-8 mt-20"
+        "mx-auto w-full rounded-none border border-border bg-card p-4 shadow-input md:rounded-2xl",
+        compact ? "p-4 md:p-6" : "mt-8 max-w-md p-4 md:p-8"
       )}
     >
 
 
-      <h3 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
+      <h3 className="text-xl font-bold text-foreground">
         Get in Touch
       </h3>
-      <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
+      <p className="mt-2 max-w-sm text-sm text-muted-foreground">
         Have a question or want to work together? Send me a message.
       </p>
 
       <form className={compact ? "my-4" : "my-8"} onSubmit={handleSubmit}>
         <LabelInputContainer className="mb-3">
-          <Label htmlFor={compact ? "name-compact" : "name"}>Name</Label>
+          <Label className="font-mono text-xs uppercase tracking-widest" htmlFor={compact ? "name-compact" : "name"}>
+            Name
+          </Label>
           <Input
             id={compact ? "name-compact" : "name"}
             name="name"
@@ -87,7 +89,7 @@ export function ContactForm({ compact = false }: ContactFormProps) {
         </LabelInputContainer>
 
         <LabelInputContainer className="mb-3">
-          <Label htmlFor={compact ? "email-compact" : "email"}>
+          <Label className="font-mono text-xs uppercase tracking-widest" htmlFor={compact ? "email-compact" : "email"}>
             Email Address
           </Label>
           <Input
@@ -102,7 +104,7 @@ export function ContactForm({ compact = false }: ContactFormProps) {
         </LabelInputContainer>
 
         <LabelInputContainer className={compact ? "mb-4" : "mb-8"}>
-          <Label htmlFor={compact ? "message-compact" : "message"}>
+          <Label className="font-mono text-xs uppercase tracking-widest" htmlFor={compact ? "message-compact" : "message"}>
             Message
           </Label>
           <Textarea
@@ -120,7 +122,7 @@ export function ContactForm({ compact = false }: ContactFormProps) {
         </LabelInputContainer>
 
         <button
-          className="group/btn relative flex h-10 w-full items-center justify-center rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset] disabled:opacity-70"
+          className="group/btn relative flex h-10 w-full items-center justify-center rounded-md bg-primary font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-70"
           type="submit"
           disabled={isSubmitting}
         >
@@ -140,8 +142,8 @@ export function ContactForm({ compact = false }: ContactFormProps) {
 const BottomGradient = () => {
   return (
     <>
-      <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
-      <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
+      <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
+      <span className="absolute inset-x-10 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-primary/70 to-transparent opacity-0 blur-sm transition duration-500 group-hover/btn:opacity-100" />
     </>
   );
 };

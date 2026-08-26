@@ -19,7 +19,7 @@ export function Appbar() {
   const isHomePage = pathname === "/";
   const navItems = isHomePage
     ? [
-      { name: "Projects", link: "#projects" },
+      { name: "Projects", link: "/projects" },
       { name: "Experience", link: "#experience" },
       { name: "Contact", link: "#contact" },
       { name: "Blogs", link: "/blogs" },

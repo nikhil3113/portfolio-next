@@ -1,9 +1,11 @@
 import { About } from "@/components/landing/About";
+import { BlogCard } from "@/components/blog/BlogCard";
 import { ContactForm } from "@/components/landing/Contact";
 import { Experience } from "@/components/landing/Experience";
 import { ProjectCard } from "@/components/project/SampleProjectCard";
 import { Skills } from "@/components/landing/Skills";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
+import { getLatestBlogs } from "@/lib/action/blogs";
 import { getProjects } from "@/lib/action/projects";
 import { Project } from "@/types/projects";
 import Link from "next/link";
@@ -16,7 +18,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const project = await getProjects();
+  const [project, blogs] = await Promise.all([
+    getProjects(),
+    getLatestBlogs(),
+  ]);
   return (
     <div>
       <section className="relative flex min-h-screen items-center justify-center px-gutter py-section-mobile md:py-section-desktop">
@@ -161,6 +166,30 @@ export default async function Home() {
             </Link>
           </div>
         </div>
+
+        {blogs.length > 0 && (
+          <div
+            className="mt-section-mobile md:mt-section-desktop"
+            id="blogs"
+          >
+            <div className="mx-auto mb-12 max-w-3xl text-center">
+              <p className="text-primary font-semibold mb-2 tracking-wide">
+                LATEST WRITING
+              </p>
+              <h3 className="text-3xl md:text-4xl font-bold mb-4">Blogs</h3>
+              <p className="text-muted-foreground max-sm:px-5">
+                Articles on web development, tools, and lessons learned from
+                building real projects.
+              </p>
+            </div>
+            <BlogCard blogs={blogs} />
+            <div className="mt-8 flex justify-center">
+              <Link href="/blogs" prefetch={true}>
+                <InteractiveHoverButton text="More" />
+              </Link>
+            </div>
+          </div>
+        )}
 
         <div className="mt-section-mobile md:mt-section-desktop" id="experience">
           <Experience />

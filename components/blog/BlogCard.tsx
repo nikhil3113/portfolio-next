@@ -23,10 +23,10 @@ export function BlogCard({ blogs }: { blogs: BlogData[] }) {
         return (
           <Link href={`/blogs/${blog.slug}`} key={blog.id} prefetch={true}>
             <div className="py-6 rounded-lg">
-              <h2 className="text-black dark:text-white text-xl md:text-2xl font-bold mb-2 hover:underline transition-colors duration-300">
+              <h2 className="text-foreground text-xl md:text-2xl font-bold mb-2 hover:underline transition-colors duration-300">
                 {blog.h1}
               </h2>
-              <div className="flex items-center text-gray-700 dark:text-gray-300 text-sm mb-2 gap-2">
+              <div className="flex items-center text-muted-foreground text-sm mb-2 gap-2">
                 <Calendar className="w-4 h-4" />
                 <span>
                   {new Date(blog.createdAt).toLocaleDateString("en-GB", {
@@ -47,14 +47,14 @@ export function BlogCard({ blogs }: { blogs: BlogData[] }) {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   ) : (
-                    <div className="h-full w-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                      <span className="text-gray-400 text-sm">No Image</span>
+                    <div className="h-full w-full bg-muted flex items-center justify-center">
+                      <span className="text-muted-foreground text-sm">No Image</span>
                     </div>
                   )}
                 </div>
                 <div>
   
-                  <p className="dark:text-gray-300 text-gray-700  text-md mb-3">
+                  <p className="text-muted-foreground text-md mb-3">
                     {blog.metaDescription.slice(0, 250)}
                     ...
                   </p>

@@ -14,7 +14,7 @@ const experienceData: ExperienceItem[] = [
   {
     date: "January 2025 - Present",
     company: "Digixpressions Pvt Ltd",
-    role: "Full Stack Developer - Junior Executive",
+    role: "Full Stack Developer - Developer Executive",
     description: [
       "Orchestrated the full-stack development of the company’s website, delivering a production-ready application 3–4 times faster than the projected timeline for external vendors, resulting in significant cost savings.",
       "Led the frontend development lifecycle for an in-house SEO analytics tool, from concept to deployment, creating an intuitive interface that reduced manual audit time by 30%.",

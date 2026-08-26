@@ -32,6 +32,39 @@ export async function getBlogs() {
   }
 }
 
+export async function getLatestBlogs(count = 2) {
+  try {
+    const cacheKey = `blogs:latest:${count}`;
+    const cachedBlogs = await redis.get(cacheKey);
+    if (cachedBlogs) {
+      return JSON.parse(cachedBlogs);
+    }
+    const blogs = await prisma.blog.findMany({
+      where: {
+        isPublished: true,
+      },
+      select: {
+        id: true,
+        h1: true,
+        metaDescription: true,
+        imageUrl: true,
+        author: true,
+        slug: true,
+        createdAt: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: count,
+    });
+    await redis.set(cacheKey, JSON.stringify(blogs));
+    return blogs;
+  } catch (error) {
+    console.log("Error fetching latest blogs:", error);
+    return [];
+  }
+}
+
 export async function getBlogBySlug(slug: string) {
   try {
     const blog = await prisma.blog.findUnique({

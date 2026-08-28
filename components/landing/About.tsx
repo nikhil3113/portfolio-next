@@ -7,7 +7,7 @@ import {
 export function About() {
   return (
     <div className="mx-auto mb-8 w-full max-w-2xl">
-      <h3 className="mb-12 text-center text-3xl font-bold text-primary md:text-4xl">
+        <h3 className="mb-12 text-center text-3xl font-bold text-accent-text md:text-4xl">
         About Me
       </h3>
       <Terminal>

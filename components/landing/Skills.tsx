@@ -30,7 +30,7 @@ export function Skills() {
   return (
     <section className="py-0">
       <div className="mx-auto mb-12 max-w-2xl text-center">
-        <p className="text-primary font-semibold mb-2 tracking-wide">
+        <p className="text-accent-text font-semibold mb-2 tracking-wide">
           MY EXPERTISE
         </p>
         <h3 className="text-3xl md:text-4xl font-bold mb-4">

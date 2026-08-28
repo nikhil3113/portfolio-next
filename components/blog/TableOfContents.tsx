@@ -23,7 +23,7 @@ export function TableOfContents({ headings }: { headings: TOCHeading[] }) {
           <a
             href={`#${h.id}`}
             className={cn(
-              "block py-1 px-2 mb-1 text-muted-foreground rounded  hover:text-primary transition font-medium text-xs md:text-sm shadow-sm",
+              "block py-1 px-2 mb-1 text-muted-foreground rounded  hover:text-accent-text transition font-medium text-xs md:text-sm shadow-sm",
               h.level === 2 && "pl-0 text-base font-semibold tracking-wide",
               h.level === 3 && "pl-2 text-sm",
               h.level > 3 && "pl-3 text-xs"

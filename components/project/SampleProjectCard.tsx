@@ -74,7 +74,7 @@ export function ProjectCard({
             as={Link}
             href={siteLink}
             target="_blank"
-            className="flex items-center rounded-xl px-4 py-2 text-xs font-normal text-foreground hover:text-primary hover:underline"
+            className="flex items-center rounded-xl px-4 py-2 text-xs font-normal text-foreground hover:text-accent-text hover:underline"
           >
             Visit Site →
           </CardItem>

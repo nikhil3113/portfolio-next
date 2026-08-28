@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { RadiantButton } from "../landing/RadiantButton";
 import { CldImage } from "next-cloudinary";
@@ -24,8 +23,8 @@ export function ProjectCard({
 }: ProjectCardProps) {
   return (
     <div className="w-full h-full">
-      <div className="group relative h-full flex flex-col overflow-hidden rounded-2xl border border-zinc-100 bg-white dark:bg-zinc-900 dark:border-zinc-800 transition duration-200">
-        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-tl-lg rounded-tr-lg bg-gray-100 dark:bg-zinc-800">
+      <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition duration-200">
+        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-tl-lg rounded-tr-lg bg-muted">
           <CldImage
             src={image}
             alt={title}
@@ -34,37 +33,37 @@ export function ProjectCard({
             height={500}
           />
         </div>
-        <div className="p-4 flex flex-col flex-grow">
+        <div className="flex flex-grow flex-col p-4">
           <Link
             href={siteLink}
-            className="w-full h-full"
+            className="h-full w-full"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h2 className="my-3 text-lg font-bold text-zinc-700 dark:text-zinc-200">
+            <h2 className="my-3 text-lg font-bold text-card-foreground">
               {title}
             </h2>
-            <p className="my-3 text-sm font-normal text-zinc-500 dark:text-zinc-400">
+            <p className="my-3 text-sm font-normal text-muted-foreground">
               {description}
             </p>
           </Link>
-          <div className="flex flex-wrap gap-2 my-4">
+          <div className="my-4 flex flex-wrap gap-2">
             {tags.map((tag, index) => (
               <span
                 key={index}
-                className="px-2 py-1 text-xs font-medium rounded-full bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
+                className="rounded-full bg-muted px-2 py-1 text-xs font-medium text-muted-foreground"
               >
                 {tag}
               </span>
             ))}
           </div>
 
-          <div className="mt-auto pt-2 flex flex-row items-center justify-between">
+          <div className="mt-auto flex flex-row items-center justify-between pt-2">
             <Link
               href={githubLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 transition-colors"
+              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               View Source
             </Link>

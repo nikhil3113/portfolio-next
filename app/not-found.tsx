@@ -7,7 +7,7 @@ export default function NotFound() {
     <div className="min-h-[70vh] flex flex-col items-center justify-center text-center px-4">
       <div className="flex flex-col items-center gap-4">
         <span className="rounded-full bg-muted p-4">
-          <Ghost className="h-12 w-12 text-primary" />
+          <Ghost className="h-12 w-12 text-accent-text" />
         </span>
         <h1 className="text-4xl font-bold tracking-tight text-foreground">
           404

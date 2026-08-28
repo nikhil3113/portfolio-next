@@ -19,7 +19,7 @@ export function Appbar() {
   const isHomePage = pathname === "/";
   const navItems = isHomePage
     ? [
-      { name: "Projects", link: "#projects" },
+      { name: "Projects", link: "/projects" },
       { name: "Experience", link: "#experience" },
       { name: "Contact", link: "#contact" },
       { name: "Blogs", link: "/blogs" },
@@ -95,7 +95,7 @@ export function Appbar() {
                   }
                 }}
                 prefetch={true}
-                className="relative text-neutral-600 dark:text-neutral-300"
+                 className="relative text-muted-foreground hover:text-foreground"
               >
                 <span className="block">{item.name}</span>
               </Link>

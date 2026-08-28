@@ -49,7 +49,7 @@ export default async function ProjectsPage() {
   return (
     <div className="px-2 md:mx-32 py-16">
       <div className="max-w-3xl mx-auto text-center mb-12">
-        <p className="text-primary font-semibold mb-2 tracking-wide">MY WORK</p>
+        <p className="text-accent-text font-semibold mb-2 tracking-wide">MY WORK</p>
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Projects</h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
           Explore my portfolio of projects that showcase my technical skills and

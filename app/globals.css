@@ -173,61 +173,116 @@ html {
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 224 71.4% 4.1%;
+    --foreground: 222 47% 11%;
     --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
+    --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 224 71.4% 4.1%;
-    --primary: 220.9 39.3% 11%;
-    --primary-foreground: 210 20% 98%;
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220.9 39.3% 11%;
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
-    --accent: 220 14.3% 95.9%;
-    --accent-foreground: 220.9 39.3% 11%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 224 71.4% 4.1%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 75 100% 42%;
+    --primary-foreground: 222 47% 11%;
+    --accent-text: 75 100% 20%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 75 100% 50%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 75 100% 50%;
+    --chart-1: 75 100% 50%;
+    --chart-2: 222 47% 11%;
+    --chart-3: 215 16% 47%;
+    --chart-4: 210 40% 96%;
+    --chart-5: 0 72% 51%;
     --radius: 0.5rem;
-    --sky-400: #38bdf8;
-    --sky-500: #0ea5e9;
+    --section-gap-desktop: 8rem;
+    --section-gap-mobile: 4rem;
+    --gutter: 1.5rem;
+    --container-max: 70rem;
+    --shadow-nav: 0 0.25rem 1.5rem hsl(var(--foreground) / 0.08),
+      0 0 0 0.0625rem hsl(var(--foreground) / 0.05);
+
+    /* Deep Slate & Neon design tokens */
+    --surface: 0 0% 100%;
+    --surface-dim: 210 40% 98%;
+    --surface-bright: 0 0% 100%;
+    --surface-container-lowest: 0 0% 100%;
+    --surface-container-low: 210 40% 98%;
+    --surface-container: 210 40% 96%;
+    --surface-container-high: 214 32% 91%;
+    --surface-container-highest: 215 16% 65%;
+    --on-surface: 222 47% 11%;
+    --on-surface-variant: 215 16% 47%;
+    --inverse-surface: 222 47% 11%;
+    --inverse-on-surface: 0 0% 100%;
+    --outline: 215 16% 47%;
+    --outline-variant: 214 32% 91%;
+    --surface-tint: 75 100% 50%;
+    --electric-lime: 75 100% 50%;
+    --slate-900: 222 47% 11%;
+    --slate-800: 215 28% 18%;
+    --slate-400: 215 16% 65%;
+    --pure-white: 0 0% 100%;
   }
 
   .dark {
     --background: 224 71.4% 4.1%;
-    --foreground: 210 20% 98%;
+    --foreground: 0 0% 100%;
     --card: 224 71.4% 4.1%;
     --card-foreground: 210 20% 98%;
-    --popover: 224 71.4% 4.1%;
-    --popover-foreground: 210 20% 98%;
-    --primary: 210 20% 98%;
-    --primary-foreground: 220.9 39.3% 11%;
-    --secondary: 215 27.9% 16.9%;
-    --secondary-foreground: 210 20% 98%;
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 217.9 10.6% 64.9%;
-    --accent: 215 27.9% 16.9%;
-    --accent-foreground: 210 20% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 215 27.9% 16.9%;
-    --input: 215 27.9% 16.9%;
-    --ring: 216 12.2% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sky-400: #38bdf8;
-    --sky-500: #0ea5e9;
+    --popover: 215 28% 18%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 75 100% 50%;
+    --primary-foreground: 222 47% 11%;
+    --accent-text: 75 100% 50%;
+    --secondary: 215 25% 27%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 215 28% 18%;
+    --muted-foreground: 215 16% 65%;
+    --accent: 78 18% 18%;
+    --accent-foreground: 69 27% 85%;
+    --destructive: 5 100% 83%;
+    --destructive-foreground: 357 100% 21%;
+    --border: 76 17% 24%;
+    --input: 215 28% 18%;
+    --ring: 75 100% 50%;
+    --chart-1: 75 100% 50%;
+    --chart-2: 229 35% 81%;
+    --chart-3: 215 16% 65%;
+    --chart-4: 199 75% 75%;
+    --chart-5: 5 100% 83%;
+    --section-gap-desktop: 8rem;
+    --section-gap-mobile: 4rem;
+    --gutter: 1.5rem;
+    --container-max: 70rem;
+    --shadow-nav: 0 0 1.5rem hsl(var(--background) / 0.9),
+      0 0.25rem 1.5rem hsl(var(--electric-lime) / 0.06),
+      0 0 0 0.0625rem hsl(var(--slate-400) / 0.12);
+
+    /* Deep Slate & Neon design tokens */
+    --surface: 77 45% 6%;
+    --surface-dim: 77 45% 6%;
+    --surface-bright: 74 14% 20%;
+    --surface-container-lowest: 84 60% 4%;
+    --surface-container-low: 77 30% 9%;
+    --surface-container: 79 24% 10%;
+    --surface-container-high: 78 21% 14%;
+    --surface-container-highest: 78 18% 18%;
+    --on-surface: 69 27% 85%;
+    --on-surface-variant: 75 20% 73%;
+    --inverse-surface: 69 27% 85%;
+    --inverse-on-surface: 78 18% 16%;
+    --outline: 74 10% 53%;
+    --outline-variant: 78 16% 24%;
+    --surface-tint: 75 100% 42%;
+    --electric-lime: 75 100% 50%;
+    --slate-900: 222 47% 11%;
+    --slate-800: 215 28% 18%;
+    --slate-400: 215 16% 65%;
+    --pure-white: 0 0% 100%;
   }
 }
 

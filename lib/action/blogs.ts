@@ -1,12 +1,7 @@
 import { prisma } from "../prisma";
-import redis from "../redis";
 
 export async function getBlogs() {
   try {
-    const cachedBlogs = await redis.get("blogs");
-    if (cachedBlogs) {
-      return JSON.parse(cachedBlogs);
-    }
     const blogs = await prisma.blog.findMany({
       where: {
         isPublished: true,
@@ -24,7 +19,6 @@ export async function getBlogs() {
         createdAt: "desc",
       },
     });
-    await redis.set("blogs", JSON.stringify(blogs));
     return blogs;
   } catch (error) {
     console.log("Error fetching blogs:", error);
@@ -34,11 +28,6 @@ export async function getBlogs() {
 
 export async function getLatestBlogs(count = 2) {
   try {
-    const cacheKey = `blogs:latest:${count}`;
-    const cachedBlogs = await redis.get(cacheKey);
-    if (cachedBlogs) {
-      return JSON.parse(cachedBlogs);
-    }
     const blogs = await prisma.blog.findMany({
       where: {
         isPublished: true,
@@ -57,7 +46,6 @@ export async function getLatestBlogs(count = 2) {
       },
       take: count,
     });
-    await redis.set(cacheKey, JSON.stringify(blogs));
     return blogs;
   } catch (error) {
     console.log("Error fetching latest blogs:", error);

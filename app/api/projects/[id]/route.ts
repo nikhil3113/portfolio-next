@@ -1,19 +1,18 @@
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import redis from "@/lib/redis";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function PUT(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const session = await getServerSession(authOptions);
   if (!session || !session.user) {
     return NextResponse.json(
       { message: "Unauthorized access" },
-      { status: 401 }
+      { status: 401 },
     );
   }
   try {
@@ -37,7 +36,7 @@ export async function PUT(
     ) {
       return NextResponse.json(
         { message: "All fields are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -55,7 +54,6 @@ export async function PUT(
         createdAt: createdAt ? new Date(createdAt) : undefined,
       },
     });
-    await redis.del("projects");
     revalidatePath("/projects");
     revalidatePath("/");
     return NextResponse.json("Project Updated", { status: 200 });
@@ -63,21 +61,21 @@ export async function PUT(
     console.error("Error updating project:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const session = await getServerSession(authOptions);
 
   if (!session || !session.user) {
     return NextResponse.json(
       { message: "Unauthorized access" },
-      { status: 401 }
+      { status: 401 },
     );
   }
   const id = (await params).id;
@@ -90,20 +88,20 @@ export async function GET(
     console.error("Error fetching project:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
 
 export async function DELETE(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const session = await getServerSession(authOptions);
   if (!session || !session.user) {
     return NextResponse.json(
       { message: "Unauthorized access" },
-      { status: 401 }
+      { status: 401 },
     );
   }
 
@@ -115,13 +113,12 @@ export async function DELETE(
     if (!existingProject) {
       return NextResponse.json(
         { message: "Project not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
     await prisma.project.delete({
       where: { id },
     });
-    await redis.del("projects");
     revalidatePath("/projects");
     revalidatePath("/");
     return NextResponse.json("Project Deleted", { status: 200 });
@@ -129,7 +126,7 @@ export async function DELETE(
     console.error("Error deleting project:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

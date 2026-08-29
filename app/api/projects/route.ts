@@ -1,6 +1,5 @@
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import redis from "@/lib/redis";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
@@ -10,7 +9,7 @@ export async function POST(req: Request) {
   if (!session || !session.user) {
     return NextResponse.json(
       { message: "Unauthorized access" },
-      { status: 401 }
+      { status: 401 },
     );
   }
   try {
@@ -33,13 +32,13 @@ export async function POST(req: Request) {
     ) {
       return NextResponse.json(
         { message: "All fields are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
     if (Array.isArray(tags) && tags.length === 0) {
       return NextResponse.json(
         { message: "Tags cannot be an empty array" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -57,7 +56,6 @@ export async function POST(req: Request) {
       },
     });
 
-    await redis.del("projects");
     revalidatePath("/projects");
     revalidatePath("/");
     return NextResponse.json("Project Created", { status: 201 });
@@ -65,7 +63,7 @@ export async function POST(req: Request) {
     console.error("Error in POST /api/projects:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -82,7 +80,7 @@ export async function GET() {
     console.error("Error fetching projects:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

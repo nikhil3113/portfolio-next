@@ -1,7 +1,6 @@
 import { revalidatePath } from "next/cache";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import redis from "@/lib/redis";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
@@ -45,7 +44,6 @@ export async function POST(request: Request) {
         isPublished,
       },
     });
-    await redis.del("blogs");
     revalidatePath("/blogs");
     revalidatePath("/");
     return NextResponse.json(

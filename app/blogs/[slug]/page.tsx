@@ -38,14 +38,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `https://nikchavan.com/blogs/${blog.slug}`,
     },
     openGraph: {
+      type: "article",
       title: blog.h1,
       description: baseDesc,
       url: `https://nikchavan.com/blogs/${blog.slug}`,
-      images: blog.imageUrl ? [{ url: blog.imageUrl }] : [],
+      siteName: "Nikhil Chavan Portfolio",
+      images: blog.imageUrl
+        ? [
+            {
+              url: blog.imageUrl,
+              width: 1200,
+              height: 630,
+              alt: blog.h1,
+            },
+          ]
+        : [],
+      publishedTime: blog.createdAt.toISOString(),
+      modifiedTime: blog.updatedAt.toISOString(),
+      authors: [blog.author],
     },
     twitter: {
+      card: "summary_large_image",
       title: blog.h1,
       description: baseDesc,
+      images: blog.imageUrl ? [blog.imageUrl] : [],
     },
   };
 }
@@ -83,8 +99,32 @@ export default async function BlogPage({
   });
   const modifiedHtml = $.html();
 
+  const blogPostingLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: blog.h1,
+    description: blog.metaDescription,
+    image: blog.imageUrl,
+    author: {
+      "@type": "Person",
+      name: blog.author,
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Nikhil Chavan",
+    },
+    datePublished: blog.createdAt.toISOString(),
+    dateModified: blog.updatedAt.toISOString(),
+    mainEntityOfPage: `https://nikchavan.com/blogs/${blog.slug}`,
+    wordCount: blog.content.replace(/<[^>]+>/g, "").trim().split(/\s+/).length,
+  };
+
   return (
     <div className="container mx-auto px-4 py-10 ">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingLd) }}
+      />
       <div className="mx-auto w-full max-w-3xl order-2 md:order-1">
         <article className="space-y-6">
           <h1 className="text-2xl md:text-3xl font-bold  text-foreground">
@@ -125,7 +165,7 @@ export default async function BlogPage({
                 alt={blog.h1}
                 fill
                 className="object-cover"
-                sizes="100vw"
+                sizes="(max-width: 768px) 100vw, 768px"
                 priority
               />
             </div>

@@ -54,17 +54,11 @@ export const metadata: Metadata = {
   },
 };
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
 });
-
 
 export default function RootLayout({
   children,
@@ -87,7 +81,7 @@ export default function RootLayout({
       "TypeScript",
       "React",
       "Node.js",
-      "Java"
+      "Java",
     ],
   };
   const webSiteLd = {
@@ -101,7 +95,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -112,9 +106,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistMono.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

@@ -44,7 +44,7 @@ export function BlogCard({ blogs }: { blogs: BlogData[] }) {
                       alt={blog.h1}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      sizes="(max-width: 768px) 0px, 160px"
                     />
                   ) : (
                     <div className="h-full w-full bg-muted flex items-center justify-center">

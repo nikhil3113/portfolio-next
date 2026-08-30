@@ -1,9 +1,12 @@
 import { ImageResponse } from "next/og";
+import { siteUrl } from "@/lib/site";
 
 export const runtime = "edge";
 export const alt = "Nikhil Chavan - Full Stack Developer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+const siteName = new URL(siteUrl).hostname;
 
 export default async function Image() {
   return new ImageResponse(
@@ -104,7 +107,7 @@ export default async function Image() {
             color: "#a1a1aa",
           }}
         >
-          <span>nikchavan.com</span>
+          <span>{siteName}</span>
           <span>Projects · Blog · Experience</span>
         </div>
       </div>

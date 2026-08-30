@@ -2,9 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 body,
-html,
-* {
-  font-family: var(--font-geist-mono), monospace !important;
+html {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 }
 html {
   scroll-behavior: smooth;
@@ -74,30 +73,128 @@ html {
 }
 
 .prose pre {
-  background: #1a202c;
-  color: #f8f8f2;
-  border-radius: 0.5em;
-  padding: 1em;
+  position: relative;
+  background: hsl(var(--code-background));
+  color: hsl(var(--code-foreground));
+  border-radius: var(--radius);
+  padding: 1rem;
   overflow-x: auto;
   font-size: 0.95em;
   margin: 1em 0;
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 }
 
-.prose code {
-  background: #f3f4f6;
-  color: #d6336c;
-  border-radius: 0.3em;
-  padding: 0.2em 0.4em;
+.prose pre code {
+  background: transparent;
+  color: inherit;
+  border-radius: 0;
+  padding: 0;
+}
+
+#blog-content.prose pre {
+  padding: var(--code-block-padding);
+}
+
+#blog-content.prose pre .code-language-label,
+#blog-content.prose pre .code-copy-button {
+  margin: 0;
+  text-transform: none;
+}
+
+.prose :not(pre) > code {
+  background: hsl(var(--inline-code-background));
+  color: hsl(var(--inline-code-foreground));
+  border-radius: var(--inline-code-radius);
+  padding: var(--inline-code-padding);
   font-size: 0.95em;
-}
-.dark .prose pre {
-  background: #18181b !important;
-  color: #e0e0e0 !important;
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 }
 
-.dark .prose code {
-  background: #23272f !important;
-  color: #ffb86c !important;
+#blog-content.prose pre .hljs-comment,
+#blog-content.prose pre .hljs-quote {
+  color: hsl(var(--code-comment));
+}
+
+#blog-content.prose pre .hljs-keyword,
+#blog-content.prose pre .hljs-selector-tag,
+#blog-content.prose pre .hljs-literal,
+#blog-content.prose pre .hljs-title,
+#blog-content.prose pre .hljs-section {
+  color: hsl(var(--code-keyword));
+}
+
+#blog-content.prose pre .hljs-string,
+#blog-content.prose pre .hljs-attr,
+#blog-content.prose pre .hljs-template-tag,
+#blog-content.prose pre .hljs-template-variable {
+  color: hsl(var(--code-string));
+}
+
+#blog-content.prose pre .hljs-number,
+#blog-content.prose pre .hljs-variable,
+#blog-content.prose pre .hljs-symbol,
+#blog-content.prose pre .hljs-bullet {
+  color: hsl(var(--code-number));
+}
+
+#blog-content.prose pre .hljs-built_in,
+#blog-content.prose pre .hljs-type,
+#blog-content.prose pre .hljs-name {
+  color: hsl(var(--code-built-in));
+}
+
+#blog-content.prose pre .hljs-function,
+#blog-content.prose pre .hljs-title.function_ {
+  color: hsl(var(--code-function));
+}
+
+.code-language-label,
+.code-copy-button {
+  position: absolute;
+  top: var(--code-control-offset);
+  z-index: 1;
+  font-size: var(--code-control-font-size);
+  line-height: 1;
+}
+
+.code-language-label {
+  right: var(--code-label-offset);
+  color: hsl(var(--code-label));
+  text-transform: lowercase;
+}
+
+.code-copy-button {
+  right: var(--code-control-offset);
+  border: 1px solid hsl(var(--code-border));
+  border-radius: var(--inline-code-radius);
+  background: hsl(var(--code-button-background));
+  color: hsl(var(--code-button-foreground));
+  padding: var(--code-button-padding);
+  cursor: pointer;
+}
+
+.code-copy-button:hover {
+  background: hsl(var(--code-button-hover));
+}
+
+.code-copy-button:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+.dark .prose pre {
+  background: hsl(var(--code-background));
+  color: hsl(var(--code-foreground));
+}
+
+.dark .prose :not(pre) > code {
+  background: hsl(var(--inline-code-background));
+  color: hsl(var(--inline-code-foreground));
+}
+
+.dark .prose pre code {
+  background: transparent;
+  color: inherit;
 }
 
 /* Utility for marquee */
@@ -204,6 +301,28 @@ html {
     --container-max: 70rem;
     --shadow-nav: 0 0.25rem 1.5rem hsl(var(--foreground) / 0.08),
       0 0 0 0.0625rem hsl(var(--foreground) / 0.05);
+    --code-background: 220 13% 18%;
+    --code-foreground: 60 30% 96%;
+    --code-comment: 215 16% 65%;
+    --code-keyword: 330 81% 76%;
+    --code-string: 95 38% 72%;
+    --code-number: 187 71% 73%;
+    --code-built-in: 29 100% 75%;
+    --code-function: 187 71% 73%;
+    --code-label: 215 16% 65%;
+    --code-border: 215 28% 30%;
+    --code-button-background: 215 28% 24%;
+    --code-button-foreground: 0 0% 100%;
+    --code-button-hover: 215 28% 30%;
+    --inline-code-background: 210 40% 96%;
+    --inline-code-foreground: 343 75% 42%;
+    --code-block-padding: 2.75rem 1rem 1rem;
+    --code-control-offset: 0.75rem;
+    --code-label-offset: 4.5rem;
+    --code-control-font-size: 0.75rem;
+    --code-button-padding: 0.375rem 0.625rem;
+    --inline-code-radius: 0.3rem;
+    --inline-code-padding: 0.2rem 0.4rem;
 
     /* Deep Slate & Neon design tokens */
     --surface: 0 0% 100%;
@@ -261,6 +380,28 @@ html {
     --shadow-nav: 0 0 1.5rem hsl(var(--background) / 0.9),
       0 0.25rem 1.5rem hsl(var(--electric-lime) / 0.06),
       0 0 0 0.0625rem hsl(var(--slate-400) / 0.12);
+    --code-background: 240 5% 10%;
+    --code-foreground: 0 0% 88%;
+    --code-comment: 215 16% 65%;
+    --code-keyword: 330 81% 76%;
+    --code-string: 95 38% 72%;
+    --code-number: 187 71% 73%;
+    --code-built-in: 29 100% 75%;
+    --code-function: 187 71% 73%;
+    --code-label: 215 16% 65%;
+    --code-border: 215 28% 30%;
+    --code-button-background: 215 28% 18%;
+    --code-button-foreground: 0 0% 100%;
+    --code-button-hover: 215 28% 24%;
+    --inline-code-background: 232 16% 18%;
+    --inline-code-foreground: 32 100% 77%;
+    --code-block-padding: 2.75rem 1rem 1rem;
+    --code-control-offset: 0.75rem;
+    --code-label-offset: 4.5rem;
+    --code-control-font-size: 0.75rem;
+    --code-button-padding: 0.375rem 0.625rem;
+    --inline-code-radius: 0.3rem;
+    --inline-code-padding: 0.2rem 0.4rem;
 
     /* Deep Slate & Neon design tokens */
     --surface: 77 45% 6%;

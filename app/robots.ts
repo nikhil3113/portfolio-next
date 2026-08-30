@@ -1,3 +1,5 @@
+import { absoluteUrl } from "@/lib/site";
+
 export default function robots() {
   return {
     rules: {
@@ -5,6 +7,6 @@ export default function robots() {
       allow: "/",
       disallow: ["/admin"],
     },
-    sitemap: "https://nikchavan.com/sitemap.xml",
+    sitemap: absoluteUrl("/sitemap.xml"),
   };
 }

@@ -3,6 +3,7 @@ import { getProjects } from "@/lib/action/projects";
 import { Project } from "@/types/projects";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Projects | Full Stack Web Apps by Nikhil Chavan",
@@ -17,13 +18,13 @@ export const metadata: Metadata = {
     "nikhil chavan projects",
   ],
   alternates: {
-    canonical: "https://nikchavan.com/projects",
+    canonical: absoluteUrl("/projects"),
   },
   openGraph: {
     title: "Projects | Nikhil Chavan",
     description:
       "Production-ready full stack projects built with Next.js, React, TypeScript, Node.js, MySQL, and MongoDB.",
-    url: "https://nikchavan.com/projects",
+    url: absoluteUrl("/projects"),
     siteName: "Nikhil Chavan Portfolio",
     type: "website",
     images: [

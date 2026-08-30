@@ -25,11 +25,8 @@ export function ProjectCard({
   githubLink,
 }: ProjectCardProps) {
   return (
-    <CardContainer
-      className="inter-var max-sm:px-5"
-      containerClassName="py-0"
-    >
-       <CardBody className="relative group/card w-auto rounded-xl border border-border bg-card p-6 h-auto sm:w-[30rem]">
+    <CardContainer className="inter-var max-sm:px-5" containerClassName="py-0">
+      <CardBody className="relative group/card w-auto rounded-xl border border-border bg-card p-6 h-auto sm:w-[30rem]">
         <CardItem
           translateZ="50"
           className="text-xl font-bold text-card-foreground"
@@ -48,16 +45,13 @@ export function ProjectCard({
             src={image}
             height={1000}
             width={1000}
-            className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+            className="h-40 w-full rounded-xl object-cover sm:h-60 group-hover/card:shadow-xl"
             alt={title}
           />
         </CardItem>
 
         {/* Tags */}
-        <CardItem
-          translateZ="40"
-          className="flex flex-wrap gap-2 mt-4"
-        >
+        <CardItem translateZ="40" className="flex flex-wrap gap-2 mt-4">
           {tags.map((tag, index) => (
             <span
               key={index}

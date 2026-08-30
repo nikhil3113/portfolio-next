@@ -14,16 +14,21 @@ export default async function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background:
-            "linear-gradient(135deg, #a855f7 0%, #8b5cf6 50%, #ec4899 100%)",
-          color: "#ffffff",
-          fontSize: 110,
-          fontWeight: 800,
-          fontFamily: "system-ui, sans-serif",
-          letterSpacing: -4,
+          background: "#000000",
+          borderRadius: "50%",
         }}
       >
-        N
+        <div
+          style={{
+            color: "#B8FF00",
+            fontSize: 100,
+            fontWeight: 900,
+            fontFamily: "system-ui, sans-serif",
+            letterSpacing: -8,
+          }}
+        >
+          NC
+        </div>
       </div>
     ),
     { ...size }

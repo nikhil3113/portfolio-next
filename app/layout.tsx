@@ -7,8 +7,7 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { PostHogProvider, Providers } from "./Providers";
 import { Toaster } from "sonner";
-
-const siteUrl = "https://nikchavan.com";
+import { siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

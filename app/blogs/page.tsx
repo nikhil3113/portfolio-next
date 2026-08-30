@@ -1,6 +1,7 @@
 import { BlogCard } from "@/components/blog/BlogCard";
 import { getBlogs } from "@/lib/action/blogs";
 import type { Metadata } from "next";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Blog | Web Development, Next.js, React & AI Insights",
@@ -15,13 +16,13 @@ export const metadata: Metadata = {
     "nikhil chavan blog",
   ],
   alternates: {
-    canonical: "https://nikchavan.com/blogs",
+    canonical: absoluteUrl("/blogs"),
   },
   openGraph: {
     title: "Blog | Nikhil Chavan",
     description:
       "Articles on full stack web development, Next.js, React, TypeScript, performance, SEO, and AI explained.",
-    url: "https://nikchavan.com/blogs",
+    url: absoluteUrl("/blogs"),
     siteName: "Nikhil Chavan Portfolio",
     type: "website",
     images: [

@@ -10,6 +10,7 @@ import { TableOfContents } from "@/components/blog/TableOfContents";
 import { BlogViewTracker } from "@/components/blog/ViewTracker";
 import { CodeBlockEnhancer } from "@/components/blog/CodeBlockEnhancer";
 import { highlightCodeBlocks } from "@/lib/blog/highlight-code";
+import { absoluteUrl } from "@/lib/site";
 
 export async function generateStaticParams() {
   const blogs = await prisma.blog.findMany({ select: { slug: true } });
@@ -37,13 +38,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${blog.h1}`,
     description: `${baseDesc} | Full Stack Developer Portfolio`,
     alternates: {
-      canonical: `https://nikchavan.com/blogs/${blog.slug}`,
+      canonical: absoluteUrl(`/blogs/${blog.slug}`),
     },
     openGraph: {
       type: "article",
       title: blog.h1,
       description: baseDesc,
-      url: `https://nikchavan.com/blogs/${blog.slug}`,
+      url: absoluteUrl(`/blogs/${blog.slug}`),
       siteName: "Nikhil Chavan Portfolio",
       images: blog.imageUrl
         ? [
@@ -118,7 +119,7 @@ export default async function BlogPage({
     },
     datePublished: blog.createdAt.toISOString(),
     dateModified: blog.updatedAt.toISOString(),
-    mainEntityOfPage: `https://nikchavan.com/blogs/${blog.slug}`,
+    mainEntityOfPage: absoluteUrl(`/blogs/${blog.slug}`),
     wordCount: blog.content.replace(/<[^>]+>/g, "").trim().split(/\s+/).length,
   };
 

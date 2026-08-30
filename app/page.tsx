@@ -9,10 +9,11 @@ import { getProjects } from "@/lib/action/projects";
 import { Project } from "@/types/projects";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: "/",
+    canonical: absoluteUrl("/"),
   },
 };
 

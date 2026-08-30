@@ -1,17 +1,17 @@
 import { prisma } from "@/lib/prisma";
+import { absoluteUrl } from "@/lib/site";
 
 export async function GET() {
-  const siteUrl = "https://nikchavan.com";
   const blogs = await prisma.blog
     .findMany({ select: { slug: true, updatedAt: true } })
     .catch(() => []);
 
   const staticEntries = ["", "/blogs", "/projects"].map((p) => ({
-    url: `${siteUrl}${p}`,
+    url: absoluteUrl(p),
   }));
 
   const blogEntries = blogs.map((b: { slug: string; updatedAt: Date }) => ({
-    url: `${siteUrl}/blogs/${b.slug}`,
+    url: absoluteUrl(`/blogs/${b.slug}`),
     lastModified: b.updatedAt.toISOString(),
   }));
 

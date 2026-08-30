@@ -8,6 +8,8 @@ import { notFound } from "next/navigation";
 import slugify from "slugify";
 import { TableOfContents } from "@/components/blog/TableOfContents";
 import { BlogViewTracker } from "@/components/blog/ViewTracker";
+import { CodeBlockEnhancer } from "@/components/blog/CodeBlockEnhancer";
+import { highlightCodeBlocks } from "@/lib/blog/highlight-code";
 
 export async function generateStaticParams() {
   const blogs = await prisma.blog.findMany({ select: { slug: true } });
@@ -97,6 +99,7 @@ export default async function BlogPage({
     const tagName = (el as any).tagName as string;
     headings.push({ text, id, level: Number(tagName.slice(1)) });
   });
+  highlightCodeBlocks($);
   const modifiedHtml = $.html();
 
   const blogPostingLd = {
@@ -176,9 +179,11 @@ export default async function BlogPage({
           )}
 
           <div
+            id="blog-content"
             className="prose prose-neutral dark:prose-invert max-w-none leading-relaxed"
             dangerouslySetInnerHTML={{ __html: modifiedHtml }}
           />
+          <CodeBlockEnhancer containerId="blog-content" />
         </article>
       </div>
       <BlogViewTracker slug={blog.slug} />

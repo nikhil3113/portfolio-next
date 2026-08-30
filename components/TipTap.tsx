@@ -242,6 +242,8 @@ export function TipTap({ value, onChange }: TipTapProps) {
               <option value="python">Python</option>
               <option value="json">JSON</option>
               <option value="html">HTML</option>
+              <option value="bash">Bash</option>
+              <option value="go">Go</option>
             </select>
           )}
 

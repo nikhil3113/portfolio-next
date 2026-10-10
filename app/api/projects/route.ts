@@ -21,6 +21,7 @@ export async function POST(req: Request) {
       githubLink,
       imageUrl,
       createdAt,
+      hidden,
     } = await req.json();
     if (
       !title ||
@@ -53,6 +54,7 @@ export async function POST(req: Request) {
         githubLink,
         imageUrl,
         createdAt: createdAt ? new Date(createdAt) : new Date(),
+        hidden: hidden ?? false,
       },
     });
 

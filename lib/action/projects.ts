@@ -5,6 +5,9 @@ import { prisma } from "../prisma";
 export async function getProjects() {
   try {
     const projects = await prisma.project.findMany({
+      where:{
+        hidden: false,
+      },
       orderBy: {
         createdAt: "desc",
       },

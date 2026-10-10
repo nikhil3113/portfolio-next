@@ -17,12 +17,13 @@ const formSchema = z.object({
   image: z.string().min(1, "Image URL is required"),
   tags: z.string().min(1, "At least one tag is required"),
   createdAt: z.string().optional(),
+  hidden: z.boolean(),
 });
 
 export default function AddProject() {
   const [imageUrl, setImageUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -34,6 +35,7 @@ export default function AddProject() {
       image: "",
       tags: "",
       createdAt: "",
+      hidden: false,
     },
   });
 
@@ -52,6 +54,7 @@ export default function AddProject() {
         imageUrl: values.image,
         tags: tagArray,
         createdAt: values.createdAt,
+        hidden: values.hidden,
       });
       if (response.status === 201) {
         toast.success("Project created successfully");
@@ -63,8 +66,8 @@ export default function AddProject() {
     } catch (error) {
       axios.isAxiosError(error) && error.response
         ? toast.error(
-          `Error: ${error.response.data.message || "Failed to create blog"}`
-        )
+            `Error: ${error.response.data.message || "Failed to create blog"}`,
+          )
         : toast.error("An unexpected error occurred");
       console.log("Error submitting form:", error);
     } finally {

@@ -25,6 +25,7 @@ export async function PUT(
       githubLink,
       imageUrl,
       createdAt,
+      hidden,
     } = await request.json();
     if (
       !title ||
@@ -52,6 +53,7 @@ export async function PUT(
         githubLink,
         imageUrl,
         createdAt: createdAt ? new Date(createdAt) : undefined,
+        hidden: hidden,
       },
     });
     revalidatePath("/projects");

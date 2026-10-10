@@ -17,6 +17,7 @@ const formSchema = z.object({
   image: z.string().min(1, "Image URL is required"),
   tags: z.string().min(1, "At least one tag is required"),
   createdAt: z.string().optional(),
+  hidden: z.boolean(),
 });
 
 export default function UpdateProjects() {
@@ -36,6 +37,7 @@ export default function UpdateProjects() {
       image: "",
       tags: "",
       createdAt: "",
+      hidden: false,
     },
   });
 
@@ -53,6 +55,7 @@ export default function UpdateProjects() {
           image: project.imageUrl,
           tags: project.tags.join(", "),
           createdAt: project.createdAt ? project.createdAt.split("T")[0] : "",
+          hidden: project.hidden ?? false,
         });
         setImageUrl(project.imageUrl);
       } catch (error) {
@@ -77,6 +80,7 @@ export default function UpdateProjects() {
         imageUrl: values.image,
         tags: tagArray,
         createdAt: values.createdAt,
+        hidden: values.hidden,
       });
       if (response.status === 200) {
         toast.success("Project updated successfully");
@@ -88,8 +92,8 @@ export default function UpdateProjects() {
     } catch (error) {
       axios.isAxiosError(error) && error.response
         ? toast.error(
-          `Error: ${error.response.data.message || "Failed to update project"}`
-        )
+            `Error: ${error.response.data.message || "Failed to update project"}`,
+          )
         : toast.error("An unexpected error occurred");
       console.log("Error submitting form:", error);
     } finally {

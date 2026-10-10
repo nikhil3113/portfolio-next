@@ -1,9 +1,11 @@
 import FormFields from "@/components/Form";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { UseFormReturn } from "react-hook-form";
-import { Plus, FileText, Link2, ImageIcon, Tag, ArrowLeft } from "lucide-react";
+import { Controller, UseFormReturn } from "react-hook-form";
+import { Plus, FileText, Link2, ImageIcon, Tag, ArrowLeft, EyeOff } from "lucide-react";
 import { ImageUpload } from "../ImageUpload";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 interface ProjectFormData {
   title: string;
@@ -12,6 +14,7 @@ interface ProjectFormData {
   githubLink: string;
   image: string;
   tags: string;
+  hidden: boolean;
   createdAt?: string;
 }
 
@@ -169,6 +172,41 @@ export function ProjectForm({
                   />
                 </div>
 
+                <div className="space-y-6">
+                  <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
+                      <EyeOff className="w-5 h-5 mr-2 text-rose-600" />
+                      Visibility
+                    </h2>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                      Control whether this project appears on your public
+                      portfolio
+                    </p>
+                  </div>
+
+                  <Controller
+                    name="hidden"
+                    control={form.control}
+                    render={({ field }) => (
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="hidden"
+                          checked={field.value}
+                          onCheckedChange={(checked) =>
+                            field.onChange(!!checked)
+                          }
+                        />
+                        <Label
+                          htmlFor="hidden"
+                          className="text-sm font-medium leading-none"
+                        >
+                          Hide this project from the public site
+                        </Label>
+                      </div>
+                    )}
+                  />
+                </div>
+
                 {/* Action Buttons */}
                 <div className="flex items-center justify-between pt-8 border-t border-gray-200 dark:border-gray-700">
                   <Button type="button" variant="outline" className="px-8">
@@ -186,8 +224,8 @@ export function ProjectForm({
                       {isLoading
                         ? "Loading"
                         : isUpdate
-                        ? "Update Project"
-                        : "Add Project"}
+                          ? "Update Project"
+                          : "Add Project"}
                     </Button>
                   </div>
                 </div>

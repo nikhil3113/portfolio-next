@@ -75,14 +75,49 @@ describe("POST /api/projects", () => {
 
 describe("GET /api/projects", () => {
   beforeEach(() => {
+    sessionMock.mockReset();
     findManyMock.mockReset();
   });
 
-  it("returns 200 and the public project list", async () => {
+  it("filters hidden projects for anonymous callers", async () => {
+    sessionMock.mockResolvedValue(null);
     const projects = [{ id: "p1", title: "Portfolio" }];
     findManyMock.mockResolvedValue(projects as never);
+
     const response = await GET();
+
     expect(response.status).toBe(200);
     await expect(response.json()).resolves.toEqual(projects);
+    expect(findManyMock).toHaveBeenCalledWith({
+      where: { hidden: false },
+      orderBy: { createdAt: "desc" },
+    });
+  });
+
+  it("returns every project to an authenticated caller", async () => {
+    sessionMock.mockResolvedValue({ user: { id: "u1" } } as never);
+    const projects = [
+      { id: "p1", title: "Portfolio" },
+      { id: "p2", title: "Hidden", hidden: true },
+    ];
+    findManyMock.mockResolvedValue(projects as never);
+
+    const response = await GET();
+
+    expect(response.status).toBe(200);
+    await expect(response.json()).resolves.toEqual(projects);
+    expect(findManyMock).toHaveBeenCalledWith({
+      where: {},
+      orderBy: { createdAt: "desc" },
+    });
+  });
+
+  it("returns 500 when the query fails", async () => {
+    sessionMock.mockResolvedValue(null);
+    findManyMock.mockRejectedValue(new Error("database down"));
+
+    const response = await GET();
+
+    expect(response.status).toBe(500);
   });
 });

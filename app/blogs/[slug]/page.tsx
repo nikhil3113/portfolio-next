@@ -10,6 +10,8 @@ import { TableOfContents } from "@/components/blog/TableOfContents";
 import { BlogViewTracker } from "@/components/blog/ViewTracker";
 import { CodeBlockEnhancer } from "@/components/blog/CodeBlockEnhancer";
 import { highlightCodeBlocks } from "@/lib/blog/highlight-code";
+import { sanitizeBlogHtml } from "@/lib/blog/sanitize";
+import { serializeJsonLd } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
 
 export async function generateStaticParams() {
@@ -88,7 +90,8 @@ export default async function BlogPage({
   }
 
   // Parse HTML and generate TOC
-  const $ = cheerio.load(blog.content);
+  const safeContent = sanitizeBlogHtml(blog.content);
+  const $ = cheerio.load(safeContent);
   const headings: { text: string; id: string; level: number }[] = [];
   $("h2, h3").each((i, el) => {
     const text = $(el).text();
@@ -101,7 +104,7 @@ export default async function BlogPage({
     headings.push({ text, id, level: Number(tagName.slice(1)) });
   });
   highlightCodeBlocks($);
-  const modifiedHtml = $.html();
+  const modifiedHtml = $("body").html() ?? "";
 
   const blogPostingLd = {
     "@context": "https://schema.org",
@@ -127,7 +130,7 @@ export default async function BlogPage({
     <div className="container mx-auto px-4 py-10 ">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(blogPostingLd) }}
       />
       <div className="mx-auto w-full max-w-3xl order-2 md:order-1">
         <article className="space-y-6">

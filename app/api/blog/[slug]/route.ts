@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
+import { sanitizeBlogHtml, stripTags } from "@/lib/blog/sanitize";
 
 export async function GET(
   request: Request,
@@ -63,6 +64,11 @@ export async function PUT(
       );
     }
 
+    const safeH1 = stripTags(h1);
+    const safeMetaDescription = stripTags(metaDescription);
+    const safeAuthor = author ? stripTags(author) : author;
+    const safeContent = sanitizeBlogHtml(content);
+
     const existingSlug = await prisma.blog.findUnique({
       where: { slug: newSlug },
     });
@@ -77,11 +83,11 @@ export async function PUT(
     const updatedBlog = await prisma.blog.update({
       where: { slug },
       data: {
-        h1,
-        metaDescription,
-        content,
+        h1: safeH1,
+        metaDescription: safeMetaDescription,
+        content: safeContent,
         imageUrl,
-        author,
+        author: safeAuthor,
         slug: newSlug,
         isPublished,
       },

@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface Blog {
   id: string;
@@ -25,20 +26,64 @@ interface Blog {
 export default function AllBlogsTable() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
-    fetch("/api/blog")
-      .then((res) => res.json())
-      .then((data) => {
-        setBlogs(data);
-        setLoading(false);
-      });
-  }, []);
+    let cancelled = false;
+
+    async function load() {
+      try {
+        const res = await fetch("/api/blog");
+        if (res.status === 401) {
+          router.replace("/auth/signin");
+          return;
+        }
+        if (!res.ok) {
+          throw new Error(`Failed to load blogs (${res.status})`);
+        }
+        const data: unknown = await res.json();
+        if (!Array.isArray(data)) {
+          throw new Error("Unexpected blog list response");
+        }
+        if (!cancelled) {
+          setBlogs(data);
+          setError(null);
+        }
+      } catch (err) {
+        console.error("Error loading blogs:", err);
+        if (!cancelled) {
+          setError("Could not load blogs. Please refresh and try again.");
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    }
+
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, [router]);
 
   if (loading) {
     return (
       <div className="flex justify-center items-center h-40">
         <span className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></span>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="mx-auto mt-8 max-w-5xl rounded-xl border border-border bg-card p-8 text-center">
+        <h1 className="text-xl font-semibold text-foreground">Blogs</h1>
+        <p className="mt-2 text-sm text-muted-foreground">{error}</p>
+        <Button className="mt-4" onClick={() => window.location.reload()}>
+          Try again
+        </Button>
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import { ProjectActions } from "@/components/project/TableActions";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -10,40 +11,64 @@ import {
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import Link from "next/link";
+import type { Project } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
 
-async function getProjects() {
-  try {
-    const session = await getServerSession(authOptions);
-    if (!session || !session.user) {
-      throw new Error("Unauthorized access");
-    }
+type ProjectsResult =
+  | { ok: true; projects: Project[] }
+  | { ok: false; message: string };
 
+async function getProjects(): Promise<ProjectsResult> {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) {
+    redirect("/auth/signin");
+  }
+
+  try {
     const projects = await prisma.project.findMany({
       orderBy: {
         createdAt: "asc",
       },
     });
 
-    return projects;
+    return { ok: true, projects };
   } catch (error) {
     console.error("Error fetching projects:", error);
-    return [];
+    return { ok: false, message: "Could not load projects." };
   }
 }
 
 export default async function Projects() {
-  const projects = await getProjects();
+  const result = await getProjects();
 
-  if (!projects || projects.length === 0) {
+  if (!result.ok) {
     return (
-      <div className=" grid place-items-center h-screen">
-        <h1 className="text-3xl font-bold">No Project Found</h1>
+      <div className="mx-auto max-w-3xl px-4 py-16 text-center">
+        <h1 className="text-2xl font-bold text-foreground">Projects</h1>
+        <p className="mt-3 text-muted-foreground">{result.message}</p>
+        <Button asChild className="mt-4">
+          <Link href="/admin/project">Try again</Link>
+        </Button>
       </div>
     );
   }
+
+  if (result.projects.length === 0) {
+    return (
+      <div className="mx-auto max-w-3xl px-4 py-16 text-center">
+        <h1 className="text-2xl font-bold text-foreground">Projects</h1>
+        <p className="mt-3 text-muted-foreground">No projects yet.</p>
+        <Button asChild className="mt-4">
+          <Link href="/admin/project/add">Add your first project</Link>
+        </Button>
+      </div>
+    );
+  }
+
+  const projects = result.projects;
 
   return (
     <div className="min-h-screen p-6">

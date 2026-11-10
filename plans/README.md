@@ -19,9 +19,9 @@ update your row when done.
 | B | 008 | Render empty, error, and unauthorized states | P2 | S | 002 | DONE |
 | B | 009 | Complete the blog delete flow | P2 | S | 003, 008 | DONE |
 | B | 010 | Exclude hidden projects from public API responses | P2 | S | 003 | DONE |
-| C | 011 | Throttle login attempts and use async bcrypt | P2 | M | 003, 005 | TODO |
-| C | 012 | Validate API payloads with shared Zod schemas | P2 | M | 003, 006 | TODO |
-| C | 013 | Align Prisma, next-cloudinary, and Zod versions | P2 | M | 004, 012 | TODO |
+| C | 011 | Throttle login attempts and use async bcrypt | P2 | M | 003, 005 | DONE |
+| C | 012 | Validate API payloads with shared Zod schemas | P2 | M | 003, 006 | DONE |
+| C | 013 | Align Prisma, next-cloudinary, and Zod versions | P2 | M | 004, 012 | DONE |
 | D | 014 | Wire the documented typography tokens | P3 | M | 002 | TODO |
 | D | 015 | Replace hard-coded palette utilities with theme tokens | P3 | M | 014 | TODO |
 | D | 016 | Remove dead UI, duplicate toast stack, and unused dependencies | P3 | S | 013, 014 | TODO |
@@ -61,6 +61,32 @@ Phase B (plans 007-010) is done on `advisor/phase-b-correctness`. Deviations:
 - **007, 008, 009, 010**: the manual database/browser checks were skipped
   because this worktree has no `.env` and no `DATABASE_URL`. Verification is
   the unit suite plus typecheck and lint.
+
+### Phase C execution notes
+
+Phase C (plans 011-013) is done on `advisor/phase-c-auth-input-deps`. Deviations
+and skipped checks:
+
+- **011**: `resetRateLimit` now accepts an optional key. The dummy bcrypt hash
+  was generated for the fixed `"not-the-password"` string with the plan's
+  command. The manual lockout check and the existing-admin-email case check
+  were skipped because this worktree has no `.env` and no `DATABASE_URL`.
+- **012**: the existing-slug database check was skipped for the same reason
+  (no database access). To keep pre-pattern slugs editable, `blogUpdateSchema`
+  omits the route-owned `slug` and only shape-checks `newSlug` (1-120
+  characters); the PUT route applies `slugSchema` when `newSlug` actually
+  differs from the current slug. The project-link scheme check against existing
+  rows was skipped with the database check.
+- **013**: `prisma` and `@prisma/client` are both 6.8.2, with `prisma` moved to
+  `devDependencies`. `next-cloudinary` 7.0.0 kept the `CldUploadWidget` and
+  `CldImage` props used by the app, so no component changes were needed. Zod
+  resolves to 4.6.7. `npm audit fix` was applied for non-breaking transitive
+  fixes; `npm audit` now reports 0 high (9 moderate). The admin image smoke test
+  was skipped (no Cloudinary configuration or database), and the build was
+  skipped: `DATABASE_URL` is not configured. The production host's
+  install-without-dev-dependencies behavior is not described in the repo; the
+  Prisma CLI is in `devDependencies` per the plan and relies on `postinstall`
+  running where dev dependencies are installed.
 
 ## Dependency notes
 

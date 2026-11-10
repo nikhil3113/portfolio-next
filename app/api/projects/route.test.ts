@@ -64,6 +64,15 @@ describe("POST /api/projects", () => {
     expect(createMock).not.toHaveBeenCalled();
   });
 
+  it("returns 400 for a javascript site link", async () => {
+    sessionMock.mockResolvedValue({ user: { id: "u1" } } as never);
+    const response = await POST(
+      post({ ...validBody, siteLink: "javascript:alert(1)" }),
+    );
+    expect(response.status).toBe(400);
+    expect(createMock).not.toHaveBeenCalled();
+  });
+
   it("returns 201 with a valid body", async () => {
     sessionMock.mockResolvedValue({ user: { id: "u1" } } as never);
     createMock.mockResolvedValue({ id: "p1" } as never);

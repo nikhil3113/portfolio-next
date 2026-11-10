@@ -33,6 +33,10 @@ export function checkRateLimit(
   return { allowed: true, retryAfterSeconds: 0 };
 }
 
-export function resetRateLimit() {
+export function resetRateLimit(key?: string) {
+  if (key) {
+    buckets.delete(key);
+    return;
+  }
   buckets.clear();
 }

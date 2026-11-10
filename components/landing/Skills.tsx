@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element -- Simple Icons are remote SVG badges; plan 017 replaces this strip. */
+
 import { Marquee } from "@/components/ui/marquee";
 // import Image from "next/image";
 

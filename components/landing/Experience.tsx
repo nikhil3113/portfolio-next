@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element -- Remote favicons are dynamic, error-prone, and too small for the optimizer. */
+
 import { useState } from "react";
 
 interface ExperienceItem {

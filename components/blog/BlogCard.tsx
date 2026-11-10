@@ -1,7 +1,5 @@
 "use client";
 
-import { Card, CardHeader, CardContent, CardTitle } from "../ui/card";
-import { Badge } from "../ui/badge";
 import Link from "next/link";
 import { CldImage } from "next-cloudinary";
 import { Calendar } from "lucide-react";

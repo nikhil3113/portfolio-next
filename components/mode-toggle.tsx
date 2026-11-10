@@ -7,21 +7,27 @@ import { motion, AnimatePresence } from "motion/react"
 
 import { Button } from "@/components/ui/button"
 
-export function ModeToggle() {
-  const { theme, setTheme, resolvedTheme } = useTheme()
-  const [mounted, setMounted] = React.useState(false)
+type DocumentWithViewTransition = Document & {
+  startViewTransition?: (callback: () => void) => { ready: Promise<void> }
+}
 
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
+export function ModeToggle() {
+  const { setTheme, resolvedTheme } = useTheme()
+  // Hydration-safe mounted check without a state-setting effect.
+  const mounted = React.useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  )
 
   const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
     const x = e.clientX
     const y = e.clientY
     const newTheme = resolvedTheme === "dark" ? "light" : "dark"
+    const viewTransitionDocument = document as DocumentWithViewTransition
 
     // Check if the browser supports View Transitions API
-    if (!(document as any).startViewTransition) {
+    if (!viewTransitionDocument.startViewTransition) {
       setTheme(newTheme)
       return
     }
@@ -32,7 +38,7 @@ export function ModeToggle() {
     )
 
     // Trigger the View Transition spread effect
-    const transition = (document as any).startViewTransition(() => {
+    const transition = viewTransitionDocument.startViewTransition(() => {
       setTheme(newTheme)
     })
 

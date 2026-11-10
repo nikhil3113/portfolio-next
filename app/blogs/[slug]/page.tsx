@@ -97,7 +97,7 @@ export default async function BlogPage({
       id = slugify(text, { lower: true, strict: true }) + (i > 0 ? `-${i}` : "");
       $(el).attr("id", id);
     }
-    const tagName = (el as any).tagName as string;
+    const tagName = (el as { tagName: string }).tagName;
     headings.push({ text, id, level: Number(tagName.slice(1)) });
   });
   highlightCodeBlocks($);

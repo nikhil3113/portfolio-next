@@ -47,9 +47,14 @@ export default async function Blogs() {
   const blogs = await getBlogs();
 
   if (!blogs || blogs.length === 0) {
-    <div className="text-center py-12">
-      <p className="text-gray-500 text-lg">No blogs found.</p>
-    </div>;
+    return (
+      <div className="mx-auto max-w-3xl px-4 py-16 text-center">
+        <h1 className="mb-3 text-2xl font-bold text-foreground">Blogs</h1>
+        <p className="text-muted-foreground">
+          No published articles yet. Check back soon.
+        </p>
+      </div>
+    );
   }
 
   return (

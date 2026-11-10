@@ -51,7 +51,9 @@ export async function POST(request: Request) {
       },
     });
     revalidatePath("/blogs");
+    revalidatePath(`/blogs/${slug}`);
     revalidatePath("/");
+    revalidatePath("/sitemap.xml");
     return NextResponse.json(
       { message: "Blog created successfully" },
       { status: 201 },

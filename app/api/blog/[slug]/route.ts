@@ -68,9 +68,10 @@ export async function PUT(
     const safeMetaDescription = stripTags(metaDescription);
     const safeAuthor = author ? stripTags(author) : author;
     const safeContent = sanitizeBlogHtml(content);
+    const targetSlug = newSlug || slug;
 
     const existingSlug = await prisma.blog.findUnique({
-      where: { slug: newSlug },
+      where: { slug: targetSlug },
     });
 
     if (existingSlug && existingSlug.slug !== slug) {
@@ -88,13 +89,17 @@ export async function PUT(
         content: safeContent,
         imageUrl,
         author: safeAuthor,
-        slug: newSlug,
+        slug: targetSlug,
         isPublished,
       },
     });
     revalidatePath(`/blogs/${slug}`);
+    if (newSlug && newSlug !== slug) {
+      revalidatePath(`/blogs/${newSlug}`);
+    }
     revalidatePath("/blogs");
     revalidatePath("/");
+    revalidatePath("/sitemap.xml");
     return NextResponse.json(updatedBlog, { status: 200 });
   } catch (error) {
     console.error("Error updating blog:", error);

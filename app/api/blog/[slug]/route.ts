@@ -109,3 +109,44 @@ export async function PUT(
     );
   }
 }
+
+export async function DELETE(
+  _request: Request,
+  { params }: { params: Promise<{ slug: string }> },
+) {
+  const session = await getServerSession(authOptions);
+  if (!session || !session.user) {
+    return NextResponse.json(
+      { message: "Unauthorized access" },
+      { status: 401 },
+    );
+  }
+
+  const { slug } = await params;
+
+  try {
+    const existing = await prisma.blog.findUnique({
+      where: { slug },
+      select: { id: true, slug: true },
+    });
+
+    if (!existing) {
+      return NextResponse.json({ message: "Blog not found" }, { status: 404 });
+    }
+
+    await prisma.blog.delete({ where: { slug } });
+
+    revalidatePath(`/blogs/${slug}`);
+    revalidatePath("/blogs");
+    revalidatePath("/");
+    revalidatePath("/sitemap.xml");
+
+    return NextResponse.json({ message: "Blog deleted" }, { status: 200 });
+  } catch (error) {
+    console.error("Error deleting blog:", error);
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 },
+    );
+  }
+}

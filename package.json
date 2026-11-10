@@ -6,9 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "verify": "npm run typecheck && npm run lint",
     "postinstall": "npx prisma generate",
     "signup": "npx tsx scripts/signup.ts"
+  },
+  "engines": {
+    "node": ">=20.9"
   },
   "dependencies": {
     "@getbrevo/brevo": "^3.0.1",

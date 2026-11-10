@@ -10,7 +10,7 @@ update your row when done.
 | Phase | Plan | Title | Priority | Effort | Depends on | Status |
 | --- | --- | --- | --- | --- | --- | --- |
 | A | 001 | Upgrade Next past critical advisories and harden image handling | P1 | M | — | DONE |
-| A | 002 | Restore lint, add typecheck, and gate work in CI | P1 | S | 001 | TODO |
+| A | 002 | Restore lint, add typecheck, and gate work in CI | P1 | S | 001 | DONE |
 | A | 003 | Add a Vitest harness and route-contract tests | P1 | M | 002 | TODO |
 | A | 004 | Lock down Cloudinary signing and delete the unused upload route | P1 | S | 003 | TODO |
 | A | 005 | Harden the contact endpoint and report email failures | P1 | M | 003 | TODO |

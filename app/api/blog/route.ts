@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { sanitizeBlogHtml, stripTags } from "@/lib/blog/sanitize";
+import { blogCreateSchema } from "@/lib/validation";
 
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
@@ -17,6 +18,17 @@ export async function POST(request: Request) {
   }
 
   try {
+    const parsed = blogCreateSchema.safeParse(await request.json());
+    if (!parsed.success) {
+      return NextResponse.json(
+        {
+          message: "Invalid blog payload",
+          errors: parsed.error.flatten().fieldErrors,
+        },
+        { status: 400 },
+      );
+    }
+
     const {
       h1,
       metaDescription,
@@ -25,31 +37,34 @@ export async function POST(request: Request) {
       author,
       isPublished,
       slug,
-    } = await request.json();
-
-    if (!h1 || !metaDescription || !content || !imageUrl || !author || !slug) {
-      return NextResponse.json(
-        { error: "All fields are required" },
-        { status: 400 },
-      );
-    }
+    } = parsed.data;
 
     const safeH1 = stripTags(h1);
     const safeMetaDescription = stripTags(metaDescription);
     const safeAuthor = stripTags(author);
     const safeContent = sanitizeBlogHtml(content);
 
-    await prisma.blog.create({
-      data: {
-        h1: safeH1,
-        slug,
-        metaDescription: safeMetaDescription,
-        content: safeContent,
-        imageUrl,
-        author: safeAuthor,
-        isPublished,
-      },
-    });
+    try {
+      await prisma.blog.create({
+        data: {
+          h1: safeH1,
+          slug,
+          metaDescription: safeMetaDescription,
+          content: safeContent,
+          imageUrl,
+          author: safeAuthor,
+          isPublished,
+        },
+      });
+    } catch (error) {
+      if ((error as { code?: string }).code === "P2002") {
+        return NextResponse.json(
+          { message: "Slug already in use" },
+          { status: 409 },
+        );
+      }
+      throw error;
+    }
     revalidatePath("/blogs");
     revalidatePath(`/blogs/${slug}`);
     revalidatePath("/");

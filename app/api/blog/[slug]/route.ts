@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { sanitizeBlogHtml, stripTags } from "@/lib/blog/sanitize";
+import { blogUpdateSchema, slugSchema } from "@/lib/validation";
 
 export async function GET(
   request: Request,
@@ -47,7 +48,17 @@ export async function PUT(
   }
   try {
     const { slug } = await params;
-    const body = await request.json();
+    const parsed = blogUpdateSchema.safeParse(await request.json());
+    if (!parsed.success) {
+      return NextResponse.json(
+        {
+          message: "Invalid blog payload",
+          errors: parsed.error.flatten().fieldErrors,
+        },
+        { status: 400 },
+      );
+    }
+
     const {
       h1,
       metaDescription,
@@ -56,19 +67,26 @@ export async function PUT(
       author,
       isPublished,
       newSlug,
-    } = body;
-    if (!h1 || !metaDescription || !content) {
-      return NextResponse.json(
-        { message: "Missing required fields" },
-        { status: 400 },
-      );
-    }
+    } = parsed.data;
 
     const safeH1 = stripTags(h1);
     const safeMetaDescription = stripTags(metaDescription);
-    const safeAuthor = author ? stripTags(author) : author;
+    const safeAuthor = stripTags(author);
     const safeContent = sanitizeBlogHtml(content);
-    const targetSlug = newSlug || slug;
+    const targetSlug = newSlug ?? slug;
+
+    if (targetSlug !== slug) {
+      const slugCheck = slugSchema.safeParse(targetSlug);
+      if (!slugCheck.success) {
+        return NextResponse.json(
+          {
+            message: "Invalid blog payload",
+            errors: { newSlug: slugCheck.error.issues.map((issue) => issue.message) },
+          },
+          { status: 400 },
+        );
+      }
+    }
 
     const existingSlug = await prisma.blog.findUnique({
       where: { slug: targetSlug },
@@ -81,18 +99,29 @@ export async function PUT(
       );
     }
 
-    const updatedBlog = await prisma.blog.update({
-      where: { slug },
-      data: {
-        h1: safeH1,
-        metaDescription: safeMetaDescription,
-        content: safeContent,
-        imageUrl,
-        author: safeAuthor,
-        slug: targetSlug,
-        isPublished,
-      },
-    });
+    let updatedBlog: Awaited<ReturnType<typeof prisma.blog.update>>;
+    try {
+      updatedBlog = await prisma.blog.update({
+        where: { slug },
+        data: {
+          h1: safeH1,
+          metaDescription: safeMetaDescription,
+          content: safeContent,
+          imageUrl,
+          author: safeAuthor,
+          slug: targetSlug,
+          isPublished,
+        },
+      });
+    } catch (error) {
+      if ((error as { code?: string }).code === "P2002") {
+        return NextResponse.json(
+          { message: "Slug already in use" },
+          { status: 409 },
+        );
+      }
+      throw error;
+    }
     revalidatePath(`/blogs/${slug}`);
     if (newSlug && newSlug !== slug) {
       revalidatePath(`/blogs/${newSlug}`);

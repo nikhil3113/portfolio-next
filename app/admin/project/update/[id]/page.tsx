@@ -8,12 +8,13 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
+import { httpUrlSchema } from "@/lib/validation";
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string().min(1, "Description is required"),
-  siteLink: z.url("Invalid URL format").min(1, "Site link is required"),
-  githubLink: z.url("Invalid URL format").min(1, "GitHub link is required"),
+  siteLink: httpUrlSchema,
+  githubLink: httpUrlSchema,
   image: z.string().min(1, "Image URL is required"),
   tags: z.string().min(1, "At least one tag is required"),
   createdAt: z.string().optional(),

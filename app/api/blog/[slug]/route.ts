@@ -81,7 +81,9 @@ export async function PUT(
         return NextResponse.json(
           {
             message: "Invalid blog payload",
-            errors: { newSlug: slugCheck.error.issues.map((issue) => issue.message) },
+            errors: {
+              newSlug: slugCheck.error.issues.map((issue) => issue.message),
+            },
           },
           { status: 400 },
         );

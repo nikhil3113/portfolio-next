@@ -12,7 +12,7 @@ update your row when done.
 | A | 001 | Upgrade Next past critical advisories and harden image handling | P1 | M | — | DONE |
 | A | 002 | Restore lint, add typecheck, and gate work in CI | P1 | S | 001 | DONE |
 | A | 003 | Add a Vitest harness and route-contract tests | P1 | M | 002 | DONE |
-| A | 004 | Lock down Cloudinary signing and delete the unused upload route | P1 | S | 003 | TODO |
+| A | 004 | Lock down Cloudinary signing and delete the unused upload route | P1 | S | 003 | DONE |
 | A | 005 | Harden the contact endpoint and report email failures | P1 | M | 003 | TODO |
 | A | 006 | Sanitize blog HTML and harden JSON-LD and response headers | P1 | M | 003 | TODO |
 | B | 007 | Fix draft filtering, sitemap output, and blog revalidation | P2 | S | 003, 006 | TODO |

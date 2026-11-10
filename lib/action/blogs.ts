@@ -53,6 +53,31 @@ export async function getLatestBlogs(count = 2) {
   }
 }
 
+export async function getPublishedBlogSlugs() {
+  try {
+    return await prisma.blog.findMany({
+      where: { isPublished: true },
+      select: { slug: true },
+    });
+  } catch (error) {
+    console.error("Error fetching published blog slugs:", error);
+    return [];
+  }
+}
+
+export async function getPublishedBlogsForSitemap() {
+  try {
+    return await prisma.blog.findMany({
+      where: { isPublished: true },
+      select: { slug: true, updatedAt: true },
+      orderBy: { updatedAt: "desc" },
+    });
+  } catch (error) {
+    console.error("Error fetching sitemap blogs:", error);
+    return [];
+  }
+}
+
 export async function getBlogBySlug(slug: string) {
   try {
     const blog = await prisma.blog.findUnique({

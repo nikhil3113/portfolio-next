@@ -1,5 +1,4 @@
-import { getBlogBySlug } from "@/lib/action/blogs";
-import { prisma } from "@/lib/prisma";
+import { getBlogBySlug, getPublishedBlogSlugs } from "@/lib/action/blogs";
 import { CircleUser, CalendarDays, Clock } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -15,7 +14,7 @@ import { serializeJsonLd } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
 
 export async function generateStaticParams() {
-  const blogs = await prisma.blog.findMany({ select: { slug: true } });
+  const blogs = await getPublishedBlogSlugs();
   return blogs.map((blog) => ({ slug: blog.slug }));
 }
 

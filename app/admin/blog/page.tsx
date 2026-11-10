@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/table";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { BlogActions } from "@/components/blog/BlogActions";
 
 interface Blog {
   id: string;
@@ -145,13 +146,7 @@ export default function AllBlogsTable() {
                   <Button size="sm" variant="outline" asChild>
                     <a href={`/admin/blog/update/${blog.slug}`}>Edit</a>
                   </Button>
-                  <Button
-                    size="sm"
-                    variant="destructive"
-                  // onClick={() => handleDelete(blog.id)}
-                  >
-                    Delete
-                  </Button>
+                  <BlogActions slug={blog.slug} title={blog.h1} />
                 </TableCell>
               </TableRow>
             ))}

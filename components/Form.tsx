@@ -51,7 +51,7 @@ const FormFields = <T extends FieldValues>({
 
   return (
     <FormItem>
-      <FormLabel className="text-[15px] font-poppins font-medium">
+      <FormLabel className="text-[15px] font-heading font-medium">
         {label}
       </FormLabel>
       <Controller

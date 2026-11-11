@@ -1,10 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body,
-html {
-  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
-}
 html {
   scroll-behavior: smooth;
 }
@@ -81,7 +77,7 @@ html {
   overflow-x: auto;
   font-size: 0.95em;
   margin: 1em 0;
-  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  font-family: var(--font-code), ui-monospace, SFMono-Regular, monospace;
 }
 
 .prose pre code {
@@ -107,7 +103,7 @@ html {
   border-radius: var(--inline-code-radius);
   padding: var(--inline-code-padding);
   font-size: 0.95em;
-  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  font-family: var(--font-code), ui-monospace, SFMono-Regular, monospace;
 }
 
 #blog-content.prose pre .hljs-comment,
@@ -432,6 +428,14 @@ html {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
   }
 }

@@ -31,6 +31,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-toast": "^1.2.10",
     "@tabler/icons-react": "^3.31.0",
+    "@tailwindcss/typography": "^0.5.20",
     "@tiptap/extension-blockquote": "^3.0.9",
     "@tiptap/extension-bold": "^3.0.9",
     "@tiptap/extension-bullet-list": "^3.0.9",

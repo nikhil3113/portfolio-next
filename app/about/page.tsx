@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { absoluteUrl, siteUrl } from "@/lib/site";
 import { serializeJsonLd } from "@/lib/seo";
+import { experienceData } from "@/lib/experience";
 
 export const metadata: Metadata = {
   title: { absolute: "About Nikhil Chavan" },
@@ -34,29 +35,6 @@ export const metadata: Metadata = {
     images: ["/opengraph-image"],
   },
 };
-
-const background = [
-  {
-    role: "Full Stack Developer - Developer Executive",
-    company: "Digixpressions Pvt Ltd",
-    period: "January 2025 - Present",
-  },
-  {
-    role: "Product Intern",
-    company: "Digixpressions Pvt Ltd",
-    period: "September 2024 - January 2025",
-  },
-  {
-    role: "Java Developer Intern",
-    company: "Mira Advanced Engineering",
-    period: "June 2023 - July 2023",
-  },
-  {
-    role: "Flutter Developer Intern",
-    company: "Terna Engineering College",
-    period: "February 2023 - April 2023",
-  },
-];
 
 const stack = [
   "Next.js",
@@ -152,7 +130,7 @@ export default function AboutPage() {
           Background
         </h2>
         <div className="divide-y divide-border">
-          {background.map((item) => (
+          {experienceData.map((item) => (
             <div
               key={`${item.company}-${item.role}`}
               className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
@@ -161,7 +139,7 @@ export default function AboutPage() {
                 <h3 className="font-semibold text-foreground">{item.role}</h3>
                 <p className="text-sm text-muted-foreground">{item.company}</p>
               </div>
-              <p className="text-sm text-muted-foreground">{item.period}</p>
+              <p className="text-sm text-muted-foreground">{item.date}</p>
             </div>
           ))}
         </div>

@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Eye,
@@ -162,12 +163,23 @@ export default async function AdminPage() {
                 {stats.topBlogs.map((blog) => (
                   <div key={blog.id} className="space-y-2 py-3 first:pt-0 last:pb-0">
                     <div className="flex items-center justify-between gap-4">
-                      <Link
-                        href={`/blogs/${blog.slug}`}
-                        className="truncate text-sm text-foreground hover:text-accent-text"
-                      >
-                        {blog.h1}
-                      </Link>
+                      <div className="flex min-w-0 items-center gap-2">
+                        <Link
+                          href={
+                            blog.isPublished
+                              ? `/blogs/${blog.slug}`
+                              : `/admin/blog/preview/${blog.slug}`
+                          }
+                          className="truncate text-sm text-foreground hover:text-accent-text"
+                        >
+                          {blog.h1}
+                        </Link>
+                        {!blog.isPublished && (
+                          <Badge variant="secondary" className="shrink-0">
+                            Draft
+                          </Badge>
+                        )}
+                      </div>
                       <span className="shrink-0 font-mono text-xs text-muted-foreground">
                         {blog.views} views
                       </span>

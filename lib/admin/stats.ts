@@ -10,6 +10,7 @@ export type TopBlog = {
   h1: string;
   slug: string;
   views: number;
+  isPublished: boolean;
 };
 
 export type DashboardStats = AdminCounts & {
@@ -46,7 +47,13 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     prisma.blog.findMany({
       orderBy: { views: "desc" },
       take: 5,
-      select: { id: true, h1: true, slug: true, views: true },
+      select: {
+        id: true,
+        h1: true,
+        slug: true,
+        views: true,
+        isPublished: true,
+      },
     }),
   ]);
 

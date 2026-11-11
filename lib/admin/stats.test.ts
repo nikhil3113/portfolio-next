@@ -48,7 +48,14 @@ describe("getDashboardStats", () => {
       .mockResolvedValueOnce(6); // published
     blogAggregate.mockResolvedValue({ _sum: { views: 42 } } as never);
     blogFindMany.mockResolvedValue([
-      { id: "b1", h1: "Top", slug: "top", views: 20 },
+      { id: "b1", h1: "Top", slug: "top", views: 20, isPublished: true },
+      {
+        id: "b2",
+        h1: "Draft post",
+        slug: "draft-post",
+        views: 10,
+        isPublished: false,
+      },
     ] as never);
 
     const stats = await getDashboardStats();
@@ -56,12 +63,20 @@ describe("getDashboardStats", () => {
     expect(stats.hiddenProjects).toBe(3);
     expect(stats.draftBlogs).toBe(2);
     expect(stats.totalViews).toBe(42);
-    expect(stats.topBlogs).toHaveLength(1);
+    expect(stats.topBlogs).toHaveLength(2);
     expect(stats.topBlogs[0]).toEqual({
       id: "b1",
       h1: "Top",
       slug: "top",
       views: 20,
+      isPublished: true,
+    });
+    expect(stats.topBlogs[1]).toEqual({
+      id: "b2",
+      h1: "Draft post",
+      slug: "draft-post",
+      views: 10,
+      isPublished: false,
     });
   });
 
@@ -83,7 +98,13 @@ describe("getDashboardStats", () => {
     expect(blogFindMany).toHaveBeenCalledWith({
       orderBy: { views: "desc" },
       take: 5,
-      select: { id: true, h1: true, slug: true, views: true },
+      select: {
+        id: true,
+        h1: true,
+        slug: true,
+        views: true,
+        isPublished: true,
+      },
     });
   });
 

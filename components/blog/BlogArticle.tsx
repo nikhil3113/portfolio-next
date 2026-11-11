@@ -46,7 +46,7 @@ export function BlogArticle({
       </h1>
 
       <div className="flex justify-between items-center">
-        <div className="flex flex-wrap items-center gap-4 text-sm text-black dark:text-white ">
+        <div className="flex flex-wrap items-center gap-4 text-sm text-foreground">
           <div className="flex items-center gap-2">
             <CircleUser className="h-4 w-4" />
             <span>{blog.author}</span>

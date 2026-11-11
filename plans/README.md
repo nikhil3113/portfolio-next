@@ -171,6 +171,9 @@ Deviations and skipped checks:
   were skipped because this worktree has no database or authenticated session.
 - **020-022**: the build was skipped because `DATABASE_URL` is not configured.
   No backfill script was run.
+- **Review fixes**: top posts now carry `isPublished` and link drafts to the
+  admin preview with a Draft badge; `BlogArticle` uses the `text-foreground`
+  token instead of hard-coded black/white.
 
 ## Dependency notes
 

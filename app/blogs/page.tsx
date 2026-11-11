@@ -60,10 +60,10 @@ export default async function Blogs() {
   return (
     <div className="md:mx-32 px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2 dark:text-white">
+        <h1 className="text-3xl font-bold text-foreground mb-2">
           Blogs
         </h1>
-        <p className="text-gray-600 dark:text-gray-300">
+        <p className="text-muted-foreground">
           Discover my latest articles and insights
         </p>
       </div>

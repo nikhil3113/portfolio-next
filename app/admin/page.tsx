@@ -38,43 +38,43 @@ export default function AdminPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-black dark:to-slate-900 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-background to-muted p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-4xl font-bold text-foreground mb-2">
             Admin Dashboard
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-muted-foreground">
             Manage your portfolio content
           </p>
         </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-gray-200/50 dark:border-gray-700/50">
+          <Card className="bg-card backdrop-blur-sm border-border">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              <CardTitle className="text-sm font-medium text-muted-foreground">
                 Total Projects
               </CardTitle>
-              <FolderKanban className="h-4 w-4 text-blue-600" />
+              <FolderKanban className="h-4 w-4 text-accent-text" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white">
+              <div className="text-3xl font-bold text-foreground">
                 {loading ? "..." : stats.totalProjects}
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-gray-200/50 dark:border-gray-700/50">
+          <Card className="bg-card backdrop-blur-sm border-border">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              <CardTitle className="text-sm font-medium text-muted-foreground">
                 Total Blogs
               </CardTitle>
-              <FileText className="h-4 w-4 text-purple-600" />
+              <FileText className="h-4 w-4 text-accent-text" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white">
+              <div className="text-3xl font-bold text-foreground">
                 {loading ? "..." : stats.totalBlogs}
               </div>
             </CardContent>
@@ -84,10 +84,10 @@ export default function AdminPage() {
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Projects Section */}
-          <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-gray-200/50 dark:border-gray-700/50">
+          <Card className="bg-card backdrop-blur-sm border-border">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <FolderKanban className="h-5 w-5 text-blue-600" />
+                <FolderKanban className="h-5 w-5 text-accent-text" />
                 Projects
               </CardTitle>
             </CardHeader>
@@ -108,10 +108,10 @@ export default function AdminPage() {
           </Card>
 
           {/* Blogs Section */}
-          <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-gray-200/50 dark:border-gray-700/50">
+          <Card className="bg-card backdrop-blur-sm border-border">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <FileText className="h-5 w-5 text-purple-600" />
+                <FileText className="h-5 w-5 text-accent-text" />
                 Blogs
               </CardTitle>
             </CardHeader>

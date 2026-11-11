@@ -35,13 +35,13 @@ export function ProjectActions({ projectId }: ProjectActionsProps) {
     <div className="flex items-center space-x-2 justify-center">
       <Link
         href={`/admin/project/update/${projectId}`}
-        className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+        className="inline-flex items-center px-4 py-2 text-sm font-medium text-primary-foreground bg-primary hover:opacity-90 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
       >
         Update
       </Link>
       <Button
         onClick={handleDelete}
-        className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+        className="inline-flex items-center px-4 py-2 text-sm font-medium text-destructive-foreground bg-destructive hover:opacity-90 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
       >
         Delete
       </Button>

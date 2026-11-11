@@ -72,7 +72,7 @@ export default function AllBlogsTable() {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-40">
-        <span className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></span>
+        <span className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground"></span>
       </div>
     );
   }
@@ -97,7 +97,7 @@ export default function AllBlogsTable() {
           <a href="/admin/blog/add">+ New Blog</a>
         </Button>
       </div>
-      <div className="rounded-xl border bg-white dark:bg-black shadow-sm overflow-x-auto">
+      <div className="rounded-xl border bg-card shadow-sm overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
@@ -113,7 +113,7 @@ export default function AllBlogsTable() {
               <TableRow key={blog.id} className="hover:bg-muted transition">
                 <TableCell>
                   {blog.imageUrl ? (
-                    <div className="relative h-12 w-20 rounded overflow-hidden border bg-gray-100">
+                    <div className="relative h-12 w-20 rounded overflow-hidden border bg-muted">
                       <Image
                         src={blog.imageUrl}
                         alt={blog.h1}
@@ -123,21 +123,21 @@ export default function AllBlogsTable() {
                       />
                     </div>
                   ) : (
-                    <div className="h-12 w-20 bg-gray-200 rounded flex items-center justify-center text-gray-400 text-xs">
+                    <div className="h-12 w-20 bg-muted rounded flex items-center justify-center text-muted-foreground text-xs">
                       N/A
                     </div>
                   )}
                 </TableCell>
                 <TableCell>
-                  <div className="font-medium text-gray-900 dark:text-gray-200">{blog.h1}</div>
-                  <div className="text-xs text-gray-500 line-clamp-1">
+                  <div className="font-medium text-foreground">{blog.h1}</div>
+                  <div className="text-xs text-muted-foreground line-clamp-1">
                     {blog.metaDescription}
                   </div>
                 </TableCell>
                 <TableCell>
                   <span className="font-medium">{blog.author}</span>
                 </TableCell>
-                <TableCell className="hidden md:table-cell text-gray-500 text-xs">
+                <TableCell className="hidden md:table-cell text-muted-foreground text-xs">
                   {blog.createdAt
                     ? new Date(blog.createdAt).toLocaleDateString()
                     : "-"}
@@ -153,7 +153,7 @@ export default function AllBlogsTable() {
           </TableBody>
         </Table>
         {blogs.length === 0 && (
-          <div className="p-6 text-center text-gray-500">No blogs found.</div>
+          <div className="p-6 text-center text-muted-foreground">No blogs found.</div>
         )}
       </div>
     </div>

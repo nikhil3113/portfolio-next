@@ -5,7 +5,7 @@ import { Appbar } from "@/components/Appbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { PostHogProvider, Providers } from "./Providers";
+import { PostHogProvider } from "./Providers";
 import { Toaster } from "@/components/ui/sonner";
 import { siteUrl } from "@/lib/site";
 import { serializeJsonLd } from "@/lib/seo";
@@ -132,14 +132,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Providers>
-            <PostHogProvider>
-              <Appbar />
-              {children}
-              <ScrollToTop />
-              <Toaster richColors />
-            </PostHogProvider>
-          </Providers>
+          <PostHogProvider>
+            <Appbar />
+            {children}
+            <ScrollToTop />
+            <Toaster richColors />
+          </PostHogProvider>
         </ThemeProvider>
         <GoogleAnalytics gaId="G-QQDK7W7LM4" />
       </body>

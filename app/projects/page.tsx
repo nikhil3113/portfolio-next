@@ -6,9 +6,9 @@ import type { Metadata } from "next";
 import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Projects | Full Stack Web Apps by Nikhil Chavan",
+  title: "Full Stack Projects",
   description:
-    "Portfolio projects by Nikhil Chavan: production-ready full stack web apps built with Next.js, React, TypeScript, Node.js, MySQL, and MongoDB. Explore live demos and source code.",
+    "Production-ready full stack projects built with Next.js, React, TypeScript, Node.js, MySQL and MongoDB, with live demos and source code.",
   keywords: [
     "full stack projects",
     "next.js projects",
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
     canonical: absoluteUrl("/projects"),
   },
   openGraph: {
-    title: "Projects | Nikhil Chavan",
+    title: "Full Stack Projects | Nikhil Chavan",
     description:
-      "Production-ready full stack projects built with Next.js, React, TypeScript, Node.js, MySQL, and MongoDB.",
+      "Production-ready full stack projects built with Next.js, React, TypeScript, Node.js, MySQL and MongoDB.",
     url: absoluteUrl("/projects"),
     siteName: "Nikhil Chavan Portfolio",
     type: "website",
@@ -38,9 +38,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projects | Nikhil Chavan",
+    title: "Full Stack Projects | Nikhil Chavan",
     description:
-      "Production-ready full stack projects built with Next.js, React, TypeScript, Node.js, MySQL, and MongoDB.",
+      "Production-ready full stack projects built with Next.js, React, TypeScript, Node.js, MySQL and MongoDB.",
     images: ["/opengraph-image"],
   },
 };

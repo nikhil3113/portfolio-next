@@ -7,7 +7,7 @@ const escapeXml = (value: string) =>
 export async function GET() {
   const blogs = await getPublishedBlogsForSitemap();
 
-  const staticEntries = ["", "/blogs", "/projects"].map((p) => ({
+  const staticEntries = ["", "/blogs", "/projects", "/about"].map((p) => ({
     url: absoluteUrl(p),
   }));
 

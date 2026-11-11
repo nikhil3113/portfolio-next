@@ -4,11 +4,13 @@ import "./globals.css";
 import { Appbar } from "@/components/Appbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ScrollToTop } from "@/components/ScrollToTop";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 import { PostHogProvider } from "./Providers";
 import { Toaster } from "@/components/ui/sonner";
-import { siteUrl } from "@/lib/site";
+import { absoluteUrl, siteUrl } from "@/lib/site";
 import { serializeJsonLd } from "@/lib/seo";
+
+const GA_MEASUREMENT_ID = "G-QQDK7W7LM4";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -82,8 +84,10 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": `${siteUrl}/#person`,
     name: "Nikhil Chavan",
     url: siteUrl,
+    image: absoluteUrl("/icon"),
     jobTitle: "Full Stack Developer",
     sameAs: [
       "https://github.com/nikhil3113",
@@ -98,6 +102,23 @@ export default function RootLayout({
       "Java",
     ],
   };
+  const organizationLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${siteUrl}/#organization`,
+    name: "Nikhil Chavan",
+    url: siteUrl,
+    logo: {
+      "@type": "ImageObject",
+      url: absoluteUrl("/icon"),
+      width: 512,
+      height: 512,
+    },
+    sameAs: [
+      "https://github.com/nikhil3113",
+      "https://www.linkedin.com/in/nikchavan",
+    ],
+  };
   const webSiteLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -106,6 +127,7 @@ export default function RootLayout({
     inLanguage: "en",
     description:
       "Full Stack Developer Portfolio highlighting projects, blogs and modern web engineering expertise.",
+    publisher: { "@id": `${siteUrl}/#organization` },
   };
 
   return (
@@ -124,6 +146,10 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(organizationLd) }}
+        />
       </head>
       <body className="antialiased">
         <ThemeProvider
@@ -139,7 +165,13 @@ export default function RootLayout({
             <Toaster richColors />
           </PostHogProvider>
         </ThemeProvider>
-        <GoogleAnalytics gaId="G-QQDK7W7LM4" />
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="lazyOnload"
+        />
+        <Script id="ga-init" strategy="lazyOnload">
+          {`window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '${GA_MEASUREMENT_ID}');`}
+        </Script>
       </body>
     </html>
   );

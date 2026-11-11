@@ -75,9 +75,9 @@ export function Experience() {
           <p className="mb-2 font-semibold tracking-wide text-accent-text">
             MY JOURNEY
           </p>
-          <h3 className="mb-4 text-3xl font-bold md:text-4xl">
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl">
             Professional Experience
-          </h3>
+          </h2>
           <p className="text-muted-foreground max-sm:px-5">
             A look at the teams and roles that have shaped my professional
             journey.
@@ -94,7 +94,7 @@ export function Experience() {
                 <CompanyIcon company={item.company} website={item.website} />
 
                 <div>
-                  <h4 className="text-xl font-bold">
+                  <h3 className="text-xl font-bold">
                     {item.website ? (
                       <a
                         href={item.website}
@@ -107,7 +107,7 @@ export function Experience() {
                     ) : (
                       item.company
                     )}
-                  </h4>
+                  </h3>
                   <p className="mt-1 font-medium text-accent-text">{item.role}</p>
                 </div>
               </div>

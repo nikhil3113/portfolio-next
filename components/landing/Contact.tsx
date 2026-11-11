@@ -84,6 +84,7 @@ export function ContactForm({ compact = false }: ContactFormProps) {
             onChange={handleChange}
             placeholder="Your name"
             type="text"
+            autoComplete="name"
             required
           />
         </LabelInputContainer>
@@ -99,6 +100,7 @@ export function ContactForm({ compact = false }: ContactFormProps) {
             onChange={handleChange}
             placeholder="Enter Your Email"
             type="email"
+            autoComplete="email"
             required
           />
         </LabelInputContainer>

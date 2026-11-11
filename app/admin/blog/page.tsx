@@ -1,5 +1,8 @@
-"use client";
-import { useEffect, useState } from "react";
+import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import { BlogActions } from "@/components/blog/BlogActions";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -10,80 +13,50 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { BlogActions } from "@/components/blog/BlogActions";
+import Link from "next/link";
 
-interface Blog {
+export const dynamic = "force-dynamic";
+
+type BlogRow = {
   id: string;
   h1: string;
   metaDescription: string;
   slug: string;
-  content: string;
-  imageUrl?: string;
+  imageUrl: string;
   author: string;
-  createdAt?: string;
-}
+  createdAt: Date;
+};
 
-export default function AllBlogsTable() {
-  const [blogs, setBlogs] = useState<Blog[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
-
-  useEffect(() => {
-    let cancelled = false;
-
-    async function load() {
-      try {
-        const res = await fetch("/api/blog");
-        if (res.status === 401) {
-          router.replace("/auth/signin");
-          return;
-        }
-        if (!res.ok) {
-          throw new Error(`Failed to load blogs (${res.status})`);
-        }
-        const data: unknown = await res.json();
-        if (!Array.isArray(data)) {
-          throw new Error("Unexpected blog list response");
-        }
-        if (!cancelled) {
-          setBlogs(data);
-          setError(null);
-        }
-      } catch (err) {
-        console.error("Error loading blogs:", err);
-        if (!cancelled) {
-          setError("Could not load blogs. Please refresh and try again.");
-        }
-      } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
-      }
-    }
-
-    load();
-    return () => {
-      cancelled = true;
-    };
-  }, [router]);
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-40">
-        <span className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground"></span>
-      </div>
-    );
+export default async function AllBlogsTable() {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) {
+    redirect("/auth/signin");
   }
 
-  if (error) {
+  let blogs: BlogRow[];
+  try {
+    blogs = await prisma.blog.findMany({
+      orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        h1: true,
+        metaDescription: true,
+        slug: true,
+        imageUrl: true,
+        author: true,
+        createdAt: true,
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
     return (
       <div className="mx-auto mt-8 max-w-5xl rounded-xl border border-border bg-card p-8 text-center">
         <h1 className="text-xl font-semibold text-foreground">Blogs</h1>
-        <p className="mt-2 text-sm text-muted-foreground">{error}</p>
-        <Button className="mt-4" onClick={() => window.location.reload()}>
-          Try again
+        <p className="mt-2 text-sm text-muted-foreground">
+          Could not load blogs. Please try again.
+        </p>
+        <Button asChild className="mt-4">
+          <Link href="/admin/blog">Try again</Link>
         </Button>
       </div>
     );
@@ -94,7 +67,7 @@ export default function AllBlogsTable() {
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold tracking-tight">All Blogs</h1>
         <Button asChild>
-          <a href="/admin/blog/add">+ New Blog</a>
+          <Link href="/admin/blog/add">+ New Blog</Link>
         </Button>
       </div>
       <div className="rounded-xl border bg-card shadow-sm overflow-x-auto">
@@ -139,12 +112,12 @@ export default function AllBlogsTable() {
                 </TableCell>
                 <TableCell className="hidden md:table-cell text-muted-foreground text-xs">
                   {blog.createdAt
-                    ? new Date(blog.createdAt).toLocaleDateString()
+                    ? blog.createdAt.toLocaleDateString()
                     : "-"}
                 </TableCell>
                 <TableCell className="text-right space-x-2 flex justify-center items-center">
                   <Button size="sm" variant="outline" asChild>
-                    <a href={`/admin/blog/update/${blog.slug}`}>Edit</a>
+                    <Link href={`/admin/blog/update/${blog.slug}`}>Edit</Link>
                   </Button>
                   <BlogActions slug={blog.slug} title={blog.h1} />
                 </TableCell>
@@ -153,7 +126,9 @@ export default function AllBlogsTable() {
           </TableBody>
         </Table>
         {blogs.length === 0 && (
-          <div className="p-6 text-center text-muted-foreground">No blogs found.</div>
+          <div className="p-6 text-center text-muted-foreground">
+            No blogs found.
+          </div>
         )}
       </div>
     </div>

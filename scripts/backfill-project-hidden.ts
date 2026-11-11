@@ -1,7 +1,7 @@
 import { prisma } from "../lib/prisma";
 
 async function main() {
-  console.log("Starting backfill of null blog views...");
+  console.log("Starting backfill of project.hidden...");
 
   try {
     const result = await prisma.$runCommandRaw({
@@ -15,10 +15,10 @@ async function main() {
       ],
     });
 
-    console.log("Successfully backfilled blog views");
+    console.log("Successfully backfilled project.hidden");
     console.log("Result:", result);
   } catch (error) {
-    console.error("Error backfilling views:", error);
+    console.error("Error backfilling project.hidden:", error);
     process.exit(1);
   } finally {
     await prisma.$disconnect();

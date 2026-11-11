@@ -1,41 +1,21 @@
-"use client";
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText, FolderKanban, Plus, Eye } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { getAdminCounts } from "@/lib/admin/stats";
 
-interface Stats {
-  totalProjects: number;
-  totalBlogs: number;
-}
+export const dynamic = "force-dynamic";
 
-export default function AdminPage() {
-  const [stats, setStats] = useState<Stats>({
-    totalProjects: 0,
-    totalBlogs: 0,
-  });
-  const [loading, setLoading] = useState(true);
+export default async function AdminPage() {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) {
+    redirect("/auth/signin");
+  }
 
-  useEffect(() => {
-    Promise.all([
-      fetch("/api/projects").then((res) => res.json()),
-      fetch("/api/blog").then((res) => res.json()),
-    ])
-      .then(([projects, blogs]) => {
-        setStats({
-          totalProjects: projects.length || 0,
-          totalBlogs: blogs.length || 0,
-        });
-      })
-      .catch((error) => {
-        console.error("Error fetching stats:", error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  const { totalProjects, totalBlogs } = await getAdminCounts();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted p-6">
@@ -61,7 +41,7 @@ export default function AdminPage() {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-foreground">
-                {loading ? "..." : stats.totalProjects}
+                {totalProjects}
               </div>
             </CardContent>
           </Card>
@@ -75,7 +55,7 @@ export default function AdminPage() {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-foreground">
-                {loading ? "..." : stats.totalBlogs}
+                {totalBlogs}
               </div>
             </CardContent>
           </Card>

@@ -1,12 +1,20 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, FolderKanban, Mail, Plus, Eye } from "lucide-react";
+import {
+  Eye,
+  EyeOff,
+  FileText,
+  FolderKanban,
+  Mail,
+  Pencil,
+  Plus,
+} from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { getAdminCounts } from "@/lib/admin/stats";
+import { getDashboardStats } from "@/lib/admin/stats";
 
 export const dynamic = "force-dynamic";
 
@@ -16,12 +24,15 @@ export default async function AdminPage() {
     redirect("/auth/signin");
   }
 
-  const [{ totalProjects, totalBlogs }, unreadContacts] = await Promise.all([
-    getAdminCounts(),
+  const [stats, unreadContacts] = await Promise.all([
+    getDashboardStats(),
     prisma.contact.count({
       where: { OR: [{ isRead: false }, { isRead: null }] },
     }),
   ]);
+
+  const { totalProjects, totalBlogs } = stats;
+  const maxViews = Math.max(1, ...stats.topBlogs.map((blog) => blog.views));
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted p-6">
@@ -66,6 +77,115 @@ export default async function AdminPage() {
             </CardContent>
           </Card>
         </div>
+
+        {/* Content Stats */}
+        <div className="mb-8">
+          <h2 className="mb-4 text-xl font-semibold text-foreground">Content</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="bg-card backdrop-blur-sm border-border">
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">
+                  Total Views
+                </CardTitle>
+                <Eye className="h-4 w-4 text-accent-text" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-3xl font-bold text-foreground">
+                  {stats.totalViews}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-card backdrop-blur-sm border-border">
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">
+                  Published Posts
+                </CardTitle>
+                <FileText className="h-4 w-4 text-accent-text" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-3xl font-bold text-foreground">
+                  {stats.publishedBlogs}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-card backdrop-blur-sm border-border">
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">
+                  Drafts
+                </CardTitle>
+                <Pencil className="h-4 w-4 text-accent-text" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-3xl font-bold text-foreground">
+                  {stats.draftBlogs}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-card backdrop-blur-sm border-border">
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">
+                  Hidden Projects
+                </CardTitle>
+                <EyeOff className="h-4 w-4 text-accent-text" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-3xl font-bold text-foreground">
+                  {stats.hiddenProjects}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Top Posts */}
+        <Card className="mb-8 bg-card backdrop-blur-sm border-border">
+          <CardHeader>
+            <CardTitle>Top Posts</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {stats.topBlogs.length === 0 ? (
+              <p className="text-sm text-muted-foreground">
+                No posts yet.{" "}
+                <Link
+                  href="/admin/blog/add"
+                  className="font-medium text-accent-text hover:underline"
+                >
+                  Write your first post
+                </Link>
+                .
+              </p>
+            ) : (
+              <div className="divide-y divide-border">
+                {stats.topBlogs.map((blog) => (
+                  <div key={blog.id} className="space-y-2 py-3 first:pt-0 last:pb-0">
+                    <div className="flex items-center justify-between gap-4">
+                      <Link
+                        href={`/blogs/${blog.slug}`}
+                        className="truncate text-sm text-foreground hover:text-accent-text"
+                      >
+                        {blog.h1}
+                      </Link>
+                      <span className="shrink-0 font-mono text-xs text-muted-foreground">
+                        {blog.views} views
+                      </span>
+                    </div>
+                    <div className="h-1 w-full rounded-full bg-muted">
+                      <div
+                        className="h-1 rounded-full bg-primary"
+                        style={{
+                          width: `${Math.round((blog.views / maxViews) * 100)}%`,
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

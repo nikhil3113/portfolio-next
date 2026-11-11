@@ -54,6 +54,11 @@ function CompanyIcon({
           alt="company favicon"
           className="h-6 w-6 object-contain"
           onError={() => setHasError(true)}
+          loading="lazy"
+          decoding="async"
+          referrerPolicy="no-referrer"
+          width={24}
+          height={24}
         />
       ) : (
         company.charAt(0)

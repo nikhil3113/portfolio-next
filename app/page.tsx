@@ -1,7 +1,7 @@
 import { BlogCard } from "@/components/blog/BlogCard";
 import { ContactForm } from "@/components/landing/Contact";
 import { Experience } from "@/components/landing/Experience";
-import { ProjectCard } from "@/components/project/SampleProjectCard";
+import { FeaturedProjectCard } from "@/components/project/FeaturedProjectCard";
 import { Skills } from "@/components/landing/Skills";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { getLatestBlogs } from "@/lib/action/blogs";
@@ -130,9 +130,9 @@ export default async function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 gap-8 p-0 lg:grid-cols-2">
-            {project.slice(0, 2).map((items: Project, idx: number) => (
-              <ProjectCard
-                key={idx}
+            {project.slice(0, 2).map((items: Project) => (
+              <FeaturedProjectCard
+                key={items.id}
                 title={items.title}
                 description={items.description}
                 image={items.image}

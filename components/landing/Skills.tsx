@@ -1,9 +1,7 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element -- Simple Icons are remote SVG badges; plan 017 replaces this strip. */
-
+import Image from "next/image";
 import { Marquee } from "@/components/ui/marquee";
-// import Image from "next/image";
 
 // Define skills with their Simple Icons slugs
 const skills = [
@@ -50,12 +48,13 @@ export function Skills() {
               key={index}
               className="relative h-full w-fit sm:mx-[4rem] mx-[2rem] flex flex-col items-center justify-center gap-2"
             >
-              <img
+              <Image
                 src={`https://cdn.simpleicons.org/${skill.slug}?viewbox=auto`}
                 alt={skill.name}
-                className="h-10 w-10"
-                height={40}
                 width={40}
+                height={40}
+                sizes="40px"
+                className="h-10 w-10"
               />
               <span className="text-sm font-medium">{skill.name}</span>
             </div>
@@ -70,12 +69,13 @@ export function Skills() {
               key={index}
               className="relative h-full w-fit sm:mx-[4rem] mx-[2rem] flex flex-col items-center justify-center gap-2"
             >
-              <img
+              <Image
                 src={`https://cdn.simpleicons.org/${skill.slug}?viewbox=auto`}
                 alt={skill.name}
-                className="h-10 w-10"
-                height={40}
                 width={40}
+                height={40}
+                sizes="40px"
+                className="h-10 w-10"
               />
               <span className="text-sm font-medium">{skill.name}</span>
             </div>

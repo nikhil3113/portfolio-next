@@ -1,10 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, FolderKanban, Plus, Eye } from "lucide-react";
+import { FileText, FolderKanban, Mail, Plus, Eye } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 import { getAdminCounts } from "@/lib/admin/stats";
 
 export const dynamic = "force-dynamic";
@@ -15,7 +16,12 @@ export default async function AdminPage() {
     redirect("/auth/signin");
   }
 
-  const { totalProjects, totalBlogs } = await getAdminCounts();
+  const [{ totalProjects, totalBlogs }, unreadContacts] = await Promise.all([
+    getAdminCounts(),
+    prisma.contact.count({
+      where: { OR: [{ isRead: false }, { isRead: null }] },
+    }),
+  ]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted p-6">
@@ -62,7 +68,7 @@ export default async function AdminPage() {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Projects Section */}
           <Card className="bg-card backdrop-blur-sm border-border">
             <CardHeader>
@@ -106,6 +112,27 @@ export default async function AdminPage() {
                 <Link href="/admin/blog">
                   <Eye className="mr-2 h-4 w-4" />
                   View All Blogs
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Messages Section */}
+          <Card className="bg-card backdrop-blur-sm border-border">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Mail className="h-5 w-5 text-accent-text" />
+                Messages
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <p className="text-sm text-muted-foreground">
+                {unreadContacts} unread message{unreadContacts === 1 ? "" : "s"}
+              </p>
+              <Button asChild className="w-full" variant="outline">
+                <Link href="/admin/contact">
+                  <Eye className="mr-2 h-4 w-4" />
+                  Open Inbox
                 </Link>
               </Button>
             </CardContent>

@@ -28,9 +28,9 @@ update your row when done.
 | D | 017 | Consolidate project cards and right-size images | P3 | M | 002, 015 | DONE |
 | E | 018 | Scope the session provider and server-render admin lists | P3 | M | 003, 008, 009 | DONE |
 | E | 019 | Make setup docs, env example, and scripts match the app | P3 | S | 013, 014, 016 | DONE |
-| F | 020 | Design and build the contact inbox | P3 | M | 005, 018 | TODO |
-| F | 021 | Turn the admin dashboard into a content dashboard | P3 | M | 018 | TODO |
-| F | 022 | Design and build blog draft preview | P3 | M | 007, 009, 018 | TODO |
+| F | 020 | Design and build the contact inbox | P3 | M | 005, 018 | DONE |
+| F | 021 | Turn the admin dashboard into a content dashboard | P3 | M | 018 | DONE |
+| F | 022 | Design and build blog draft preview | P3 | M | 007, 009, 018 | DONE |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (one-line reason) | REJECTED
 (one-line rationale).
@@ -138,6 +138,42 @@ and skipped checks:
   and `npm run verify` passes. Tiptap versions were left unchanged.
 - **018-019**: the build was skipped because `DATABASE_URL` is not configured.
   Neither backfill script was run against a database.
+
+### Phase F execution notes
+
+Phase F (plans 020-022) is done on `advisor/phase-f-direction-features`.
+Deviations and skipped checks:
+
+- **020**: the existing `app/api/contact/route.test.ts` create assertion was
+  extended with `isRead: false` and `createdAt: expect.any(Date)` because it
+  matched the old payload exactly. The dashboard unread count uses
+  `OR: [{ isRead: false }, { isRead: null }]` so legacy documents without the
+  field count as unread, matching the inbox badge. Only `npx prisma format` and
+  `npx prisma generate` were run; no `prisma db push` or migration was applied.
+  The manual inbox checks (submit, mark read/unread, delete, dashboard count)
+  were skipped because this worktree has no `.env`, `DATABASE_URL`, or
+  authenticated session.
+- **021**: `getAdminCounts` is kept for compatibility. The top-posts query has
+  no `isPublished` filter, so drafts can appear by design; the dashboard links
+  those rows to the public slug, which 404s for drafts per plan 022's public
+  filtering. Contact metrics remain a separate `prisma.contact.count` in
+  `app/admin/page.tsx` rather than part of `DashboardStats`, per the plan's
+  out-of-scope note. The manual dashboard checks were skipped (no database).
+- **022**: `BlogArticle` keeps the live Phase A Cheerio fragment fallback,
+  `cheerio.load(content)` plus `$("body").html()`, because the installed
+  `@types/cheerio` rejects the three-argument form. The public page markup is
+  unchanged; `BlogViewTracker` moved inside the shared component and still
+  renders `null`, and the public page keeps it enabled by default. The preview
+  route is admin-only, `noindex`, and never renders the tracker, so it cannot
+  increment views; it does not use `draftMode()` and the public page remains
+  statically generated for published posts. The manual preview checks (draft
+  banner, no view increment, signed-out redirect, public 404, publish toggle)
+  were skipped because this worktree has no database or authenticated session.
+- **020-022**: the build was skipped because `DATABASE_URL` is not configured.
+  No backfill script was run.
+- **Review fixes**: top posts now carry `isPublished` and link drafts to the
+  admin preview with a Draft badge; `BlogArticle` uses the `text-foreground`
+  token instead of hard-coded black/white.
 
 ## Dependency notes
 

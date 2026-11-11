@@ -64,4 +64,25 @@ describe("POST /api/blog", () => {
     expect(response.status).toBe(201);
     expect(createMock).toHaveBeenCalledOnce();
   });
+
+  it("returns 400 when isPublished is not a boolean", async () => {
+    sessionMock.mockResolvedValue({ user: { id: "u1" } } as never);
+    const response = await POST(post({ ...validBody, isPublished: "yes" }));
+    expect(response.status).toBe(400);
+    expect(createMock).not.toHaveBeenCalled();
+  });
+
+  it("returns 400 when the slug has capitals or spaces", async () => {
+    sessionMock.mockResolvedValue({ user: { id: "u1" } } as never);
+    const response = await POST(post({ ...validBody, slug: "Bad Slug" }));
+    expect(response.status).toBe(400);
+    expect(createMock).not.toHaveBeenCalled();
+  });
+
+  it("returns 409 when the slug already exists", async () => {
+    sessionMock.mockResolvedValue({ user: { id: "u1" } } as never);
+    createMock.mockRejectedValue({ code: "P2002" });
+    const response = await POST(post(validBody));
+    expect(response.status).toBe(409);
+  });
 });

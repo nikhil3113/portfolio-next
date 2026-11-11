@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { toast } from "sonner"
 import { useForm } from "react-hook-form";
 import z from "zod";
+import { slugSchema } from "@/lib/validation";
 
 const formSchema = z.object({
   h1: z.string().min(1, "Heading is required"),
@@ -16,7 +17,7 @@ const formSchema = z.object({
   content: z.string().min(1, "Content is required"),
   imageUrl: z.string().optional(),
   author: z.string().min(1, "Author is required"),
-  slug: z.string().min(1, "Slug is required"),
+  slug: slugSchema,
   isPublished: z.boolean(),
 });
 export default function UpdateBlogPage() {

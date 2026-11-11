@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
+import { projectCreateSchema } from "@/lib/validation";
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
@@ -13,6 +14,17 @@ export async function POST(req: Request) {
     );
   }
   try {
+    const parsed = projectCreateSchema.safeParse(await req.json());
+    if (!parsed.success) {
+      return NextResponse.json(
+        {
+          message: "Invalid project payload",
+          errors: parsed.error.flatten().fieldErrors,
+        },
+        { status: 400 },
+      );
+    }
+
     const {
       title,
       description,
@@ -22,26 +34,7 @@ export async function POST(req: Request) {
       imageUrl,
       createdAt,
       hidden,
-    } = await req.json();
-    if (
-      !title ||
-      !description ||
-      !tags ||
-      !siteLink ||
-      !githubLink ||
-      !imageUrl
-    ) {
-      return NextResponse.json(
-        { message: "All fields are required" },
-        { status: 400 },
-      );
-    }
-    if (Array.isArray(tags) && tags.length === 0) {
-      return NextResponse.json(
-        { message: "Tags cannot be an empty array" },
-        { status: 400 },
-      );
-    }
+    } = parsed.data;
 
     await prisma.project.create({
       data: {
@@ -53,8 +46,10 @@ export async function POST(req: Request) {
         siteLink,
         githubLink,
         imageUrl,
-        createdAt: createdAt ? new Date(createdAt) : new Date(),
-        hidden: hidden ?? false,
+        createdAt: createdAt
+          ? new Date(`${createdAt}T00:00:00.000Z`)
+          : new Date(),
+        hidden,
       },
     });
 

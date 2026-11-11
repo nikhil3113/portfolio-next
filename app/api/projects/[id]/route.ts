@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
+import { projectCreateSchema } from "@/lib/validation";
 
 export async function PUT(
   request: Request,
@@ -17,6 +18,17 @@ export async function PUT(
   }
   try {
     const id = (await params).id;
+    const parsed = projectCreateSchema.safeParse(await request.json());
+    if (!parsed.success) {
+      return NextResponse.json(
+        {
+          message: "Invalid project payload",
+          errors: parsed.error.flatten().fieldErrors,
+        },
+        { status: 400 },
+      );
+    }
+
     const {
       title,
       description,
@@ -26,20 +38,7 @@ export async function PUT(
       imageUrl,
       createdAt,
       hidden,
-    } = await request.json();
-    if (
-      !title ||
-      !description ||
-      !tags ||
-      !siteLink ||
-      !githubLink ||
-      !imageUrl
-    ) {
-      return NextResponse.json(
-        { message: "All fields are required" },
-        { status: 400 },
-      );
-    }
+    } = parsed.data;
 
     await prisma.project.update({
       where: { id },
@@ -52,8 +51,10 @@ export async function PUT(
         siteLink,
         githubLink,
         imageUrl,
-        createdAt: createdAt ? new Date(createdAt) : undefined,
-        hidden: hidden,
+        createdAt: createdAt
+          ? new Date(`${createdAt}T00:00:00.000Z`)
+          : undefined,
+        hidden,
       },
     });
     revalidatePath("/projects");

@@ -74,48 +74,48 @@ export default async function Projects() {
     <div className="min-h-screen p-6">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-3xl font-bold text-foreground mb-2">
             Projects
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-muted-foreground">
             Manage your portfolio projects ({projects.length} total)
           </p>
         </div>
-        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-200/50 dark:border-gray-700/50 overflow-hidden">
-          <div className="p-6 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between ">
+        <div className="bg-card backdrop-blur-sm rounded-2xl shadow-sm border border-border overflow-hidden">
+          <div className="p-6 border-b border-border flex items-center justify-between ">
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+              <h2 className="text-xl font-semibold text-foreground">
                 All Projects
               </h2>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              <p className="text-sm text-muted-foreground mt-1">
                 A comprehensive list of all your portfolio projects
               </p>
             </div>
             <Link
               href={`/admin/project/add`}
-              className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              className="inline-flex items-center px-4 py-2 text-sm font-medium text-primary-foreground bg-primary hover:opacity-90 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
             >
               Add
             </Link>
           </div>
 
-          <div className="overflow-x-auto bg-white/80 dark:bg-slate-800/80">
+          <div className="overflow-x-auto bg-card">
             <Table>
               <TableHeader>
-                <TableRow className="bg-gray-50/50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
-                  <TableHead className="font-semibold text-gray-900 dark:text-white py-4 px-6">
+                <TableRow className="bg-muted border-b border-border">
+                  <TableHead className="font-semibold text-foreground py-4 px-6">
                     Project Title
                   </TableHead>
-                  <TableHead className="font-semibold text-gray-900 dark:text-white py-4 px-6">
+                  <TableHead className="font-semibold text-foreground py-4 px-6">
                     Site Link
                   </TableHead>
-                  <TableHead className="font-semibold text-gray-900 dark:text-white py-4 px-6">
+                  <TableHead className="font-semibold text-foreground py-4 px-6">
                     Github Link
                   </TableHead>
-                  <TableHead className="font-semibold text-gray-900 dark:text-white py-4 px-6">
+                  <TableHead className="font-semibold text-foreground py-4 px-6">
                     Created At
                   </TableHead>
-                  <TableHead className="font-semibold text-gray-900 dark:text-white py-4 px-6 text-center">
+                  <TableHead className="font-semibold text-foreground py-4 px-6 text-center">
                     Action
                   </TableHead>
                 </TableRow>
@@ -124,18 +124,18 @@ export default async function Projects() {
                 {projects.map((project, index) => (
                   <TableRow
                     key={project.id}
-                    className="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors border-b border-gray-100 dark:border-gray-800"
+                    className="hover:bg-muted transition-colors border-b border-border"
                   >
                     <TableCell className="py-4 px-6">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-sm">
+                        <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-semibold text-sm">
                           {project.title.charAt(0).toUpperCase()}
                         </div>
                         <div>
-                          <p className="font-medium text-gray-900 dark:text-white">
+                          <p className="font-medium text-foreground">
                             {project.title}
                           </p>
-                          <p className="text-sm text-gray-500 dark:text-gray-400">
+                          <p className="text-sm text-muted-foreground">
                             Project #{index + 1}
                           </p>
                         </div>
@@ -144,7 +144,7 @@ export default async function Projects() {
                     <TableCell className="py-4 px-6">
                       <Link
                         href={project.siteLink}
-                        className="text-gray-700 dark:text-gray-300 break-all hover:text-blue-500"
+                        className="text-muted-foreground break-all hover:text-accent-text"
                       >
                         {project.siteLink}
                       </Link>
@@ -152,13 +152,13 @@ export default async function Projects() {
                     <TableCell className="py-4 px-6">
                       <Link
                         href={project.githubLink}
-                        className="text-gray-700 dark:text-gray-300 break-all hover:text-blue-500"
+                        className="text-muted-foreground break-all hover:text-accent-text"
                       >
                         {project.githubLink}
                       </Link>
                     </TableCell>
                     <TableCell className="py-4 px-6">
-                      <div className="text-gray-600 dark:text-gray-400">
+                      <div className="text-muted-foreground">
                         {project.createdAt.toLocaleDateString("en-US", {
                           year: "numeric",
                           month: "short",
@@ -174,8 +174,8 @@ export default async function Projects() {
               </TableBody>
             </Table>
           </div>
-          <div className="px-6 py-4 bg-gray-50/50 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-700">
-            <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
+          <div className="px-6 py-4 bg-muted border-t border-border">
+            <p className="text-sm text-muted-foreground text-center">
               Showing {projects.length} project
               {projects.length !== 1 ? "s" : ""}
             </p>

@@ -51,7 +51,7 @@ const FormFields = <T extends FieldValues>({
 
   return (
     <FormItem>
-      <FormLabel className="text-[15px] font-poppins font-medium">
+      <FormLabel className="text-[15px] font-heading font-medium">
         {label}
       </FormLabel>
       <Controller
@@ -68,7 +68,7 @@ const FormFields = <T extends FieldValues>({
                   onChange={(e) => field.onChange(e.target.value)}
                   rows={5}
                   disabled={disabled}
-                  className="dark:border-gray-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#4379EE] focus-visible:border-[#4379EE] "
+                  className="border-border focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:border-ring "
                 />
               ) : type === "select" ? (
                 <Select
@@ -76,7 +76,7 @@ const FormFields = <T extends FieldValues>({
                   value={field.value}
                   disabled={disabled}
                 >
-                  <SelectTrigger className="dark:border-gray-600 ">
+                  <SelectTrigger className="border-border">
                     <SelectValue placeholder={placeholder} />
                   </SelectTrigger>
                   <SelectContent>
@@ -102,7 +102,7 @@ const FormFields = <T extends FieldValues>({
 
                   <Input
                     {...field}
-                    className="dark:border-gray-600 pr-10"
+                    className="border-border pr-10"
                     placeholder={placeholder}
                     disabled={disabled}
                     type={
@@ -123,7 +123,7 @@ const FormFields = <T extends FieldValues>({
                   {type === "password" && (
                     <button
                       type="button"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? (

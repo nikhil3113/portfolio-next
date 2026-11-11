@@ -76,19 +76,19 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="mx-auto w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-4">
-            <Lock className="w-8 h-8 text-white" />
+          <div className="mx-auto w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
+            <Lock className="w-8 h-8 text-primary-foreground" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-3xl font-bold text-foreground mb-2">
             Welcome Back
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-muted-foreground">
             Sign in to access your admin dashboard
           </p>
         </div>
 
         {/* Login Card */}
-        <Card className="shadow-xl border bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
+        <Card className="shadow-xl border bg-card backdrop-blur-sm">
           <CardHeader className="space-y-1 pb-6">
             <CardTitle className="text-2xl font-semibold text-center">
               Admin Login
@@ -103,7 +103,7 @@ export default function LoginPage() {
             {error && (
               <Alert
                 variant="destructive"
-                className="border-red-200 bg-red-50 dark:bg-red-900/20"
+                className="border-destructive bg-card"
               >
                 <AlertDescription className="text-sm">{error}</AlertDescription>
               </Alert>
@@ -141,7 +141,7 @@ export default function LoginPage() {
                 <Button
                   type="submit"
                   disabled={loading}
-                  className="w-full h-11 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium rounded-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
+                  className="w-full h-11 bg-primary hover:opacity-90 text-primary-foreground font-medium rounded-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
                 >
                   {loading ? (
                     <>

@@ -61,7 +61,7 @@ export function ImageUpload<T extends FieldValues>({
     }
   };
   return (
-    <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-8 text-center hover:border-blue-400 transition-colors">
+    <div className="border-2 border-dashed border-border rounded-xl p-8 text-center hover:border-ring transition-colors">
       <CldUploadWidget
         uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
         signatureEndpoint="/api/sign-cloudinary-params"
@@ -120,8 +120,8 @@ export function ImageUpload<T extends FieldValues>({
                 </div>
               ) : (
                 <div>
-                  <div className="mx-auto w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                    <Upload className="w-8 h-8 text-white" />
+                  <div className="mx-auto w-16 h-16 bg-primary rounded-full flex items-center justify-center">
+                    <Upload className="w-8 h-8 text-primary-foreground" />
                   </div>
                   <div>
                     <Button
@@ -133,7 +133,7 @@ export function ImageUpload<T extends FieldValues>({
                       <Upload className="w-4 h-4 mr-2" />
                       Upload Project Image
                     </Button>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm text-muted-foreground">
                       PNG, JPG, GIF up to 10MB
                     </p>
                   </div>

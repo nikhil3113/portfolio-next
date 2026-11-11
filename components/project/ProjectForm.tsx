@@ -36,29 +36,29 @@ export function ProjectForm({
   isUpdate = false,
 }: ProjectFormProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-black dark:to-slate-800 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-background to-muted p-6">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <div className="flex items-center space-x-3 mb-4">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-              <Plus className="w-5 h-5 text-white" />
+            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+              <Plus className="w-5 h-5 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+              <h1 className="text-3xl font-bold text-foreground">
                 Add New Project
               </h1>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-muted-foreground">
                 Create a new project for your portfolio
               </p>
             </div>
           </div>
-          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1">
-            <div className="bg-gradient-to-r from-blue-500 to-purple-600 h-1 rounded-full w-1/4"></div>
+          <div className="w-full bg-muted rounded-full h-1">
+            <div className="bg-primary h-1 rounded-full w-1/4"></div>
           </div>
         </div>
 
         {/* Form Card */}
-        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200/50 dark:border-gray-700/50 overflow-hidden">
+        <div className="bg-card backdrop-blur-sm rounded-2xl shadow-xl border border-border overflow-hidden">
           <div className="p-8">
             <Form {...form}>
               <form
@@ -67,12 +67,12 @@ export function ProjectForm({
               >
                 {/* Project Details Section */}
                 <div className="space-y-6">
-                  <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
-                      <FileText className="w-5 h-5 mr-2 text-blue-600" />
+                  <div className="border-b border-border pb-4">
+                    <h2 className="text-xl font-semibold text-foreground flex items-center">
+                      <FileText className="w-5 h-5 mr-2 text-accent-text" />
                       Project Details
                     </h2>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    <p className="text-sm text-muted-foreground mt-1">
                       Basic information about your project
                     </p>
                   </div>
@@ -105,12 +105,12 @@ export function ProjectForm({
 
                 {/* Links Section */}
                 <div className="space-y-6">
-                  <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
-                      <Link2 className="w-5 h-5 mr-2 text-green-600" />
+                  <div className="border-b border-border pb-4">
+                    <h2 className="text-xl font-semibold text-foreground flex items-center">
+                      <Link2 className="w-5 h-5 mr-2 text-accent-text" />
                       Project Links
                     </h2>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    <p className="text-sm text-muted-foreground mt-1">
                       Share your live site and source code
                     </p>
                   </div>
@@ -133,12 +133,12 @@ export function ProjectForm({
 
                 {/* Media Section */}
                 <div className="space-y-6">
-                  <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
-                      <ImageIcon className="w-5 h-5 mr-2 text-purple-600" />
+                  <div className="border-b border-border pb-4">
+                    <h2 className="text-xl font-semibold text-foreground flex items-center">
+                      <ImageIcon className="w-5 h-5 mr-2 text-accent-text" />
                       Project Image
                     </h2>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    <p className="text-sm text-muted-foreground mt-1">
                       Upload a screenshot or preview of your project
                     </p>
                   </div>
@@ -153,12 +153,12 @@ export function ProjectForm({
 
                 {/* Tags Section */}
                 <div className="space-y-6">
-                  <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
-                      <Tag className="w-5 h-5 mr-2 text-orange-600" />
+                  <div className="border-b border-border pb-4">
+                    <h2 className="text-xl font-semibold text-foreground flex items-center">
+                      <Tag className="w-5 h-5 mr-2 text-accent-text" />
                       Technologies & Tags
                     </h2>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    <p className="text-sm text-muted-foreground mt-1">
                       Add technologies and keywords for your project
                     </p>
                   </div>
@@ -173,12 +173,12 @@ export function ProjectForm({
                 </div>
 
                 <div className="space-y-6">
-                  <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
-                      <EyeOff className="w-5 h-5 mr-2 text-rose-600" />
+                  <div className="border-b border-border pb-4">
+                    <h2 className="text-xl font-semibold text-foreground flex items-center">
+                      <EyeOff className="w-5 h-5 mr-2 text-accent-text" />
                       Visibility
                     </h2>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    <p className="text-sm text-muted-foreground mt-1">
                       Control whether this project appears on your public
                       portfolio
                     </p>
@@ -208,7 +208,7 @@ export function ProjectForm({
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex items-center justify-between pt-8 border-t border-gray-200 dark:border-gray-700">
+                <div className="flex items-center justify-between pt-8 border-t border-border">
                   <Button type="button" variant="outline" className="px-8">
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Cancel
@@ -217,7 +217,7 @@ export function ProjectForm({
                   <div className="flex space-x-3">
                     <Button
                       type="submit"
-                      className="px-8 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+                      className="px-8 bg-primary hover:opacity-90"
                       disabled={isLoading}
                     >
                       <Plus className="w-4 h-4 mr-2" />

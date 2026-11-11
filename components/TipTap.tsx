@@ -59,7 +59,7 @@ export function TipTap({ value, onChange }: TipTapProps) {
         openOnClick: false,
         autolink: true,
         HTMLAttributes: {
-          class: "text-blue-500 underline",
+          class: "text-accent-text underline",
         },
       }),
       UndoRedo,
@@ -71,7 +71,7 @@ export function TipTap({ value, onChange }: TipTapProps) {
     editorProps: {
       attributes: {
         class:
-          "prose prose-neutral max-w-none min-h-[300px] p-4 focus:outline-none border border-gray-200 rounded-md",
+          "prose prose-neutral max-w-none min-h-[300px] p-4 focus:outline-none border border-border rounded-md",
       },
     },
     immediatelyRender: false,
@@ -90,9 +90,9 @@ export function TipTap({ value, onChange }: TipTapProps) {
   };
 
   return (
-    <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+    <div className="border border-border rounded-lg overflow-hidden">
       {/* Toolbar */}
-      <div className="border-b border-gray-200 dark:border-gray-700 p-2 bg-gray-50 dark:bg-gray-700">
+      <div className="border-b border-border p-2 bg-muted">
         <div className="flex flex-wrap gap-1">
           {/* Text Formatting */}
           <Button
@@ -121,7 +121,7 @@ export function TipTap({ value, onChange }: TipTapProps) {
           </Button>
 
           {/* Separator */}
-          <div className="w-px h-6 bg-gray-300 mx-1" />
+          <div className="w-px h-6 bg-border mx-1" />
 
           {/* Headings */}
           <Button
@@ -162,7 +162,7 @@ export function TipTap({ value, onChange }: TipTapProps) {
           </Button>
 
           {/* Separator */}
-          <div className="w-px h-6 bg-gray-300 mx-1" />
+          <div className="w-px h-6 bg-border mx-1" />
 
           {/* Lists */}
           <Button
@@ -191,7 +191,7 @@ export function TipTap({ value, onChange }: TipTapProps) {
           </Button>
 
           {/* Separator */}
-          <div className="w-px h-6 bg-gray-300 mx-1" />
+          <div className="w-px h-6 bg-border mx-1" />
 
           {/* Links */}
           <Button
@@ -218,7 +218,7 @@ export function TipTap({ value, onChange }: TipTapProps) {
           </Button>
 
           {/* Separator */}
-          <div className="w-px h-6 bg-gray-300 mx-1" />
+          <div className="w-px h-6 bg-border mx-1" />
 
           {/* Code Block */}
           <Button
@@ -233,7 +233,7 @@ export function TipTap({ value, onChange }: TipTapProps) {
           {/* Language select for code block */}
           {editor.isActive("codeBlock") && (
             <select
-              className="ml-2 border border-gray-300 rounded px-2 py-1 text-sm bg-white"
+              className="ml-2 border border-border rounded px-2 py-1 text-sm bg-background"
               value={editor.getAttributes("codeBlock").language || "javascript"}
               onChange={(e) => setCodeBlockLanguage(e.target.value)}
             >
@@ -248,7 +248,7 @@ export function TipTap({ value, onChange }: TipTapProps) {
           )}
 
           {/* Separator */}
-          <div className="w-px h-6 bg-gray-300 mx-1" />
+          <div className="w-px h-6 bg-border mx-1" />
 
           {/* History */}
           <Button

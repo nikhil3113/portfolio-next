@@ -3,15 +3,7 @@
 import Link from "next/link";
 import { RadiantButton } from "../landing/RadiantButton";
 import { CldImage } from "next-cloudinary";
-
-interface ProjectCardProps {
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-  siteLink: string;
-  githubLink: string;
-}
+import type { ProjectCardData } from "@/types/projects";
 
 export function ProjectCard({
   title,
@@ -20,7 +12,7 @@ export function ProjectCard({
   tags,
   siteLink,
   githubLink,
-}: ProjectCardProps) {
+}: ProjectCardData) {
   return (
     <div className="w-full h-full">
       <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition duration-200">
@@ -29,8 +21,9 @@ export function ProjectCard({
             src={image}
             alt={title}
             className="h-full w-full transform object-cover transition duration-200 group-hover:scale-95 group-hover:rounded-2xl"
-            width={500}
-            height={500}
+            width={600}
+            height={375}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
         <div className="flex flex-grow flex-col p-4">

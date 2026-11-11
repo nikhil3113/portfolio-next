@@ -22,10 +22,10 @@ update your row when done.
 | C | 011 | Throttle login attempts and use async bcrypt | P2 | M | 003, 005 | DONE |
 | C | 012 | Validate API payloads with shared Zod schemas | P2 | M | 003, 006 | DONE |
 | C | 013 | Align Prisma, next-cloudinary, and Zod versions | P2 | M | 004, 012 | DONE |
-| D | 014 | Wire the documented typography tokens | P3 | M | 002 | TODO |
-| D | 015 | Replace hard-coded palette utilities with theme tokens | P3 | M | 014 | TODO |
-| D | 016 | Remove dead UI, duplicate toast stack, and unused dependencies | P3 | S | 013, 014 | TODO |
-| D | 017 | Consolidate project cards and right-size images | P3 | M | 002, 015 | TODO |
+| D | 014 | Wire the documented typography tokens | P3 | M | 002 | DONE |
+| D | 015 | Replace hard-coded palette utilities with theme tokens | P3 | M | 014 | DONE |
+| D | 016 | Remove dead UI, duplicate toast stack, and unused dependencies | P3 | S | 013, 014 | DONE |
+| D | 017 | Consolidate project cards and right-size images | P3 | M | 002, 015 | DONE |
 | E | 018 | Scope the session provider and server-render admin lists | P3 | M | 003, 008, 009 | TODO |
 | E | 019 | Make setup docs, env example, and scripts match the app | P3 | S | 013, 014, 016 | TODO |
 | F | 020 | Design and build the contact inbox | P3 | M | 005, 018 | TODO |
@@ -87,6 +87,34 @@ and skipped checks:
   install-without-dev-dependencies behavior is not described in the repo; the
   Prisma CLI is in `devDependencies` per the plan and relies on `postinstall`
   running where dev dependencies are installed.
+
+### Phase D execution notes
+
+Phase D (plans 014-017) is done on `advisor/phase-d-design-system`. Deviations
+and skipped checks:
+
+- **014**: Hanken Grotesk, Inter, and JetBrains Mono downloaded successfully in
+  the development environment; the rendered HTML carried all three font
+  variable classes and the generated CSS defined `--font-heading` and
+  `--font-body`. The devtools computed-style checks and the full admin/editor
+  visual pass were limited because this worktree has no `.env` and no
+  `DATABASE_URL`; the public pages were smoke-tested.
+- **015**: the palette sweep completed with no remaining matches outside the
+  generated image routes (`app/opengraph-image.tsx`, `app/icon.tsx`,
+  `app/apple-icon.tsx`, `app/manifest.ts`). The light/dark visual pass could not
+  cover admin, project, and blog detail pages because they require a database or
+  authentication session.
+- **016**: the notification smoke test (contact form, sign-in, project/blog
+  mutations) was skipped for the same reason: no database or auth session.
+  `@tiptap/extension-code-block` is declared directly and resolves to 3.33.1
+  while the other Tiptap extensions remain at ^3.0.9; all dedupe to a single
+  `@tiptap/core`.
+- **017**: the Cloudinary request-width check was skipped because no project
+  rows are available without a database. The dev server rendered `/`,
+  `/projects`, `/blogs`, and `/auth/signin` with HTTP 200, and the skills strip
+  emitted `/_next/image` URLs.
+- **014-017**: the build was skipped because `DATABASE_URL` is not configured.
+
 
 ## Dependency notes
 

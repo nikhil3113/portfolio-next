@@ -5,24 +5,16 @@ import { CardBody, CardContainer, CardItem } from "../ui/3d-card";
 import Link from "next/link";
 import { Github } from "lucide-react";
 import { CldImage } from "next-cloudinary";
+import type { ProjectCardData } from "@/types/projects";
 
-interface ProjectCardProps {
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-  siteLink: string;
-  githubLink: string;
-}
-
-export function ProjectCard({
+export function FeaturedProjectCard({
   title,
   description,
   image,
   tags,
   siteLink,
   githubLink,
-}: ProjectCardProps) {
+}: ProjectCardData) {
   return (
     <CardContainer className="inter-var max-sm:px-5" containerClassName="py-0">
       <CardBody className="relative group/card w-auto rounded-xl border border-border bg-card p-6 h-auto sm:w-[30rem]">
@@ -42,10 +34,11 @@ export function ProjectCard({
         <CardItem translateZ="100" className="w-full mt-4">
           <CldImage
             src={image}
-            height={1000}
-            width={1000}
+            width={800}
+            height={400}
             className="h-40 w-full rounded-xl object-cover sm:h-60 group-hover/card:shadow-xl"
             alt={title}
+            sizes="(max-width: 640px) 100vw, 480px"
           />
         </CardItem>
 

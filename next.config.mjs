@@ -19,15 +19,23 @@ const nextConfig = {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+  async rewrites() {
+    return [
+      {
+        source: "/favicon.ico",
+        destination: "/icon",
+      },
+    ];
+  },
   async headers() {
     const isDev = process.env.NODE_ENV === "development";
     const csp = [
       "default-src 'self'",
       `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://www.google-analytics.com https://*.posthog.com https://*.cloudinary.com`,
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob: https://*.cloudinary.com https://cdn.simpleicons.org https://www.google.com https://www.google-analytics.com",
+      "img-src 'self' data: blob: https://*.cloudinary.com https://cdn.simpleicons.org https://www.google.com https://www.google-analytics.com https://*.google.co.in",
       "font-src 'self' data:",
-      "connect-src 'self' https://*.posthog.com https://www.google-analytics.com https://*.cloudinary.com",
+      "connect-src 'self' https://*.posthog.com https://*.google-analytics.com https://analytics.google.com https://www.google.com https://stats.g.doubleclick.net https://*.cloudinary.com",
       "frame-src 'self' https://*.cloudinary.com",
       "frame-ancestors 'none'",
       "base-uri 'self'",

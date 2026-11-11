@@ -4,7 +4,7 @@ interface RadiantButtonProps{
 
 export function RadiantButton({text}: RadiantButtonProps) {
   return (
-    <button className="group relative inline-block cursor-pointer rounded-full bg-slate-800 p-px text-xs font-semibold leading-6 text-foreground no-underline shadow-2xl">
+    <button className="group relative inline-block cursor-pointer rounded-full bg-surface-container p-px text-xs font-semibold leading-6 text-foreground no-underline shadow-2xl">
       <span className="absolute inset-0 overflow-hidden rounded-full">
         <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,hsl(var(--primary)/0.6)_0%,hsl(var(--primary)/0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       </span>

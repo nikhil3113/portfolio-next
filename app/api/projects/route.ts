@@ -71,8 +71,12 @@ export async function POST(req: Request) {
 }
 
 export async function GET() {
+  const session = await getServerSession(authOptions);
+  const where = session?.user ? {} : { hidden: false };
+
   try {
     const projects = await prisma.project.findMany({
+      where,
       orderBy: {
         createdAt: "desc",
       },

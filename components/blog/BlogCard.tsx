@@ -40,8 +40,9 @@ export function BlogCard({ blogs }: { blogs: BlogData[] }) {
                     <CldImage
                       src={blog.imageUrl}
                       alt={blog.h1}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      width={160}
+                      height={80}
+                      className="h-full w-full object-cover transition-transform duration-300"
                       sizes="(max-width: 768px) 0px, 160px"
                     />
                   ) : (

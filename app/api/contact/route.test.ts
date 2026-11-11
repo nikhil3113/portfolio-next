@@ -71,6 +71,8 @@ describe("POST /api/contact", () => {
         name: "Nikhil",
         email: "nikhil@example.com",
         message: "Hello there",
+        isRead: false,
+        createdAt: expect.any(Date),
       },
     });
     expect(mailMock).toHaveBeenCalledWith({

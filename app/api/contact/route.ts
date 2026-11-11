@@ -62,6 +62,8 @@ export async function POST(request: NextRequest) {
         name,
         email,
         message,
+        isRead: false,
+        createdAt: new Date(),
       },
     });
 

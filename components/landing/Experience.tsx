@@ -3,39 +3,7 @@
 /* eslint-disable @next/next/no-img-element -- Remote favicons are dynamic, error-prone, and too small for the optimizer. */
 
 import { useState } from "react";
-
-interface ExperienceItem {
-  date: string;
-  company: string;
-  role: string;
-  website?: string;
-}
-
-const experienceData: ExperienceItem[] = [
-  {
-    date: "January 2025 - Present",
-    company: "Digixpressions Pvt Ltd",
-    role: "Full Stack Developer - Developer Executive",
-    website: "https://digixpressionsmedia.com/",
-  },
-  {
-    date: "September 2024 - January 2025",
-    company: "Digixpressions Pvt Ltd",
-    role: "Product Intern",
-    website: "https://digixpressionsmedia.com/",
-  },
-  {
-    date: "June 2023 - July 2023",
-    company: "Mira Advanced Engineering",
-    role: "Java Developer Intern",
-  },
-  {
-    date: "February 2023 - April 2023",
-    company: "Terna Engineering College",
-    role: "Flutter Developer Intern",
-    website: "https://ternaengg.ac.in/",
-  },
-];
+import { experienceData, type ExperienceItem } from "@/lib/experience";
 
 function CompanyIcon({
   company,
@@ -75,9 +43,9 @@ export function Experience() {
           <p className="mb-2 font-semibold tracking-wide text-accent-text">
             MY JOURNEY
           </p>
-          <h3 className="mb-4 text-3xl font-bold md:text-4xl">
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl">
             Professional Experience
-          </h3>
+          </h2>
           <p className="text-muted-foreground max-sm:px-5">
             A look at the teams and roles that have shaped my professional
             journey.
@@ -94,7 +62,7 @@ export function Experience() {
                 <CompanyIcon company={item.company} website={item.website} />
 
                 <div>
-                  <h4 className="text-xl font-bold">
+                  <h3 className="text-xl font-bold">
                     {item.website ? (
                       <a
                         href={item.website}
@@ -107,7 +75,7 @@ export function Experience() {
                     ) : (
                       item.company
                     )}
-                  </h4>
+                  </h3>
                   <p className="mt-1 font-medium text-accent-text">{item.role}</p>
                 </div>
               </div>

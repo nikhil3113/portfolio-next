@@ -28,9 +28,9 @@ export default async function Home() {
             <div className="z-20 text-center lg:text-left">
               <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl lg:text-4xl xl:text-6xl">
                 Nikhil Chavan <br />
-                <div className="relative inline-block w-max py-4 text-accent-text">
+                <span className="relative inline-block w-max py-4 text-accent-text">
                   <span>Full Stack Developer</span>
-                </div>
+                </span>
               </h1>
               {/* Resume Download Button */}
               <div className="mt-8 flex justify-center lg:justify-start">
@@ -123,7 +123,7 @@ export default async function Home() {
             <p className="text-accent-text font-semibold mb-2 tracking-wide">
               Proof Of Work
             </p>
-            <h3 className="text-3xl md:text-4xl font-bold mb-4">Projects</h3>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Projects</h2>
             <p className="text-muted-foreground max-sm:px-5">
               Explore a selection of my projects that showcase my technical
               skills and problem-solving abilities.
@@ -164,7 +164,7 @@ export default async function Home() {
                 <p className="text-accent-text font-semibold mb-2 tracking-wide">
                   LATEST WRITING
                 </p>
-                <h3 className="text-3xl md:text-4xl font-bold mb-4">Blogs</h3>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Blogs</h2>
                 <p className="text-muted-foreground max-sm:px-5">
                   Articles on web development, tools, and lessons learned from
                   building real projects.
@@ -184,7 +184,7 @@ export default async function Home() {
               <p className="text-accent-text font-semibold mb-2 tracking-wide">
                 GET IN TOUCH
               </p>
-              <h3 className="text-3xl md:text-4xl font-bold mb-4">Contact Me</h3>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Contact Me</h2>
               <p className="text-muted-foreground max-sm:px-5">
                 Have a question or want to work together? Send me a message.
               </p>

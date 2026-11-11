@@ -33,9 +33,9 @@ export function Skills() {
         <p className="text-accent-text font-semibold mb-2 tracking-wide">
           MY EXPERTISE
         </p>
-        <h3 className="text-3xl md:text-4xl font-bold mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">
           Technical Skills
-        </h3>
+        </h2>
         <p className="text-muted-foreground max-sm:px-5">
           These are the technologies I&apos;ve worked with and am proficient in.
         </p>
@@ -54,7 +54,7 @@ export function Skills() {
                 width={40}
                 height={40}
                 sizes="40px"
-                className="h-10 w-10"
+                className="h-10 w-10 object-contain"
               />
               <span className="text-sm font-medium">{skill.name}</span>
             </div>
@@ -75,7 +75,7 @@ export function Skills() {
                 width={40}
                 height={40}
                 sizes="40px"
-                className="h-10 w-10"
+                className="h-10 w-10 object-contain"
               />
               <span className="text-sm font-medium">{skill.name}</span>
             </div>

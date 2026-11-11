@@ -4,9 +4,9 @@ import type { Metadata } from "next";
 import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Blog | Web Development, Next.js, React & AI Insights",
+  title: "Blog: Next.js, React & AI Insights",
   description:
-    "Articles by Nikhil Chavan on full stack web development, Next.js, React, TypeScript, performance, SEO, and how AI tools like ChatGPT and Claude work under the hood.",
+    "Practical articles on Next.js, React, TypeScript, web performance and AI tooling, written by Nikhil Chavan, full stack developer.",
   keywords: [
     "web development blog",
     "next.js articles",
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
     canonical: absoluteUrl("/blogs"),
   },
   openGraph: {
-    title: "Blog | Nikhil Chavan",
+    title: "Blog: Next.js, React & AI Insights | Nikhil Chavan",
     description:
-      "Articles on full stack web development, Next.js, React, TypeScript, performance, SEO, and AI explained.",
+      "Practical articles on Next.js, React, TypeScript, web performance and AI tooling, written by Nikhil Chavan.",
     url: absoluteUrl("/blogs"),
     siteName: "Nikhil Chavan Portfolio",
     type: "website",
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blog | Nikhil Chavan",
+    title: "Blog: Next.js, React & AI Insights | Nikhil Chavan",
     description:
-      "Articles on full stack web development, Next.js, React, TypeScript, performance, SEO, and AI explained.",
+      "Practical articles on Next.js, React, TypeScript, web performance and AI tooling, written by Nikhil Chavan.",
     images: ["/opengraph-image"],
   },
 };

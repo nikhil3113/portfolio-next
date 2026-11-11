@@ -1,5 +1,6 @@
 import type { Blog } from "@prisma/client";
 import Image from "next/image";
+import Link from "next/link";
 import * as cheerio from "cheerio";
 import slugify from "slugify";
 import { CircleUser, CalendarDays, Clock } from "lucide-react";
@@ -8,6 +9,7 @@ import { CodeBlockEnhancer } from "@/components/blog/CodeBlockEnhancer";
 import { BlogViewTracker } from "@/components/blog/ViewTracker";
 import { highlightCodeBlocks } from "@/lib/blog/highlight-code";
 import { sanitizeBlogHtml } from "@/lib/blog/sanitize";
+import { AUTHOR_NAME, normalizeAuthor } from "@/lib/seo";
 
 function estimateReadTime(html: string) {
   const text = html.replace(/<[^>]*>/g, " ");
@@ -38,6 +40,10 @@ export function BlogArticle({
   });
   highlightCodeBlocks($);
   const modifiedHtml = $("body").html() ?? "";
+  const authorName = normalizeAuthor(blog.author);
+  const wasUpdated =
+    blog.updatedAt instanceof Date &&
+    blog.updatedAt.getTime() - blog.createdAt.getTime() > 24 * 60 * 60 * 1000;
 
   return (
     <article className="space-y-6">
@@ -49,7 +55,9 @@ export function BlogArticle({
         <div className="flex flex-wrap items-center gap-4 text-sm text-foreground">
           <div className="flex items-center gap-2">
             <CircleUser className="h-4 w-4" />
-            <span>{blog.author}</span>
+            <Link href="/about" rel="author" className="hover:text-accent-text">
+              {authorName}
+            </Link>
           </div>
           <div className="flex items-center gap-2">
             <CalendarDays className="h-4 w-4" />
@@ -59,6 +67,13 @@ export function BlogArticle({
                 : ""}
             </span>
           </div>
+          {wasUpdated && (
+            <div className="flex items-center gap-2">
+              <span className="text-muted-foreground">
+                Updated {new Date(blog.updatedAt).toLocaleDateString()}
+              </span>
+            </div>
+          )}
           <div className="flex items-center gap-2">
             <Clock className="h-4 w-4" />
             <span>{estimateReadTime(blog.content)} min read</span>
@@ -95,6 +110,25 @@ export function BlogArticle({
         dangerouslySetInnerHTML={{ __html: modifiedHtml }}
       />
       <CodeBlockEnhancer containerId="blog-content" />
+
+      <div className="mt-10 flex gap-4 rounded-xl border border-border bg-muted/40 p-5">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground">
+          NC
+        </div>
+        <div className="space-y-1">
+          <p className="font-semibold text-foreground">{AUTHOR_NAME}</p>
+          <p className="text-sm text-muted-foreground">
+            Full stack developer writing about Next.js, AI tooling and the web.{" "}
+            <Link
+              href="/about"
+              className="underline decoration-border underline-offset-4 hover:text-accent-text"
+            >
+              More about me
+            </Link>
+          </p>
+        </div>
+      </div>
+
       {showViewTracker && <BlogViewTracker slug={blog.slug} />}
     </article>
   );

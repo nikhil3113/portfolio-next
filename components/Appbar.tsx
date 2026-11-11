@@ -23,10 +23,12 @@ export function Appbar() {
       { name: "Experience", link: "#experience" },
       { name: "Contact", link: "#contact" },
       { name: "Blogs", link: "/blogs" },
+      { name: "About", link: "/about" },
     ]
     : [
       { name: "Projects", link: "/projects" },
       { name: "Blogs", link: "/blogs" },
+      { name: "About", link: "/about" },
     ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

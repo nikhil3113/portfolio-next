@@ -2,8 +2,14 @@ import { getBlogBySlug, getPublishedBlogSlugs } from "@/lib/action/blogs";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogArticle } from "@/components/blog/BlogArticle";
-import { serializeJsonLd } from "@/lib/seo";
-import { absoluteUrl } from "@/lib/site";
+import {
+  AUTHOR_NAME,
+  buildBlogTitle,
+  clampDescription,
+  normalizeAuthor,
+  serializeJsonLd,
+} from "@/lib/seo";
+import { absoluteUrl, siteUrl } from "@/lib/site";
 
 export async function generateStaticParams() {
   const blogs = await getPublishedBlogSlugs();
@@ -20,23 +26,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!blog) {
     return {
       title: "Blog Not Found",
-      description:
-        "This article does not exist | Full Stack Developer Portfolio",
+      description: "This article could not be found.",
     };
   }
-  const baseDesc =
+  const description = clampDescription(
     blog.metaDescription ||
-    (blog.content ? blog.content.replace(/<[^>]+>/g, "").slice(0, 150) : "");
+      (blog.content ? blog.content.replace(/<[^>]+>/g, "").slice(0, 150) : ""),
+  );
+  const title = buildBlogTitle(blog.h1, blog.metaTitle);
   return {
-    title: `${blog.h1}`,
-    description: `${baseDesc} | Full Stack Developer Portfolio`,
+    title: { absolute: title },
+    description,
     alternates: {
       canonical: absoluteUrl(`/blogs/${blog.slug}`),
     },
     openGraph: {
       type: "article",
-      title: blog.h1,
-      description: baseDesc,
+      title,
+      description,
       url: absoluteUrl(`/blogs/${blog.slug}`),
       siteName: "Nikhil Chavan Portfolio",
       images: blog.imageUrl
@@ -51,12 +58,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         : [],
       publishedTime: blog.createdAt.toISOString(),
       modifiedTime: blog.updatedAt.toISOString(),
-      authors: [blog.author],
+      authors: [normalizeAuthor(blog.author)],
     },
     twitter: {
       card: "summary_large_image",
-      title: blog.h1,
-      description: baseDesc,
+      title,
+      description,
       images: blog.imageUrl ? [blog.imageUrl] : [],
     },
   };
@@ -74,24 +81,65 @@ export default async function BlogPage({
     return notFound();
   }
 
+  const authorName = normalizeAuthor(blog.author);
+  const articleUrl = absoluteUrl(`/blogs/${blog.slug}`);
+
   const blogPostingLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
+    "@id": `${articleUrl}#article`,
     headline: blog.h1,
-    description: blog.metaDescription,
-    image: blog.imageUrl,
+    description: clampDescription(blog.metaDescription),
+    image: blog.imageUrl ? [blog.imageUrl] : undefined,
     author: {
       "@type": "Person",
-      name: blog.author,
+      "@id": `${siteUrl}/#person`,
+      name: authorName,
+      url: siteUrl,
     },
     publisher: {
-      "@type": "Person",
-      name: "Nikhil Chavan",
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: AUTHOR_NAME,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/icon"),
+        width: 512,
+        height: 512,
+      },
     },
     datePublished: blog.createdAt.toISOString(),
     dateModified: blog.updatedAt.toISOString(),
-    mainEntityOfPage: absoluteUrl(`/blogs/${blog.slug}`),
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": articleUrl,
+    },
     wordCount: blog.content.replace(/<[^>]+>/g, "").trim().split(/\s+/).length,
+  };
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: absoluteUrl("/blogs"),
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: blog.h1,
+        item: articleUrl,
+      },
+    ],
   };
 
   return (
@@ -99,6 +147,10 @@ export default async function BlogPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(blogPostingLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbLd) }}
       />
       <div className="mx-auto w-full max-w-3xl order-2 md:order-1">
         <BlogArticle blog={blog} />

@@ -39,12 +39,12 @@ html {
 }
 
 .prose blockquote {
-  border-left: 4px solid #a0aec0;
+  border-left: 4px solid hsl(var(--border));
   padding-left: 1em;
-  color: #6b7280;
+  color: hsl(var(--muted-foreground));
   font-style: italic;
   margin: 1em 0;
-  background: #f9fafb;
+  background: hsl(var(--muted));
   transition:
     background 0.2s,
     color 0.2s,
@@ -52,20 +52,20 @@ html {
 }
 
 .dark .prose blockquote {
-  background: #18181b !important;
-  color: #cbd5e1 !important;
-  border-left: 4px solid #6366f1 !important; /* Indigo-500 for accent */
+  background: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+  border-left: 4px solid hsl(var(--primary));
   font-style: italic;
 }
 
 .prose a {
-  color: #2563eb;
+  color: hsl(var(--accent-text));
   text-decoration: underline;
   transition: color 0.2s;
 }
 
 .prose a:hover {
-  color: #1d4ed8;
+  color: hsl(var(--primary));
 }
 
 .prose pre {
@@ -282,6 +282,8 @@ html {
     --accent-foreground: 222 47% 11%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
     --border: 214 32% 91%;
     --input: 214 32% 91%;
     --ring: 75 100% 50%;
@@ -361,6 +363,8 @@ html {
     --accent-foreground: 69 27% 85%;
     --destructive: 5 100% 83%;
     --destructive-foreground: 357 100% 21%;
+    --success: 142 60% 55%;
+    --success-foreground: 144 70% 10%;
     --border: 76 17% 24%;
     --input: 215 28% 18%;
     --ring: 75 100% 50%;

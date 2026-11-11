@@ -90,11 +90,13 @@ export default function UpdateProjects() {
         alert("Failed to update project. Please try again.");
       }
     } catch (error) {
-      axios.isAxiosError(error) && error.response
-        ? toast.error(
-            `Error: ${error.response.data.message || "Failed to update project"}`,
-          )
-        : toast.error("An unexpected error occurred");
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error(
+          `Error: ${error.response.data.message || "Failed to update project"}`,
+        );
+      } else {
+        toast.error("An unexpected error occurred");
+      }
       console.log("Error submitting form:", error);
     } finally {
       setIsLoading(false);

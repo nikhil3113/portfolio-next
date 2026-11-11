@@ -16,7 +16,7 @@ export interface TOCHeading {
 export function TableOfContents({ headings }: { headings: TOCHeading[] }) {
   if (!headings || headings.length === 0) return null;
 
-  const buildList = (headings: TOCHeading[], parentLevel = 2) => (
+  const buildList = (headings: TOCHeading[]) => (
     <ul className="pl-2 md:pl-4 border-l border-muted-foreground/30 ml-2">
       {headings.map((h, idx) => (
         <li key={h.id + idx}>

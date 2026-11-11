@@ -48,15 +48,11 @@ export const AnimatedSpan = ({
 
   const sequence = useSequence()
   const itemIndex = useItemIndex()
-  const [hasStarted, setHasStarted] = useState(false)
-  useEffect(() => {
-    if (!sequence || itemIndex === null) return
-    if (!sequence.sequenceStarted) return
-    if (hasStarted) return
-    if (sequence.activeIndex === itemIndex) {
-      setHasStarted(true)
-    }
-  }, [sequence?.activeIndex, sequence?.sequenceStarted, hasStarted, itemIndex])
+  const hasStarted =
+    sequence !== null &&
+    itemIndex !== null &&
+    sequence.sequenceStarted &&
+    sequence.activeIndex >= itemIndex
 
   const shouldAnimate = sequence ? hasStarted : startOnView ? isInView : true
 
@@ -110,7 +106,7 @@ export const TypingAnimation = ({
   )
 
   const [displayedText, setDisplayedText] = useState<string>("")
-  const [started, setStarted] = useState(false)
+  const [timerStarted, setTimerStarted] = useState(false)
   const elementRef = useRef<HTMLElement | null>(null)
   const isInView = useInView(elementRef as React.RefObject<Element>, {
     amount: 0.3,
@@ -119,35 +115,26 @@ export const TypingAnimation = ({
 
   const sequence = useSequence()
   const itemIndex = useItemIndex()
+  const sequenceActivated =
+    sequence !== null &&
+    itemIndex !== null &&
+    sequence.sequenceStarted &&
+    sequence.activeIndex >= itemIndex
+  const started = sequenceActivated || timerStarted
 
   useEffect(() => {
-    if (sequence && itemIndex !== null) {
-      if (!sequence.sequenceStarted) return
-      if (started) return
-      if (sequence.activeIndex === itemIndex) {
-        setStarted(true)
-      }
-      return
-    }
+    if (sequence && itemIndex !== null) return
 
     if (!startOnView) {
-      const startTimeout = setTimeout(() => setStarted(true), delay)
+      const startTimeout = setTimeout(() => setTimerStarted(true), delay)
       return () => clearTimeout(startTimeout)
     }
 
     if (!isInView) return
 
-    const startTimeout = setTimeout(() => setStarted(true), delay)
+    const startTimeout = setTimeout(() => setTimerStarted(true), delay)
     return () => clearTimeout(startTimeout)
-  }, [
-    delay,
-    startOnView,
-    isInView,
-    started,
-    sequence?.activeIndex,
-    sequence?.sequenceStarted,
-    itemIndex,
-  ])
+  }, [sequence, itemIndex, startOnView, isInView, delay])
 
   useEffect(() => {
     if (!started) return

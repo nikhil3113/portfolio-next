@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import { sanitizeBlogHtml, stripTags } from "@/lib/blog/sanitize";
 
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
@@ -33,14 +34,19 @@ export async function POST(request: Request) {
       );
     }
 
+    const safeH1 = stripTags(h1);
+    const safeMetaDescription = stripTags(metaDescription);
+    const safeAuthor = stripTags(author);
+    const safeContent = sanitizeBlogHtml(content);
+
     await prisma.blog.create({
       data: {
-        h1,
+        h1: safeH1,
         slug,
-        metaDescription,
-        content,
+        metaDescription: safeMetaDescription,
+        content: safeContent,
         imageUrl,
-        author,
+        author: safeAuthor,
         isPublished,
       },
     });

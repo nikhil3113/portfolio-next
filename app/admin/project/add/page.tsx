@@ -64,11 +64,13 @@ export default function AddProject() {
         alert("Failed to create project. Please try again.");
       }
     } catch (error) {
-      axios.isAxiosError(error) && error.response
-        ? toast.error(
-            `Error: ${error.response.data.message || "Failed to create blog"}`,
-          )
-        : toast.error("An unexpected error occurred");
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error(
+          `Error: ${error.response.data.message || "Failed to create blog"}`,
+        );
+      } else {
+        toast.error("An unexpected error occurred");
+      }
       console.log("Error submitting form:", error);
     } finally {
       setIsLoading(false);

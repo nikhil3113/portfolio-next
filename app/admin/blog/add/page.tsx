@@ -54,11 +54,13 @@ export default function AddBlogPage() {
         alert("Failed to create blog. Please try again.");
       }
     } catch (error) {
-      axios.isAxiosError(error) && error.response
-        ? toast.error(
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error(
           `Error: ${error.response.data.message || "Failed to create blog"}`
-        )
-        : toast.error("An unexpected error occurred");
+        );
+      } else {
+        toast.error("An unexpected error occurred");
+      }
       console.log("Error submitting form:", error);
     }
   }

@@ -18,6 +18,7 @@ export function ContactForm({ compact = false }: ContactFormProps) {
     name: "",
     email: "",
     message: "",
+    website: "",
   });
 
   const handleChange = (
@@ -44,7 +45,7 @@ export function ContactForm({ compact = false }: ContactFormProps) {
         toast.success("Message sent successfully!", {
           description: "I'll get back to you soon.",
         });
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({ name: "", email: "", message: "", website: "" });
       } else {
         toast.error("Failed to send message. Please try again.");
       }
@@ -120,6 +121,17 @@ export function ContactForm({ compact = false }: ContactFormProps) {
             required
           />
         </LabelInputContainer>
+
+        <input
+          type="text"
+          name="website"
+          value={formData.website}
+          onChange={handleChange}
+          className="hidden"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+        />
 
         <button
           className="group/btn relative flex h-10 w-full items-center justify-center rounded-md bg-primary font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-70"

@@ -119,6 +119,15 @@ export default async function AllBlogsTable() {
                   <Button size="sm" variant="outline" asChild>
                     <Link href={`/admin/blog/update/${blog.slug}`}>Edit</Link>
                   </Button>
+                  <Button size="sm" variant="outline" asChild>
+                    <Link
+                      href={`/admin/blog/preview/${blog.slug}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Preview
+                    </Link>
+                  </Button>
                   <BlogActions slug={blog.slug} title={blog.h1} />
                 </TableCell>
               </TableRow>

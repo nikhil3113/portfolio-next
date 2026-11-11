@@ -92,3 +92,12 @@ export async function getBlogBySlug(slug: string) {
     return null;
   }
 }
+
+export async function getBlogBySlugForPreview(slug: string) {
+  try {
+    return await prisma.blog.findUnique({ where: { slug } });
+  } catch (error) {
+    console.error("Error fetching blog preview:", error);
+    return null;
+  }
+}

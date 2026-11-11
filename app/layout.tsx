@@ -6,7 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { PostHogProvider, Providers } from "./Providers";
-import { Toaster } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 import { siteUrl } from "@/lib/site";
 import { serializeJsonLd } from "@/lib/seo";
 

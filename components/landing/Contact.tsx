@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
-import { Toaster } from "@/components/ui/toaster";
 import { toast } from "sonner";
 
 interface ContactFormProps {
@@ -146,7 +145,6 @@ export function ContactForm({ compact = false }: ContactFormProps) {
           <BottomGradient />
         </button>
       </form>
-      <Toaster />
     </div>
   );
 }

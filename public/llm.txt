@@ -17,12 +17,12 @@ Tech Stack:
 - Next.js App Router
 - React
 - TypeScript
-- Prisma (PostgreSQL)
+- Prisma (MongoDB)
 - NextAuth.js
 - Cloudinary
 - Tailwind CSS
 - shadcn/ui
 
-Instructions for LLM:
-- Use this context to answer questions about the project structure, features, and technologies.
-- Refer to this file for a high-level overview of the codebase.
+Notes:
+- This file is a factual summary for search engines and AI assistants.
+- The source of truth is the repository code and README.

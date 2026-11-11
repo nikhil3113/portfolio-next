@@ -16,8 +16,8 @@ colors:
   outline: '#8c9479'
   outline-variant: '#434933'
   surface-tint: '#a0d800'
-  primary: '#ffffff'
-  on-primary: '#253600'
+  primary: '#BDFF00'
+  on-primary: '#0F172A'
   primary-container: '#b7f700'
   on-primary-container: '#506e00'
   inverse-primary: '#4b6700'
@@ -119,6 +119,8 @@ This design system is built for the high-end Full Stack Developer, blending tech
 The visual style is a hybrid of **Minimalism** and **Modern Corporate**, utilizing heavy whitespace to let the content breathe and high-contrast typography to establish an immediate hierarchy. It avoids unnecessary decoration, instead using structural elements like subtle borders and intentional "code-like" containers to signify a developer's environment. The emotional response should be one of trust and technical competence.
 
 ## Colors
+
+The CSS variables in `app/globals.css` are the source of truth; the YAML frontmatter is a design-tool export.
 
 The palette is anchored by **Deep Slate (#0F172A)**, providing a more sophisticated and softer depth than pure black. This serves as the primary canvas. The system uses a high-contrast **Pure White** for primary text to ensure maximum legibility.
 
